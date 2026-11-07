@@ -1,0 +1,13 @@
+diff --git a/reconstruction/train_titok_llamagen_decoder_adapt_router_f2d_e2e_dynamic.py b/reconstruction/train_titok_llamagen_decoder_adapt_router_f2d_e2e_dynamic.py
+--- a/reconstruction/train_titok_llamagen_decoder_adapt_router_f2d_e2e_dynamic.py
++++ b/reconstruction/train_titok_llamagen_decoder_adapt_router_f2d_e2e_dynamic.py
+@@ -1789,7 +1789,8 @@ def main(args):
+             metric_sums["mask_tokens_min"] += mask_tokens.min().item()
+             metric_sums["mask_tokens_max"] += mask_tokens.max().item()
+             for score_key, score_value in local_score_metric_values.items():
+-                metric_sums[score_key] += score_value
++                if score_key in metric_sums:
++                    metric_sums[score_key] += score_value
+             last = {
+                 "x_lg": x_lg,
+                 "x_base": x_base,

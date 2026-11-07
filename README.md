@@ -12,6 +12,12 @@ The K=96 run spends the first 0.5 epoch of its 20-epoch stage training only the 
 
 Clone [MixTok](https://github.com/LCGLiChenge/MixTok) at commit `6623ccdc7a48688497f7b1f312548d1f14107e4d`, arrange its ImageNet and original pretrained-weight paths as described in its reconstruction README, then run from its `reconstruction/` directory. If the original 2.5-epoch adapter checkpoint has not been produced yet, first run the same Stage 1 command as K=96:
 
+Before training, apply [`reconstruction_k256/fix_fullgrid_logging.patch`](reconstruction_k256/fix_fullgrid_logging.patch) from the MixTok repository root. The pinned trainer includes an unused router-debt field in its logging map for `per_image_random`; without this fix, the first step raises `KeyError: 'router_budget_debt_tokens'`. The patch changes logging only, not the model or loss.
+
+```bash
+git apply /path/to/addMixtok/reconstruction_k256/fix_fullgrid_logging.patch
+```
+
 ```bash
 torchrun --standalone --nproc_per_node=8 train_titok_llamagen_recon.py \
   --config configs/adapter_only_2p5epoch.yaml
