@@ -38,6 +38,38 @@ python eval_titok_llamagen_mix_metrics_router_f2d_e2e_dynamic.py \
 
 The evaluation mask also covers every position, so `mix` is the pure 2D reconstruction. This configuration is intended to answer whether MixTok's sparse hybrid reconstruction improves over a 256-token LlamaGen VQ tokenizer trained with the same full reconstruction loss recipe. No K=256 reconstruction result is claimed here; the training and evaluation have not been run from this config.
 
+## Train a generator on the newly trained K=256 tokenizer
+
+The tokenizer and generator must share the same 2D code space. After the 20+6-epoch reconstruction training, use [`generation_full_k256/extract_codes.py`](generation_full_k256/extract_codes.py) to re-encode the ImageNet training set with **that final dense checkpoint**. It uses the same center crop, no random flip in the dataset, and two stored views (original and horizontal flip) as the K=96 generation cache. Record the checkpoint SHA256 and pass it explicitly:
+
+```bash
+export DENSE_CKPT=/path/to/MixTok/reconstruction/results/full256_dense_continued_6epoch/latest.pt
+export DENSE_SHA256=$(sha256sum "$DENSE_CKPT" | cut -d' ' -f1)
+export DENSE_CODES=/path/to/full256_paired_codes
+
+torchrun --standalone --nproc_per_node=8 /path/to/addMixtok/generation_full_k256/extract_codes.py \
+  --data-path /path/to/ImageNet/train --output-root "$DENSE_CODES" \
+  --dense-ckpt "$DENSE_CKPT" --expected-checkpoint-sha256 "$DENSE_SHA256" \
+  --titok-root /path/to/1d-tokenizer \
+  --titok-config /path/to/1d-tokenizer/configs/infer/TiTok/titok_l32.yaml \
+  --titok-ckpt /path/to/1d-tokenizer/tokenizer_titok_l32.bin \
+  --llamagen-root /path/to/LlamaGen --aug-mode adm
+```
+
+Then use [`generation_full_k256/train.py`](generation_full_k256/train.py) to train Halton from the same official pretrained initialization and with the same 20,000-update, global-batch-256, six-GPU generation recipe as the K=96 control. Every location is supervised and the 1D context is unused.
+
+```bash
+export MIXTOK_REPO=/path/to/MixTok
+export MIXTOK_HALTON_UPSTREAM=/path/to/Halton-MaskGIT
+export MIXTOK_HALTON_PRETRAINED=/path/to/ImageNet_256_base.pth
+
+torchrun --standalone --nproc_per_node=6 /path/to/addMixtok/generation_full_k256/train.py \
+  --codes "$DENSE_CODES" --expected-tokenizer-sha256 "$DENSE_SHA256" \
+  --output /path/to/full256_halton_run --seed 0
+```
+
+The new generation trainer is provided as source code and has not been run with a newly trained K=256 tokenizer. A matching full-grid gFID evaluator still needs to load the new tokenizer's decoder. The archived evaluator below is pinned to the sparse MixTok tokenizer and **must not** be used for this new checkpoint.
+
 ## Earlier generation-only control
 
-[`generation_only_control/`](generation_only_control/) contains the 20,000-update K=256 Halton generator experiment previously uploaded here. It starts its **generator** from pretrained Halton weights, but its token cache and RGB decoder come from the already-trained **sparse MixTok** reconstruction checkpoint. Its reported gFID therefore does **not** constitute the full-grid control above. The original README is retained inside that directory for provenance. To compare full-grid generation fairly, retrain the generator on codes extracted from the new K=256 reconstruction tokenizer and evaluate with its decoder; the earlier generation-only scripts do not yet implement that chain.
+[`generation_only_control/`](generation_only_control/) contains the 20,000-update K=256 Halton generator experiment previously uploaded here. It starts its **generator** from pretrained Halton weights, but its token cache and RGB decoder come from the already-trained **sparse MixTok** reconstruction checkpoint. Its reported gFID therefore does **not** constitute the full-grid control above. The original README is retained inside that directory for provenance.
