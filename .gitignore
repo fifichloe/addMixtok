@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+*.log
+results/
+data/
+assets/
+checkpoints/
+routes/
