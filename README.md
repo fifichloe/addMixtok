@@ -1,68 +1,43 @@
-# MixTok K=256 dense generation control
+# K=256 full-grid control for MixTok
 
-This repository contains the routing, training, and evaluation scripts used for the fixed **K=256** generation control. Every location in the 16×16 grid is selected. The 2D generator is trained from the official pretrained Halton initialization for 20,000 optimizer updates, with global batch size 256 and the same frozen MixTok tokenizer, adapter, decoder, and training objective used in the sparse generation experiments. The pretrained Halton weights are an initialization; the 2D generator is trained afresh for this control.
+This repository separates two experiments that were previously conflated.
 
-**Interpretation:** This is a MixTok dense control, **not an original LlamaGen checkpoint or a complete LlamaGen reproduction**. With all 256 positions replaced by 2D tokens, the 1D spatial context does not affect the 2D output or final RGB reconstruction, although the evaluation pipeline still runs the 1D stage for its diagnostic base result. The MixTok shared decoder was trained with sparse mixed grids. Therefore this endpoint does not isolate the effect of K alone and must not be presented as LlamaGen's best attainable quality or as a compute-matched baseline.
+## Fair reconstruction control: train from the original weights
 
-## Dependencies and data
+[`reconstruction_k256/train_full256_20epoch.yaml`](reconstruction_k256/train_full256_20epoch.yaml) and [`reconstruction_k256/continue_full256_6epoch.yaml`](reconstruction_k256/continue_full256_6epoch.yaml) are the K=256 full-grid counterparts to MixTok's fixed-96 20-epoch stage and 6-epoch continuation. Run them with the **same reconstruction training script and ImageNet data**, starting from the original TiTok-L32 and LlamaGen VQ-16 checkpoints. They keep the K=96 run's image, LPIPS, DINOv2, CLIP, GAN, and discriminator feature-matching losses, optimizer settings, batch sizes, learning-rate schedules, and preprocessing. The full-grid mask is one at every location; the grid scorer and 1D adapter are not trained because neither can influence the reconstruction when K=256. The LlamaGen VQ encoder, quantization convolution, post-quantization convolution, and decoder follow the same training flags as K=96. The codebook receives only a zero-gradient term in the shared trainer, so this recipe does not claim to update the codebook.
 
-Clone [MixTok](https://github.com/LCGLiChenge/MixTok) at commit `6623ccdc7a48688497f7b1f312548d1f14107e4d` and use its `generation` Python dependencies and asset instructions. Its `generation/experiments/continuous_halton_embedding_20260923/` modules provide the tokenizer, adapter, Halton model, training objective, cache format, and evaluator. The upstream Halton-MaskGIT checkout is pinned by MixTok's `halton_upstream.py` to commit `f61b0a1314717004dc7487531fd16a8bb71e1888`. The scripts verify upstream source hashes and checkpoint compatibility.
+The config uses the existing training script's `per_image_random` mask mode with `mask_ratio_min=mask_ratio_max=1.0`. In this special case the implementation selects **all 256 positions deterministically**; there is no random spatial selection. `lambda_mix=2.0` and the other reconstruction losses remain the same as the K=96 training config. The config loads the same 2.5-epoch adapter initialization as the K=96 run to satisfy the shared model/evaluator checkpoint contract, but keeps it frozen. Its output has zero weight in the all-2D reconstruction. The LlamaGen VQ weights still start at the original pretrained checkpoint, just as in K=96.
 
-Provide the paired ImageNet training code cache in MixTok's `ContinuousRouteDataset` format (`titok_codes.npy`, `llamagen_codes.npy`, `labels.npy`, `meta.json`). The public `generation/scripts/extract_codes_top_p.py` creates it using the released tokenizer checkpoints. The route builder expects the two-view cache used in the experiment (2,562,334 rows). The MixTok generation assets must include the ADM FID reference and evaluator for 50,000-image evaluation.
+The K=96 run spends the first 0.5 epoch of its 20-epoch stage training only the scorer. Full-grid K=256 has no scorer to train, so its 2D network receives those additional 0.5 epoch of updates. This favors the dense control slightly; the runs are matched in overall epochs, data, losses, and optimizer settings, but not in exact 2D-network update count or FLOPs.
 
-Set paths to your local copies before running **any** script in `dense_k256/`:
-
-```bash
-export MIXTOK_REPO=/path/to/MixTok
-export MIXTOK_SOURCE_CACHE=/path/to/paired_top_p_codes
-export MIXTOK_ASSETS=/path/to/MixTok/generation/assets
-export MIXTOK_TOP_CHECKPOINT=/path/to/top_p_ema_inference_v1_step247482.pt
-export MIXTOK_ADAPTER_CHECKPOINT=/path/to/adapter_step20000.pt
-export MIXTOK_SCORER_CHECKPOINT=/path/to/scorer_top_p_1d_only_step20000.pt
-export MIXTOK_HALTON_PRETRAINED=/path/to/ImageNet_256_base.pth
-export MIXTOK_HALTON_UPSTREAM=/path/to/Halton-MaskGIT
-```
-
-The scorer checkpoint is checked for cache provenance but **is not used to select K=256 locations**. All routes are the full spatial grid. The route script retains the MixTok cache schema and its integrity checks.
-
-## Train
-
-From this repository root, build the static routes and launch six-GPU training:
+Clone [MixTok](https://github.com/LCGLiChenge/MixTok) at commit `6623ccdc7a48688497f7b1f312548d1f14107e4d`, arrange its ImageNet and original pretrained-weight paths as described in its reconstruction README, then run from its `reconstruction/` directory. If the original 2.5-epoch adapter checkpoint has not been produced yet, first run the same Stage 1 command as K=96:
 
 ```bash
-python dense_k256/cache_routes.py --policy dense --output /path/to/dense_routes
-torchrun --standalone --nproc_per_node=6 dense_k256/train.py \
-  --policy dense --routes /path/to/dense_routes --output /path/to/dense_run --seed 0
+torchrun --standalone --nproc_per_node=8 train_titok_llamagen_recon.py \
+  --config configs/adapter_only_2p5epoch.yaml
 ```
 
-Set `CUDA_VISIBLE_DEVICES` to the desired six GPUs. The 20,000-update run uses eight logical microbatches of 32 examples per update across six GPUs, with accumulation `[2,2,1,1,1,1]`. `--resume` resumes a checkpoint made by the **same** six-GPU script, paths, and source files. The configuration and source hashes are recorded in the checkpoint and checked on resume.
-
-The reported run was interrupted after step 18,000 and resumed for the final 2,000 updates on four GPUs with `dense_k256/train_four_gpu.py`. That handoff is included to document the actual execution, not required for a new uninterrupted six-GPU run. It expects an intact step-18,000 checkpoint and matching original paths:
+Then train and continue the full-grid model with the matching 20+6 epoch schedule:
 
 ```bash
-torchrun --standalone --nproc_per_node=4 dense_k256/train_four_gpu.py \
-  --policy dense --routes /path/to/dense_routes --output /path/to/four_gpu_run \
-  --source-checkpoint /path/to/six_gpu_run/latest.pt --seed 0
+torchrun --standalone --nproc_per_node=8 \
+  train_titok_llamagen_decoder_adapt_router_f2d_e2e_dynamic.py \
+  --config /path/to/addMixtok/reconstruction_k256/train_full256_20epoch.yaml
+
+torchrun --standalone --nproc_per_node=8 \
+  train_titok_llamagen_decoder_adapt_router_f2d_e2e_dynamic.py \
+  --config /path/to/addMixtok/reconstruction_k256/continue_full256_6epoch.yaml
 ```
 
-The four-GPU handoff retains global batch 256 and maps the first four saved rank RNG streams to the four new ranks. The original six-GPU step-18,000 checkpoint is no longer distributed here. Because this published `common.py` replaces machine-specific paths with environment variables, the original checkpoint cannot be resumed from this checkout without matching its saved configuration and source hashes.
-
-## Evaluate
-
-The evaluation scripts perform the same 50,000-image ADM gFID protocol with four GPU workers, seed 4, 8+8 sampling rounds and CFG 4.5/3.0:
+For reconstruction evaluation, run the existing evaluator with the matching full-grid config (edit its `ckpt` and data paths to match your installation):
 
 ```bash
-python dense_k256/eval_fixed_parallel.py \
-  --policy dense --checkpoint /path/to/dense_run/latest.pt \
-  --output /path/to/dense_eval_seed4 --n 50000 --seed 4 --workers 4 \
-  --allowed-gpus 0,1,2,3 \
-  --top-p-checkpoint "$MIXTOK_TOP_CHECKPOINT" \
-  --adapter-checkpoint "$MIXTOK_ADAPTER_CHECKPOINT" \
-  --scorer-checkpoint "$MIXTOK_SCORER_CHECKPOINT"
+python eval_titok_llamagen_mix_metrics_router_f2d_e2e_dynamic.py \
+  --config /path/to/addMixtok/reconstruction_k256/eval_full256_50k.yaml
 ```
 
-Use the four-GPU run's `latest.pt` when reproducing the reported interrupted run. The evaluation code checks the training policy, K, selected positions, checkpoint assets, and sample coverage.
+The evaluation mask also covers every position, so `mix` is the pure 2D reconstruction. This configuration is intended to answer whether MixTok's sparse hybrid reconstruction improves over a 256-token LlamaGen VQ tokenizer trained with the same full reconstruction loss recipe. No K=256 reconstruction result is claimed here; the training and evaluation have not been run from this config.
 
-## Reported result and scope
+## Earlier generation-only control
 
-The interrupted run's final checkpoint SHA256 is `1ebe919828c59dc1685ced8927f6b119a089cfef82236ebd6c537d22a289b5a6`. The 50,000-image, single-seed gFID was **15.54999895** at effective 256 content tokens. The dense result is poor under this specific MixTok decoder and training protocol; it should not be interpreted as a general dense-token or LlamaGen result. Weights, training caches, ImageNet data, and FID assets are not included in this code repository.
+[`generation_only_control/`](generation_only_control/) contains the 20,000-update K=256 Halton generator experiment previously uploaded here. It starts its **generator** from pretrained Halton weights, but its token cache and RGB decoder come from the already-trained **sparse MixTok** reconstruction checkpoint. Its reported gFID therefore does **not** constitute the full-grid control above. The original README is retained inside that directory for provenance. To compare full-grid generation fairly, retrain the generator on codes extracted from the new K=256 reconstruction tokenizer and evaluate with its decoder; the earlier generation-only scripts do not yet implement that chain.
