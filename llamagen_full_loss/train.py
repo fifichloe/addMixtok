@@ -43,6 +43,29 @@ def synchronize_gradients(parameters, world):
         grad.copy_(reduced / world)
 
 
+def mean_logged_metrics(sums, world, accum, distributed):
+    names = sorted(sums)
+    values = torch.stack([sums[name] for name in names])
+    if distributed:
+        dist.all_reduce(values, op=dist.ReduceOp.SUM)
+    values /= world * accum
+    return dict(zip(names, values.tolist()))
+
+
+def hinge_log_parts(logits_real, logits_fake, iter_weighted_logits):
+    real_total = None
+    fake_total = None
+    weight_total = 0.0
+    for (real, weight), (fake, _) in zip(iter_weighted_logits(logits_real),
+                                          iter_weighted_logits(logits_fake)):
+        real_part = torch.relu(1.0 - real.detach()).mean() * weight
+        fake_part = torch.relu(1.0 + fake.detach()).mean() * weight
+        real_total = real_part if real_total is None else real_total + real_part
+        fake_total = fake_part if fake_total is None else fake_total + fake_part
+        weight_total += weight
+    return real_total / weight_total, fake_total / weight_total
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('--data-root', type=Path, required=True)
@@ -78,7 +101,7 @@ def main():
         build_discriminator, build_perceptual_loss, compute_image_loss,
         compute_lecam_loss, compute_perceptual_loss,
         discriminator_feature_matching_loss, gan_g_loss_from_logits,
-        hinge_d_loss, load_llamagen_vq, set_requires_grad,
+        hinge_d_loss, iter_weighted_logits, load_llamagen_vq, set_requires_grad,
         weighted_logits_mean,
     )
     from train_titok_llamagen_decoder_adapt_router_f2d_e2e_dynamic import (  # noqa: E402
@@ -134,13 +157,44 @@ def main():
     run = None
     if main_rank and not args_cli.max_steps and args_cli.wandb_mode != 'disabled':
         import wandb
+        run_id_path = args_cli.output / 'wandb_run_id.txt'
+        if run_id_path.exists():
+            run_id = run_id_path.read_text().strip()
+        else:
+            run_id = wandb.util.generate_id()
+            run_id_path.write_text(run_id + '\n')
+        selection_path = args_cli.output / 'batch_selection.json'
+        selection = json.loads(selection_path.read_text()) if selection_path.exists() else {}
         run = wandb.init(project=args_cli.wandb_project,
                          name=args_cli.output.name,
+                         group=args_cli.output.name,
+                         id=run_id,
+                         resume='allow',
                          dir=str(args_cli.output),
                          mode=args_cli.wandb_mode,
                          config={'batch_size_per_gpu': args_cli.batch_size,
                                  'accum': args_cli.accum, 'world_size': world,
-                                 'epochs': args_cli.epochs, 'total_steps': total_steps})
+                                 'global_batch': world * args_cli.batch_size * args_cli.accum,
+                                 'dataset_size': len(dataset),
+                                 'epochs': args_cli.epochs, 'total_steps': total_steps,
+                                 'source_commit': source_commit.stdout.strip() if source_commit.returncode == 0 else 'unknown',
+                                 'selected_peak_fraction': selection.get('selected_peak_fraction'),
+                                 'probe_gpu_ids': selection.get('gpu_ids'),
+                                 'loss_weights': {
+                                     'image': 2.0, 'lpips': 2.0 * cfg.lambda_perceptual,
+                                     'dino': cfg.lambda_dino_feat, 'clip': cfg.lambda_clip_feat,
+                                     'gan': cfg.lambda_gan,
+                                     'feature_matching': cfg.lambda_disc_feature_matching,
+                                     'lecam': cfg.lecam_regularization_weight,
+                                 },
+                                 'optimizer': {
+                                     'lr_encoder': cfg.lr_llamagen_encoder,
+                                     'lr_decoder': cfg.lr_llamagen,
+                                     'lr_discriminator': cfg.lr_d,
+                                     'weight_decay': cfg.weight_decay_llamagen,
+                                     'ema_decay': cfg.ema_decay,
+                                     'gan_start_epoch': cfg.gan_start_epoch,
+                                 }})
     model = load_llamagen_vq(cfg.llamagen_root, cfg.llamagen_ckpt, device, cfg.codebook_size, cfg.codebook_embed_dim)
     model.requires_grad_(False)
     for name in ('encoder', 'quant_conv', 'post_quant_conv', 'decoder'):
@@ -185,13 +239,18 @@ def main():
               f'global_batch={world * args_cli.batch_size * args_cli.accum} steps_per_epoch={steps_per_epoch} '
               f'epochs={args_cli.epochs} total_steps={total_steps} start_step={step}', flush=True)
     started = time.monotonic()
+    last_logged_at = started
+    last_logged_step = step
     benchmark_started = None
     for epoch in range(first_epoch, args_cli.epochs):
+        epoch_started = time.monotonic()
         if sampler is not None:
             sampler.set_epoch(epoch)
         iterator = iter(loader)
         for _epoch_step in range(steps_per_epoch):
             step += 1
+            should_log = step <= 2 or step % args_cli.log_every == 0
+            metric_sums = {} if should_log else None
             for group in opt.param_groups:
                 group['lr'] = cosine_lr(group['initial_lr'], step - 1, total_steps)
             opt.zero_grad(set_to_none=True)
@@ -204,48 +263,105 @@ def main():
                 sync_ctx = model_ddp.no_sync() if distributed and micro + 1 < args_cli.accum else contextlib.nullcontext()
                 with sync_ctx, torch.autocast('cuda', dtype=torch.bfloat16):
                     y, _ = model_ddp(x)
-                    g_loss = 2.0 * (compute_image_loss(y, x, cfg.image_loss)
-                                    + cfg.lambda_perceptual * compute_perceptual_loss(lpips, cfg.perceptual_loss, y, x))
-                    g_loss = g_loss + cfg.lambda_dino_feat * dino(y, x, pred_range='minus1_1', target_range='minus1_1')
-                    g_loss = g_loss + cfg.lambda_clip_feat * clip(y, x, pred_range='minus1_1', target_range='minus1_1')
+                    image_raw = compute_image_loss(y, x, cfg.image_loss)
+                    lpips_raw = compute_perceptual_loss(lpips, cfg.perceptual_loss, y, x)
+                    g_loss = 2.0 * (image_raw + cfg.lambda_perceptual * lpips_raw)
+                    dino_raw = dino(y, x, pred_range='minus1_1', target_range='minus1_1')
+                    g_loss = g_loss + cfg.lambda_dino_feat * dino_raw
+                    clip_raw = clip(y, x, pred_range='minus1_1', target_range='minus1_1')
+                    g_loss = g_loss + cfg.lambda_clip_feat * clip_raw
                     fake01 = (y.float() + 1) * 0.5
                     real01 = (x.float() + 1) * 0.5
+                    gan_raw = g_loss.new_zeros(())
+                    feature_matching_raw = g_loss.new_zeros(())
                     if gan_on and not d_warmup:
                         set_requires_grad(disc, False)
-                        g_loss = g_loss + cfg.lambda_gan * gan_g_loss_from_logits(disc(fake01))
-                        g_loss = g_loss + cfg.lambda_disc_feature_matching * discriminator_feature_matching_loss(disc, fake01, real01)
+                        gan_raw = gan_g_loss_from_logits(disc(fake01))
+                        g_loss = g_loss + cfg.lambda_gan * gan_raw
+                        feature_matching_raw = discriminator_feature_matching_loss(disc, fake01, real01)
+                        g_loss = g_loss + cfg.lambda_disc_feature_matching * feature_matching_raw
                 (g_loss / args_cli.accum).backward()
                 if gan_on:
                     set_requires_grad(disc, True)
                     with torch.autocast('cuda', dtype=torch.bfloat16):
                         real_logits = disc(real01.detach())
                         fake_logits = disc(fake01.detach())
-                        d_loss = hinge_d_loss(real_logits, fake_logits)
+                        d_hinge = hinge_d_loss(real_logits, fake_logits)
+                        d_loss = d_hinge
                         real_mean = weighted_logits_mean(real_logits)
                         fake_mean = weighted_logits_mean(fake_logits)
+                        d_lecam = d_loss.new_zeros(())
                         if cfg.lecam_regularization_weight > 0:
-                            d_loss = d_loss + cfg.lecam_regularization_weight * compute_lecam_loss(
-                                real_mean, fake_mean, lecam_real, lecam_fake)
+                            d_lecam = compute_lecam_loss(real_mean, fake_mean, lecam_real, lecam_fake)
+                            d_loss = d_loss + cfg.lecam_regularization_weight * d_lecam
                         lecam_real = lecam_real * cfg.lecam_ema_decay + real_mean.detach() * (1 - cfg.lecam_ema_decay)
                         lecam_fake = lecam_fake * cfg.lecam_ema_decay + fake_mean.detach() * (1 - cfg.lecam_ema_decay)
                     (d_loss / args_cli.accum).backward()
-            torch.nn.utils.clip_grad_norm_(trainable, cfg.max_grad_norm)
+                if should_log:
+                    micro_metrics = {
+                        'train/loss_g': g_loss,
+                        'train/loss_image_raw': image_raw,
+                        'train/loss_image_weighted': 2.0 * image_raw,
+                        'train/loss_lpips_raw': lpips_raw,
+                        'train/loss_lpips_weighted': 2.0 * cfg.lambda_perceptual * lpips_raw,
+                        'train/loss_dino_raw': dino_raw,
+                        'train/loss_dino_weighted': cfg.lambda_dino_feat * dino_raw,
+                        'train/loss_clip_raw': clip_raw,
+                        'train/loss_clip_weighted': cfg.lambda_clip_feat * clip_raw,
+                        'train/loss_g_adv_raw': gan_raw,
+                        'train/loss_g_adv_weighted': cfg.lambda_gan * gan_raw,
+                        'train/loss_feature_matching_raw': feature_matching_raw,
+                        'train/loss_feature_matching_weighted': cfg.lambda_disc_feature_matching * feature_matching_raw,
+                    }
+                    if gan_on:
+                        d_real_hinge, d_fake_hinge = hinge_log_parts(real_logits, fake_logits, iter_weighted_logits)
+                        micro_metrics.update({
+                            'train/loss_d': d_loss,
+                            'train/loss_d_hinge': d_hinge,
+                            'train/loss_d_real_hinge': d_real_hinge,
+                            'train/loss_d_fake_hinge': d_fake_hinge,
+                            'train/loss_d_lecam_raw': d_lecam,
+                            'train/loss_d_lecam_weighted': cfg.lecam_regularization_weight * d_lecam,
+                            'train/disc_real_logit': real_mean,
+                            'train/disc_fake_logit': fake_mean,
+                            'train/disc_real_ema': lecam_real,
+                            'train/disc_fake_ema': lecam_fake,
+                        })
+                    for name, value in micro_metrics.items():
+                        metric_sums[name] = metric_sums.get(name, 0) + value.detach().float()
+            grad_norm = torch.nn.utils.clip_grad_norm_(trainable, cfg.max_grad_norm)
             opt.step()
             ema.update(model)
             if gan_on:
                 if distributed:
                     synchronize_gradients(disc_trainable, world)
                 opt_d.step()
-            if main_rank and (step <= 2 or step % args_cli.log_every == 0):
-                d_text = f'{d_loss.item():.5f}' if gan_on else 'off'
-                print(f'epoch={epoch + 1} step={step}/{total_steps} loss_g={g_loss.item():.5f} '
-                      f'loss_d={d_text} elapsed_s={time.monotonic() - started:.1f}', flush=True)
-                if run is not None:
-                    metrics = {'train/loss_g': g_loss.item(), 'train/epoch': epoch + 1,
-                               'train/progress': step / total_steps}
-                    if gan_on:
-                        metrics['train/loss_d'] = d_loss.item()
-                    run.log(metrics, step=step)
+            if should_log:
+                metrics = mean_logged_metrics(metric_sums, world, args_cli.accum, distributed)
+                if main_rank:
+                    now = time.monotonic()
+                    metrics.update({
+                        'train/epoch': epoch + 1,
+                        'train/progress': step / total_steps,
+                        'train/gan_enabled': int(gan_on),
+                        'train/discriminator_warmup': int(d_warmup),
+                        'train/lr_encoder': opt.param_groups[0]['lr'],
+                        'train/lr_decoder': opt.param_groups[1]['lr'],
+                        'train/lr_discriminator': opt_d.param_groups[0]['lr'],
+                        'train/grad_norm_before_clip': float(grad_norm),
+                        'train/elapsed_h': (now - started) / 3600,
+                        'train/images_per_second': world * args_cli.batch_size * args_cli.accum * (step - last_logged_step) / max(now - last_logged_at, 1e-6),
+                        'system/rank0_memory_allocated_gib': torch.cuda.memory_allocated(device) / 2**30,
+                        'system/rank0_memory_reserved_gib': torch.cuda.memory_reserved(device) / 2**30,
+                        'system/rank0_peak_reserved_gib': torch.cuda.max_memory_reserved(device) / 2**30,
+                    })
+                    d_text = f"{metrics['train/loss_d']:.5f}" if gan_on else 'off'
+                    print(f"epoch={epoch + 1} step={step}/{total_steps} loss_g={metrics['train/loss_g']:.5f} "
+                          f'loss_d={d_text} elapsed_s={now - started:.1f}', flush=True)
+                    if run is not None:
+                        run.log(metrics, step=step)
+                    last_logged_at = now
+                    last_logged_step = step
             if args_cli.max_steps and step == 10:
                 torch.cuda.synchronize()
                 if distributed:
@@ -285,7 +401,9 @@ def main():
                 atomic_save(payload, args_cli.output / 'epoch_10.pt')
             print(f'completed epoch={epoch + 1} step={step} elapsed_h={(time.monotonic() - started) / 3600:.2f}', flush=True)
             if run is not None:
-                run.log({'train/completed_epoch': epoch + 1}, step=step)
+                run.log({'train/completed_epoch': epoch + 1,
+                         'train/epoch_hours': (time.monotonic() - epoch_started) / 3600,
+                         'train/elapsed_h': (time.monotonic() - started) / 3600}, step=step)
         if distributed:
             dist.barrier()
     if distributed:

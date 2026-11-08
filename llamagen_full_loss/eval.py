@@ -22,6 +22,8 @@ def main():
     p.add_argument('--batch-size', type=int, default=16)
     p.add_argument('--workers', type=int, default=4)
     p.add_argument('--num-images', type=int, default=50000)
+    p.add_argument('--wandb-project', default='mixtok-rebuttal')
+    p.add_argument('--wandb-mode', choices=['online', 'offline', 'disabled'], default='disabled')
     args = p.parse_args()
     sys.path.insert(0, str(args.source_root.resolve()))
     from train_titok_llamagen_recon import add_path, load_llamagen_vq
@@ -69,6 +71,21 @@ def main():
               'content_tokens': 256}
     args.output.write_text(json.dumps(result, indent=2))
     print(json.dumps(result, indent=2), flush=True)
+    if args.wandb_mode != 'disabled':
+        import wandb
+        run = wandb.init(project=args.wandb_project,
+                         name=f'{args.checkpoint.parent.name}-val{count}',
+                         group=args.checkpoint.parent.name,
+                         mode=args.wandb_mode,
+                         config={'model': 'original LlamaGen VQ-16',
+                                 'checkpoint_step': int(checkpoint['step']),
+                                 'images': count,
+                                 'fid_feature': 2048,
+                                 'preprocessing': result['preprocessing'],
+                                 'model_ema': True})
+        run.log({'eval/rFID': result['rFID'], 'eval/PSNR_dB': result['PSNR_dB'],
+                 'eval/images': count}, step=int(checkpoint['step']))
+        run.finish()
 
 
 if __name__ == '__main__':

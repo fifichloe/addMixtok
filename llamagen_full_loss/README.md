@@ -59,7 +59,7 @@ print('CLIP and ConvNeXt weights are ready')
 PY
 ```
 
-Check that the required paths and eight matching, idle H200 GPUs are available. The launcher accepts only GPUs with at most 1 GiB already in use. The validation evaluation expects 50,000 images. For the default **online** W&B run, complete `wandb login` in the H200 account; the project is `mixtok-rebuttal`.
+Check that the required paths and eight matching, idle H200 GPUs are available. The launcher accepts only GPUs with at most 1 GiB already in use. The validation evaluation expects 50,000 images. For the default **online** W&B run, complete `wandb login --relogin --verify` in the H200 account before allocating GPUs; the project is `mixtok-rebuttal`. Keep the API key out of commands, README files, and logs.
 
 ```bash
 set -e
@@ -92,9 +92,11 @@ python "$MIXTOK_H200_WORK/addMixtok/llamagen_full_loss/run.py" \
 
 The defaults are eight GPUs, 20 epochs, gradient accumulation 1, a 92%–95% memory band, and online W&B project `mixtok-rebuttal`. Global batch size is determined by the H200 probe and recorded in the run configuration and W&B. Add `--gpu-ids 0,1,2,3,4,5,6,7` only if specific physical GPUs must be used. Use `--wandb-mode offline` only if online W&B is unavailable and the user agrees. Run the full ImageNet experiment: do not pass the short smoke-test options `--limit-samples` or `--train-max-steps`. `run.py` stays attached until training finishes; detach from `tmux` with `Ctrl-B`, then `D`.
 
-`latest.pt` is atomically replaced after **every epoch**. The only separately retained intermediate checkpoint is `epoch_10.pt`. No `epoch_20.pt` is written; `latest.pt` holds epoch 20 after completion. Re-running the same command with `latest.pt` present resumes from the next epoch using the saved batch selection. Keep the same GPU count and accumulation on resume.
+`latest.pt` is atomically replaced after **every epoch**. The only separately retained intermediate checkpoint is `epoch_10.pt`. No `epoch_20.pt` is written; `latest.pt` holds epoch 20 after completion. Re-running the same command with `latest.pt` present resumes from the next epoch using the saved batch selection. Keep the same GPU count and accumulation on resume. `wandb_run_id.txt` keeps a resumed training job in the same W&B run.
 
 The training log is `train.log`, and full-loss probe logs are under `probes/`. The probe forces GAN on from the first update to expose the higher-memory training phase. The actual 20-epoch training retains the scheduled GAN start at epoch 1.5. Each batch candidate initializes the distributed models and runs 12 full-loss steps, so probing can take time.
+
+W&B logs the mean across GPUs and accumulation microbatches every 100 optimizer steps (and for steps 1–2): total generator and discriminator losses; raw and weighted image, LPIPS, DINOv2, CLIP, adversarial, feature-matching, and LeCam terms; total and separate real/fake discriminator hinge losses; discriminator real/fake logits and their LeCam moving averages; generator gradient norm before clipping; all learning rates; GAN/warmup state; epoch/progress, throughput, elapsed time, and rank-0 GPU memory. The total hinge loss is half the sum of its real and fake parts. Its run configuration records the selected batch, global batch, source revision, loss weights, and probe peak-memory fraction. Probe candidates themselves are recorded locally in `batch_selection.json`; probe W&B runs are disabled. Epoch completion and duration are logged separately. This training run does not calculate rFID/PSNR during training; the final evaluation below logs them as a second run in the same W&B group.
 
 Monitor from another shell:
 
@@ -115,7 +117,8 @@ CUDA_VISIBLE_DEVICES=0 python "$MIXTOK_H200_WORK/addMixtok/llamagen_full_loss/ev
   --llamagen-ckpt "$MIXTOK_H200_WORK/LlamaGen/pretrained_models/vq_ds16_c2i.pt" \
   --data-root "$MIXTOK_IMAGENET_VAL" \
   --checkpoint "$MIXTOK_H200_RUN/latest.pt" \
-  --output "$MIXTOK_H200_RUN/val50k.json"
+  --output "$MIXTOK_H200_RUN/val50k.json" \
+  --wandb-mode online
 ```
 
-The evaluator reports reconstruction FID and PSNR with the EMA weights. It computes FID with TorchMetrics Inception-2048; record the evaluator identity when comparing with results from another FID implementation. Its Inception weight may need a first-time download. Report `val50k.json`, the selected per-GPU and global batch sizes and peak-memory fraction, training duration, W&B run link, and any deviations from this runbook. The short 5090 execution checks are in [`SMOKE_TEST_5090.md`](SMOKE_TEST_5090.md); they are not full ImageNet results.
+The evaluator reports reconstruction FID and PSNR with the EMA weights, saves them in `val50k.json`, and logs both to a separate W&B evaluation run grouped with the training run. It computes FID with TorchMetrics Inception-2048; record the evaluator identity when comparing with results from another FID implementation. Its Inception weight may need a first-time download. Report `val50k.json`, the selected per-GPU and global batch sizes and peak-memory fraction, training duration, W&B run links, and any deviations from this runbook. The short 5090 execution checks are in [`SMOKE_TEST_5090.md`](SMOKE_TEST_5090.md); they are not full ImageNet results.
