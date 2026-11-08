@@ -1,6 +1,6 @@
 # Pure LlamaGen VQ reconstruction control: H200 runbook
 
-This is the dense K=256 reconstruction control, starting from the original LlamaGen `vq_ds16_c2i.pt` EMA weights. It trains the VQ encoder, quantization convolution, post-quantization convolution, and decoder with the MixTok fixed-96 reconstruction loss recipe. The codebook is frozen. The TiTok model, MixTok adapter, grid scorer, sparse routing, and generation pipeline are not used; the TiTok **source tree**, but not its weights, is needed to import the projected discriminator implementation.
+This experiment fine-tunes the **original LlamaGen VQ tokenizer** from its `vq_ds16_c2i.pt` EMA weights, using its full 16×16 grid of 256 visual tokens. It trains the VQ encoder, quantization convolution, post-quantization convolution, and decoder with the MixTok fixed-96 reconstruction loss recipe. The codebook is frozen. There is **no K selection** in this trainer: the TiTok model, MixTok adapter, grid scorer, sparse routing, and generation pipeline are not used. The TiTok **source tree**, but not its weights, is needed only to import the projected discriminator implementation.
 
 The loss weights are L1 ×2, LPIPS ×0.6, DINOv2 ×0.5, CLIP ×0.5, projected ConvNeXt GAN ×0.12, discriminator feature matching ×0.5, and LeCam ×0.001. GAN training starts at epoch 1.5. `loss_config.yaml` is a copy of the fixed-96 configuration; router settings in that file are unused by this trainer.
 

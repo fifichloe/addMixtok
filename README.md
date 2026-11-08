@@ -1,10 +1,10 @@
-# K=256 full-grid control for MixTok
+# LlamaGen VQ full-loss control and earlier K=256 workflows
 
-For the eight-H200 pure LlamaGen VQ full-loss control, **start with the complete [`llamagen_full_loss/README.md`](llamagen_full_loss/README.md) runbook**. It covers source revisions, dependencies, public weights, GPU checks, the 92%–95% memory probe, 20-epoch training, checkpoint recovery, and evaluation. This is separate from the older K=256 workflows below.
+For the current eight-H200 experiment, **start with the complete [`llamagen_full_loss/README.md`](llamagen_full_loss/README.md) runbook**. This trains the original LlamaGen VQ tokenizer on its full 256-token grid with the MixTok loss recipe; it has no K selection, adapter, or router. The runbook covers source revisions, dependencies, public weights, GPU checks, the 92%–95% memory probe, 20-epoch training, checkpoint recovery, and evaluation. The older shared-trainer K=256 workflows below are separate experiments and should not be used for this H200 run.
 
 This repository separates two experiments that were previously conflated.
 
-## Fair reconstruction control: train from the original weights
+## Earlier shared-trainer K=256 reconstruction recipe
 
 [`reconstruction_k256/train_full256_20epoch.yaml`](reconstruction_k256/train_full256_20epoch.yaml) and [`reconstruction_k256/continue_full256_6epoch.yaml`](reconstruction_k256/continue_full256_6epoch.yaml) are the K=256 full-grid counterparts to MixTok's fixed-96 20-epoch stage and 6-epoch continuation. Run them with the **same reconstruction training script and ImageNet data**, starting from the original TiTok-L32 and LlamaGen VQ-16 checkpoints. They keep the K=96 run's image, LPIPS, DINOv2, CLIP, GAN, and discriminator feature-matching losses, optimizer settings, batch sizes, learning-rate schedules, and preprocessing. The full-grid mask is one at every location; the grid scorer and 1D adapter are not trained because neither can influence the reconstruction when K=256. The LlamaGen VQ encoder, quantization convolution, post-quantization convolution, and decoder follow the same training flags as K=96. The codebook receives only a zero-gradient term in the shared trainer, so this recipe does not claim to update the codebook.
 
