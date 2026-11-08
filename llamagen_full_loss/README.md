@@ -10,7 +10,7 @@ Use the MixTok reconstruction environment and its public source at commit `6623c
 
 ## Train on eight H200 GPUs
 
-Run from any working directory. The launcher selects eight idle GPUs by default, probes per-GPU batch sizes with **all losses including GAN enabled**, and chooses the largest measured batch whose peak memory is at most 92% of usable GPU memory. If a batch is too large, the failed probe is recorded and the search continues. The selected batch, memory measurements, and GPU IDs are written to `batch_selection.json` before training starts.
+Run from any working directory. The launcher selects eight idle GPUs by default, probes per-GPU batch sizes with **all losses including GAN enabled**, and chooses the largest measured batch whose peak memory falls within **92%–95%** of usable GPU memory. If a batch is too large, the failed probe is recorded and the search continues. If no integer batch falls in this interval, training does not start and the probe logs explain the gap. The selected batch, memory measurements, and GPU IDs are written to `batch_selection.json` before training starts.
 
 ```bash
 python /path/to/addMixtok/llamagen_full_loss/run.py \
@@ -24,11 +24,11 @@ python /path/to/addMixtok/llamagen_full_loss/run.py \
   --clip-cache-dir /path/to/open_clip_cache
 ```
 
-The defaults are eight GPUs, 20 epochs, gradient accumulation 1, 92% memory target, and online W&B project `mixtok-rebuttal`. `--gpus`, `--gpu-ids`, `--accum`, `--target-memory`, and `--wandb-mode` may be changed. Use `tmux` or a job scheduler for the full run; `run.py` stays attached until training finishes.
+The defaults are eight GPUs, 20 epochs, gradient accumulation 1, a 92%–95% memory band, and online W&B project `mixtok-rebuttal`. `--gpus`, `--gpu-ids`, `--accum`, `--min-memory`, `--max-memory`, and `--wandb-mode` may be changed. Use `tmux` or a job scheduler for the full run; `run.py` stays attached until training finishes.
 
 `latest.pt` is atomically replaced after **every epoch**. The only separately retained intermediate checkpoint is `epoch_10.pt`. No `epoch_20.pt` is written; `latest.pt` holds epoch 20 after completion. Re-running the same command with `latest.pt` present resumes from the next epoch using the saved batch selection. Keep the same GPU count and accumulation on resume.
 
-The training log is `train.log`, and full-loss probe logs are under `probes/`. The probe forces GAN on from the first update to expose the higher-memory training phase. The actual 20-epoch training retains the scheduled GAN start at epoch 1.5. Batch sizes are discrete, so the closest safe batch can use less than 92% memory; the launcher never deliberately selects a measured value above the threshold. The batch choice changes global batch size and is recorded in `run_config.json` and W&B.
+The training log is `train.log`, and full-loss probe logs are under `probes/`. The probe forces GAN on from the first update to expose the higher-memory training phase. The actual 20-epoch training retains the scheduled GAN start at epoch 1.5. The launcher requires a measured batch within the requested memory band. The batch choice changes global batch size and is recorded in `run_config.json` and W&B.
 
 ## Evaluate
 

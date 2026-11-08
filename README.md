@@ -1,6 +1,6 @@
 # K=256 full-grid control for MixTok
 
-The portable pure LlamaGen VQ full-loss control is in [`llamagen_full_loss/`](llamagen_full_loss/). It probes GPU memory before training and keeps only the epoch-10 intermediate checkpoint plus the rolling `latest.pt`.
+The portable pure LlamaGen VQ full-loss control is in [`llamagen_full_loss/`](llamagen_full_loss/). It probes for 92%–95% GPU memory use before training and keeps only the epoch-10 intermediate checkpoint plus the rolling `latest.pt`.
 
 This repository separates two experiments that were previously conflated.
 

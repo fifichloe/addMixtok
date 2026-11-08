@@ -67,7 +67,8 @@ def main() -> None:
     parser.add_argument('--clip-cache-dir', type=Path, required=True)
     parser.add_argument('--gpus', type=int, default=8)
     parser.add_argument('--gpu-ids', help='Comma-separated physical GPU indices; otherwise use first idle GPUs.')
-    parser.add_argument('--target-memory', type=float, default=0.92)
+    parser.add_argument('--min-memory', type=float, default=0.92)
+    parser.add_argument('--max-memory', type=float, default=0.95)
     parser.add_argument('--max-batch', type=int, default=128)
     parser.add_argument('--probe-steps', type=int, default=12)
     parser.add_argument('--probe-timeout', type=int, default=900)
@@ -81,8 +82,8 @@ def main() -> None:
     args = parser.parse_args()
     if args.gpus < 1 or args.max_batch < 1 or args.probe_steps < 2 or args.accum < 1:
         parser.error('GPU count, max batch, probe steps and accumulation must be positive')
-    if not 0.0 < args.target_memory < 1.0:
-        parser.error('--target-memory must be between zero and one')
+    if not 0.0 < args.min_memory <= args.max_memory < 1.0:
+        parser.error('memory band must satisfy 0 < --min-memory <= --max-memory < 1')
     paths = (args.data_root, args.source_root, args.titok_root,
              args.llamagen_root, args.llamagen_ckpt, args.dino_repo)
     for path in paths:
@@ -128,6 +129,9 @@ def main() -> None:
         selection = json.loads(selection_path.read_text())
         if selection['gpu_count'] != args.gpus or selection['accum'] != args.accum:
             raise RuntimeError('Resume requires the original GPU count and accumulation')
+        selected_fraction = float(selection['selected_peak_fraction'])
+        if not args.min_memory <= selected_fraction <= args.max_memory:
+            raise RuntimeError('Saved batch is outside the requested memory band; use a fresh output directory')
         batch = int(selection['batch_size'])
         print(f'Resuming with prior batch={batch}; no new memory probe', flush=True)
     else:
@@ -156,12 +160,12 @@ def main() -> None:
             fraction = float(match.group(5))
             if int(match.group(1)) != args.gpus or int(match.group(2)) != batch:
                 raise RuntimeError(f'Probe batch={batch} returned inconsistent memory marker: {log}')
-            record = {'batch_size': batch, 'status': 'fit' if fraction <= args.target_memory else 'over_target',
+            record = {'batch_size': batch, 'status': 'fit' if fraction <= args.max_memory else 'over_max',
                       'peak_used_mib': float(match.group(3)), 'total_mib': float(match.group(4)),
                       'fraction': fraction, 'log': str(log)}
             records.append(record)
             print(f'  batch={batch}: {fraction:.2%} GPU memory', flush=True)
-            return fraction <= args.target_memory
+            return fraction <= args.max_memory
 
         lower = 0
         upper = None
@@ -183,12 +187,18 @@ def main() -> None:
                 else:
                     upper = candidate
         if lower == 0:
-            raise RuntimeError(f'No batch fits the {args.target_memory:.0%} memory target')
+            raise RuntimeError(f'No batch fits below the {args.max_memory:.0%} memory maximum')
         batch = lower
+        selected_fraction = next(record['fraction'] for record in records if record['batch_size'] == batch)
+        if selected_fraction < args.min_memory:
+            raise RuntimeError(f'No integer batch reaches the {args.min_memory:.0%} memory minimum '
+                               f'without exceeding {args.max_memory:.0%}; '
+                               f'largest feasible batch={batch} uses {selected_fraction:.2%}. '
+                               f'See probe logs in {args.output / "probes"}')
         selection = {'gpu_ids': selected, 'gpu_count': args.gpus, 'batch_size': batch,
-                     'accum': args.accum, 'target_memory': args.target_memory,
-                     'probes': records, 'selected_peak_fraction':
-                     next(record['fraction'] for record in records if record['batch_size'] == batch)}
+                     'accum': args.accum, 'min_memory': args.min_memory,
+                     'max_memory': args.max_memory, 'probes': records,
+                     'selected_peak_fraction': selected_fraction}
         selection_path.write_text(json.dumps(selection, indent=2) + '\n')
         print(f'Selected per-GPU batch={batch} at {selection["selected_peak_fraction"]:.2%} memory', flush=True)
     command = base + ['--output', str(args.output), '--batch-size', str(batch),
