@@ -1,3 +1,9 @@
+# MixTok experimental additions
+
+## Current Long: reconstruction and generation without density
+
+See **[mixtok_long_no_density/README.md](mixtok_long_no_density/README.md)** for the current code, scientific configuration, external asset identities, and run commands.
+
 # LlamaGen VQ full-loss control and earlier K=256 workflows
 
 For the current eight-H200 experiment, **start with the complete [`llamagen_full_loss/README.md`](llamagen_full_loss/README.md) runbook**. This trains the original LlamaGen VQ tokenizer on its full 256-token grid with the MixTok loss recipe; it has no K selection, adapter, or router. The runbook covers source revisions, dependencies, public weights, GPU checks, the 92%–95% memory probe, 20-epoch training, checkpoint recovery, and evaluation. The older shared-trainer K=256 workflows below are separate experiments and should not be used for this H200 run.

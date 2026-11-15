@@ -1,0 +1,19 @@
+{
+  "student": "long",
+  "architecture": "split_budget",
+  "input": "Fbase_Bx256x16x16_FP32",
+  "utility_weight": 0.9,
+  "threshold": -0.23861974477767944,
+  "Kmin": 48,
+  "Kmax": 144,
+  "mean_K_target": 96,
+  "one_forward_one_set": true,
+  "no_auxiliary_or_B0": true,
+  "density_component_removed": true,
+  "white_direct_weight": 0.5,
+  "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+  "teacher_policy_sha256": "1dd267c7735e02eba66d1162df466abd8d09781612fe54b96b4e0ce7ae710c04",
+  "exported_model_sha256": "d764d701d86cac6ac2a7e1bff97b97a8d48f9819da36b17274c61935e3a9733d",
+  "exported_weights_sha256": "a687641507933604582097ed8bb9d718aee641d9776c2dad8c4af5c4743d1ab8",
+  "original_config_sha256": "85df748540a752175b12172139eb14d26c4fb2193dd821b280648e1de04152a2"
+}

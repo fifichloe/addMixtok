@@ -1,0 +1,15 @@
+{
+  "status": "static_review_complete",
+  "files": 44,
+  "python_files": 35,
+  "unrequested_internal_archives": false,
+  "source_machine_paths": false,
+  "weights_or_raw_data": false,
+  "credential_patterns_found": false,
+  "reconstruction_score_and_feature_functions_match_current_source": true,
+  "deployed_generation_router_and_training_model_sources_match": true,
+  "MaskGIT_training_and_cache_algorithms_match_current_source": true,
+  "GPU_training_or_tests_run": false,
+  "clean_machine_end_to_end_verified": false,
+  "previous_rejected_archive_in_this_branch": false
+}

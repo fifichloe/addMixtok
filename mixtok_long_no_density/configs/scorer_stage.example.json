@@ -1,0 +1,10 @@
+{
+  "data": "/path/to/fit_held_manifests",
+  "teacher_policies": "/path/to/current_teacher_policies.json",
+  "warmstart": "/path/to/previous_stage_selected.pt",
+  "warmstart_sha256": "REPLACE_WITH_EXPECTED_SHA256",
+  "parent_step": 20000,
+  "parent_local_updates": 1500,
+  "execution_gate": "/path/to/long_stage_gate.json",
+  "parent_audit": "/path/to/parent_checkpoint_audit.json"
+}

@@ -1,0 +1,47 @@
+{
+  "gain_head": {
+    "filename": "best.pt",
+    "sha256": "fe9e5c562b72885b03a7be94b56541515c79df618f93aec46a413afb7cc03518",
+    "bytes": 1997669
+  },
+  "feature_scales": {
+    "filename": "input_scales.npz",
+    "sha256": "5a307e5937d1005e766a813686320e846895982f7cb29a33b116eb2539500f2d",
+    "bytes": 2548
+  },
+  "image_utility": {
+    "filename": "semantic_rel.npz",
+    "sha256": "bc23f1adc62b5c78c6c4a9fe6ba625878018ccf3c49155a2b6e4e99a9ca3dc55",
+    "bytes": 39198
+  },
+  "generation_router": {
+    "filename": "student_state.pt",
+    "sha256": "a687641507933604582097ed8bb9d718aee641d9776c2dad8c4af5c4743d1ab8",
+    "bytes": 4152691
+  },
+  "semantic_B0": {
+    "filename": "efficientnet_b0_rwightman-7f5810bc.pth",
+    "sha256": "7f5810bc96def8f7552d5b7e68d53c4786f81167d28291b21c0d90e1fca14934",
+    "bytes": 21444401
+  },
+  "maskgit": {
+    "filename": "latest.pt",
+    "sha256": "04a2f5e061fa0ce463755f73e008a620e8e0cce56d429aa21aeb79bfc2c869af"
+  },
+  "adapter": {
+    "filename": "adapter_step20000.pt",
+    "sha256": "52aeca25d6d5a44d34e294457f38971cee1f3a2e71ef7e092aec37b349967aad"
+  },
+  "codec_for_generation": {
+    "filename": "top_p_ema_inference_v1_step247482.pt",
+    "sha256": "e3806ee8011101a1f6bda002d18f2dd953f99b3dbfdf98d1be3126f1cb85547a"
+  },
+  "official_halton": {
+    "filename": "ImageNet_256_base.pth",
+    "sha256": "7fe25cb80b05743e8b42dacc61d88792a9ab5217d6bd756bef28821e0a5fc68f"
+  },
+  "reconstruction_codec": {
+    "filename": "mixtok_recon.pt",
+    "sha256": "457be008836e3f3702327795bb1953250f0032a0b35f74e26e6ffce9ef50e82e"
+  }
+}

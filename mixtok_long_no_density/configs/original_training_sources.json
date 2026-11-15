@@ -1,0 +1,16 @@
+{
+  "implementation_sha256": {
+    "cache_routes.py": "b88b3f618069397b44f7c05c9cec7bc160373d433b44e6e2f6cce3873556682e",
+    "common.py": "4f13723c616b3d222ffb12b232720da6631218fa6bd44bd5d05db9cfd8a8532f",
+    "train.py": "0a6f2fbc564a944ae4ec246224a42e0262d434bec71501421034d18edde0e312"
+  },
+  "original_modules_sha256": {
+    "adapter_data": "a4e9415d822f66e47c4b65197c975e8554aece5244fecd1dd80e42c0d6f95b75",
+    "bucket_sampler": "beb94e71be271711dc50d10f11aaf79964557ac5205dc5246e7cccaa08309699",
+    "continuous_halton": "4482445724b581671d5b6caa31703a0cca8ae9593265ea3ff58a9913718c7458",
+    "data": "71fb1954a7a7cfcd6ae8dad69e14a4999187f0aa11cd540232a75dc57dec56e7",
+    "embedding_adapter": "6ad14e01c42e1861958bf90edc6ba238deb2727a9cb82e0dc9fccf3dd56192da",
+    "halton_upstream": "7a0d241fe6f968c088af3fac71b895394bcda993b9425f60c5d23e07a9ac5590",
+    "train_halton": "e7c7789031d264d5a16f72ed00dad07305d4ac6758fcd21de6155b2c0ccdc867"
+  }
+}

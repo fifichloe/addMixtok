@@ -1,0 +1,14 @@
+{
+  "variant": "Long_no_density",
+  "kind": "long",
+  "density_removed": true,
+  "white_retained": 0.5,
+  "input": "base features only",
+  "world": 4,
+  "micro_batch": 16,
+  "global_batch": 64,
+  "new_updates": 2000,
+  "frozen_codec": true,
+  "B0_training_only": true,
+  "no_Inception_or_LPIPS_training": true
+}
