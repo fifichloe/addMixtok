@@ -27,6 +27,16 @@ The generation timing cohort has mean local K = 92.20, whereas the 50k seed-4 qu
 
 The lowest full-50k seed-4 gFID in this scan is at 2D CFG 3.0. All five points use 8+8 rounds and the same generated token budget distribution.
 
+## Current Long sampling-round comparison (seed 4, full 50k)
+
+| Sampling rounds | gFID ↓ | Mean local K |
+|---:|---:|---:|
+| 8+4 | 2.006164 | 106.38386 |
+| 8+8 | 1.865404 | 106.38386 |
+| 8+16 | 1.848165 | 106.38386 |
+
+All completed rows use the same 20k-update checkpoint, CFG 4.5/3.0, seed 4, and the same mean 2D token budget. The 8+24 evaluation is still waiting for a generation GPU; it is not included yet.
+
 ## Main CFG 3.0 sampling seeds
 
 | Seed | 1D base gFID ↓ | Full gFID ↓ | Mean local K | Mean content tokens |

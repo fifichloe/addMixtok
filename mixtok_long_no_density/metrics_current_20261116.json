@@ -1,7 +1,7 @@
 {
   "variant": "density-free Long; gain + white + CAM + image-level U retained",
   "scope": "ImageNet 256x256; current Long checkpoint only",
-  "updated_utc": "2026-11-15T20:03:31.097077+00:00",
+  "updated_utc": "2026-11-15T20:10:29.669265+00:00",
   "reconstruction_full50k": {
     "full_dynamic96": {
       "mean_local_K": 96.0,
@@ -3044,6 +3044,41 @@
         "bpp_mask256": 0.037109375,
         "rFID": 1.1280806834391228,
         "PSNR": 19.964331743621827
+      }
+    ]
+  },
+  "generation_sampling_rounds_seed4_full50k": {
+    "status": "partial_8+24_pending",
+    "n": 50000,
+    "seed": 4,
+    "cfg_stage1": 4.5,
+    "cfg_stage2": 3.0,
+    "same_checkpoint": true,
+    "same_mean_local_K": true,
+    "rows": [
+      {
+        "stage1_rounds": 8,
+        "stage2_rounds": 4,
+        "total_rounds": 12,
+        "gFID": 2.0061641820786917,
+        "mean_local_K": 106.38386,
+        "summary_sha256": "1f77e9884b17bc6dae80813554c8b916031c4b8dd5c2599dc1a2ed5b00adcb4b"
+      },
+      {
+        "stage1_rounds": 8,
+        "stage2_rounds": 8,
+        "total_rounds": 16,
+        "gFID": 1.865403534962752,
+        "mean_local_K": 106.38386,
+        "summary_sha256": "ded6776d1fe35a249d03ac838e7e6bffa02deb97eddf9df832aeb7bfc4b3642e"
+      },
+      {
+        "stage1_rounds": 8,
+        "stage2_rounds": 16,
+        "total_rounds": 24,
+        "gFID": 1.8481652617191457,
+        "mean_local_K": 106.38386,
+        "summary_sha256": "4238f7c6fe655f2f8c7d779ec044d3c0926f5499339241d058f7e9a4f8afacfb"
       }
     ]
   }
