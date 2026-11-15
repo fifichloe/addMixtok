@@ -9,7 +9,7 @@ This file records completed measurements for the current Long model. It is not t
 | Reconstruction rFID ↓ | **1.000763** | mean local K = 96 (range 48–144); 128 content tokens |
 | Reconstruction PSNR ↑ | **19.4012 dB** | same 50k validation images |
 | Reconstruction fixed-width bitrate | **0.03027344 bpp** | 32×12 + 96×14 token bits + 256-bit location mask |
-| Generation gFID ↓, seed 4 | **1.8654** | CFG 4.5/3.0; 8+8 rounds; mean local K = 106.38386; 138.38386 content tokens |
+| Generation gFID ↓, four-seed mean ± sample SD | **1.8652 ± 0.0020** | CFG 4.5/3.0; 8+8 rounds; mean local K = 106.38153; 138.38153 content tokens |
 | Generation end-to-end latency | **250.97 ms/image** | one RTX 5090, batch 1, class 207, 10 warmups + 50 timed runs |
 | Generation supported-operator FLOPs | **1.636 T/image** | class 207, seed 4; unsupported operators excluded |
 
@@ -32,9 +32,10 @@ The lowest full-50k seed-4 gFID in this scan is at 2D CFG 3.0. All five points u
 | Seed | 1D base gFID ↓ | Full gFID ↓ | Mean local K | Mean content tokens |
 |---:|---:|---:|---:|---:|
 | 1 | 4.3209 | 1.8629 | 106.30722 | 138.30722 |
-| 2 | pending | pending | pending | pending |
-| 3 | pending | pending | pending | pending |
+| 2 | 4.3851 | 1.8647 | 106.52304 | 138.52304 |
+| 3 | 4.3118 | 1.8677 | 106.31200 | 138.31200 |
 | 4 | 4.2890 | 1.8654 | 106.38386 | 138.38386 |
+| Mean ± sample SD | — | **1.8652 ± 0.0020** | — | — |
 
 These seeds vary sampling for one fixed checkpoint; they are not independent training repeats.
 
@@ -62,6 +63,14 @@ These are inference ablations with the same trained codec and scorer weights. Th
 | Fixed K = 106 | 106.00000 | 2.022093 |
 
 This control changes selection at inference with the same generator checkpoint. Its mean K differs by 0.38386, and its base features were numerically equivalent within 1e-5 rather than bitwise equal. It is not an independently trained fixed-budget generator.
+
+## Separate matched-loss LlamaGen tokenizer control
+
+| Tokenizer | Content tokens | rFID ↓ | PSNR (dB) ↑ | Fixed-width bpp |
+|---|---:|---:|---:|---:|
+| Pure LlamaGen VQ-16 EMA, H200 full-loss training | 256 | 1.238138 | 21.2151 | 0.05468750 |
+
+This is a separate 50k reconstruction control with its own tokenizer checkpoint. No pure LlamaGen gFID is claimed from this checkpoint yet.
 
 ## Runtime detail
 
