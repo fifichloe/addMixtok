@@ -110,6 +110,18 @@ This control changes selection at inference with the same generator checkpoint. 
 
 This is a separate 50k reconstruction control with its own tokenizer checkpoint. No pure LlamaGen gFID is claimed from this checkpoint yet.
 
+## ALIT transfer: newly trained ALIT Grid Scorer
+
+All three rows below use the same frozen ALIT--VQGAN Mix checkpoint after 20 epochs, the same 50,000 validation images, and 64 ALIT base tokens. The new scorer was trained on ALIT training images without using validation reconstruction quality. Its dynamic threshold was calibrated on validation **scores** to mean local K = 64.
+
+| Spatial selection | Mean local K | rFID ↓ | PSNR (dB) ↑ |
+|---|---:|---:|---:|
+| Original ALIT Mix router, fixed K=64 | 64 | 2.266476 | 18.5234 |
+| New ALIT-trained scorer, fixed K=64 | 64 | 1.937740 | 18.5124 |
+| New ALIT-trained scorer, dynamic mean K=64 | 64 | **1.902851** | 18.5094 |
+
+The new scorer improves rFID under both fixed and dynamic selection at the same average content-token budget of 128. PSNR is slightly lower than the original-router control. These values form a same-checkpoint comparison and must not be substituted for the earlier ALIT experiment that used additional training after epoch 20. Exact metrics, checkpoint identity, scorer-weight hashes, and the validation manifest hash are in [`ALIT_TRANSFER_20261116.json`](ALIT_TRANSFER_20261116.json).
+
 ## Runtime detail
 
 | Measurement | Value | Protocol |

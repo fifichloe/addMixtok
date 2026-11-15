@@ -1,0 +1,52 @@
+{
+  "status": "complete",
+  "n": 50000,
+  "checkpoint": {
+    "step": 66720,
+    "epoch": 20.0,
+    "source_alit_state": "ema"
+  },
+  "policy": {
+    "target_mean_local_K": 64,
+    "measured_mean_local_K": 64.0,
+    "threshold": 1.0252200365066528,
+    "k_min": 48,
+    "k_max": 144,
+    "scorer": "ALIT-trained density-free Long: gain + 0.5 white + 0.75 CAM + 0.9 U",
+    "calibration_uses_validation_scores_only": true,
+    "quality_not_computed_yet": true,
+    "original_ALIT_router_used_only_for_baseline": true,
+    "checkpoint": {
+      "step": 66720,
+      "epoch": 20.0,
+      "source_alit_state": "ema"
+    },
+    "images_sha256": "e87c5f705f12ec0f645cb6907142c4fe387b4531c880e865ba889c2e808eb2bb",
+    "scorer_weights": {
+      "gain_best.pt": "7a4125b4794647431a20a0c32f77d30fc2338ad68e3d4664d02376f943bc98e7",
+      "whitening.npz": "3c3aba054650f514365416476f9e5b883909c29c914d407dddaa86b39da00a0f",
+      "semantic_rel.npz": "e6e552d0a5951e71e42cfb53d69760d821c0dd25a1e8a822e7cac4cf90156918"
+    }
+  },
+  "results": {
+    "old_router_fixed64": {
+      "rFID": 2.2664756021846415,
+      "PSNR": 18.523352601470947,
+      "mean_local_K": 64.0,
+      "mean_content_tokens": 128.0
+    },
+    "new_fixed64": {
+      "rFID": 1.937740448717534,
+      "PSNR": 18.512397343902588,
+      "mean_local_K": 64.0,
+      "mean_content_tokens": 128.0
+    },
+    "new_dynamic64": {
+      "rFID": 1.902851070079464,
+      "PSNR": 18.509378897247313,
+      "mean_local_K": 64.0,
+      "mean_content_tokens": 128.0
+    }
+  },
+  "seconds": 5057.827887066989
+}
