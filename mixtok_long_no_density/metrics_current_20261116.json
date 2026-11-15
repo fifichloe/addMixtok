@@ -1,7 +1,7 @@
 {
   "variant": "density-free Long; gain + white + CAM + image-level U retained",
   "scope": "ImageNet 256x256; current Long checkpoint only",
-  "updated_utc": "2026-11-15T16:56:01.588891+00:00",
+  "updated_utc": "2026-11-15T20:03:31.097077+00:00",
   "reconstruction_full50k": {
     "full_dynamic96": {
       "mean_local_K": 96.0,
@@ -2860,9 +2860,191 @@
     "MaskGIT_training_audit": "3edfc2d7bfeb732e3ae4a20b0c8617f8190774da29abe8d234089b5aa237d484"
   },
   "pending": [
-    "Current Long reconstruction ranking and budget curves",
     "Independent random/uniform and nearconstant generator training",
     "Current Long 2D sampling-round sweep",
     "Pure LlamaGen generator with 12/16/24 rounds"
-  ]
+  ],
+  "reconstruction_controls_full50k_20261116": {
+    "n": 50000,
+    "same_frozen_codec_and_scorer": true,
+    "independent_training_repeats": false,
+    "full_pooled_FID_not_mean_of_shard_FIDs": true,
+    "curve_scope": "frozen-checkpoint inference controls, not independently trained per-budget optima",
+    "bitrate_assumption": "fixed-width 12/14-bit codewords plus raw 256-bit position mask; no entropy coding",
+    "source_result_sha256": "3c97eecec0d52caad9e0a2c717be04833b5df664412d384fed06e24878dc1b4e",
+    "protocol_sha256": "7c9fbeca9c09a57dd914e3cf3e98836c690ff77e1f6fdca1b36af10112772ae5",
+    "rows": [
+      {
+        "name": "teacher_dynamic96",
+        "family": "A01_A02_A03",
+        "mean_K": 96.0,
+        "mean_content_tokens": 128.0,
+        "bpp_mask256": 0.0302734375,
+        "rFID": 1.000751799499767,
+        "PSNR": 19.40117266265869
+      },
+      {
+        "name": "rank_uniform",
+        "family": "A01",
+        "mean_K": 96.0,
+        "mean_content_tokens": 128.0,
+        "bpp_mask256": 0.0302734375,
+        "rFID": 1.5754175271966346,
+        "PSNR": 17.223123106689453
+      },
+      {
+        "name": "rank_random",
+        "family": "A01",
+        "mean_K": 96.0,
+        "mean_content_tokens": 128.0,
+        "bpp_mask256": 0.0302734375,
+        "rFID": 1.4911600771760618,
+        "PSNR": 17.28669736099243
+      },
+      {
+        "name": "rank_gradient_entropy",
+        "family": "A01",
+        "mean_K": 96.0,
+        "mean_content_tokens": 128.0,
+        "bpp_mask256": 0.0302734375,
+        "rFID": 1.340215157815578,
+        "PSNR": 18.073002949523925
+      },
+      {
+        "name": "fixed0",
+        "family": "A02_A03",
+        "mean_K": 0.0,
+        "mean_content_tokens": 32.0,
+        "bpp_mask256": 0.009765625,
+        "rFID": 2.7294499016280156,
+        "PSNR": 15.448847897338867
+      },
+      {
+        "name": "fixed32",
+        "family": "A02_A03",
+        "mean_K": 32.0,
+        "mean_content_tokens": 64.0,
+        "bpp_mask256": 0.0166015625,
+        "rFID": 1.4851378034565528,
+        "PSNR": 17.30956953033447
+      },
+      {
+        "name": "fixed64",
+        "family": "A02_A03",
+        "mean_K": 64.0,
+        "mean_content_tokens": 96.0,
+        "bpp_mask256": 0.0234375,
+        "rFID": 1.1250098141001104,
+        "PSNR": 18.452556562194825
+      },
+      {
+        "name": "fixed96",
+        "family": "A02_A03",
+        "mean_K": 96.0,
+        "mean_content_tokens": 128.0,
+        "bpp_mask256": 0.0302734375,
+        "rFID": 1.0359321204089724,
+        "PSNR": 19.32658263259888
+      },
+      {
+        "name": "fixed128",
+        "family": "A02_A03",
+        "mean_K": 128.0,
+        "mean_content_tokens": 160.0,
+        "bpp_mask256": 0.037109375,
+        "rFID": 1.109700087399176,
+        "PSNR": 20.007623414611817
+      },
+      {
+        "name": "fixed196",
+        "family": "A02_A03",
+        "mean_K": 196.0,
+        "mean_content_tokens": 228.0,
+        "bpp_mask256": 0.0516357421875,
+        "rFID": 1.7106876891299407,
+        "PSNR": 20.936418378143312
+      },
+      {
+        "name": "fixed256",
+        "family": "A02_A03",
+        "mean_K": 256.0,
+        "mean_content_tokens": 288.0,
+        "bpp_mask256": 0.064453125,
+        "rFID": 2.5130985922788796,
+        "PSNR": 21.259618025512694
+      },
+      {
+        "name": "dynamic64",
+        "family": "A03",
+        "mean_K": 64.0,
+        "mean_content_tokens": 96.0,
+        "bpp_mask256": 0.0234375,
+        "rFID": 1.0801779500851012,
+        "PSNR": 18.514639839782713
+      },
+      {
+        "name": "matched_mean64",
+        "family": "A02_A03",
+        "mean_K": 64.0,
+        "mean_content_tokens": 96.0,
+        "bpp_mask256": 0.0234375,
+        "rFID": 1.1250098141001104,
+        "PSNR": 18.452556562194825
+      },
+      {
+        "name": "shuffled64",
+        "family": "A02_A03",
+        "mean_K": 64.0,
+        "mean_content_tokens": 96.0,
+        "bpp_mask256": 0.0234375,
+        "rFID": 1.1498503532657764,
+        "PSNR": 18.405225874328615
+      },
+      {
+        "name": "matched_mean96",
+        "family": "A02_A03",
+        "mean_K": 96.0,
+        "mean_content_tokens": 128.0,
+        "bpp_mask256": 0.0302734375,
+        "rFID": 1.0359321204089724,
+        "PSNR": 19.32658263259888
+      },
+      {
+        "name": "shuffled96",
+        "family": "A02_A03",
+        "mean_K": 96.0,
+        "mean_content_tokens": 128.0,
+        "bpp_mask256": 0.0302734375,
+        "rFID": 1.0497780443112106,
+        "PSNR": 19.243376773529054
+      },
+      {
+        "name": "dynamic128",
+        "family": "A03",
+        "mean_K": 128.0,
+        "mean_content_tokens": 160.0,
+        "bpp_mask256": 0.037109375,
+        "rFID": 1.1151233593877805,
+        "PSNR": 20.05622546203613
+      },
+      {
+        "name": "matched_mean128",
+        "family": "A02_A03",
+        "mean_K": 128.0,
+        "mean_content_tokens": 160.0,
+        "bpp_mask256": 0.037109375,
+        "rFID": 1.109700087399176,
+        "PSNR": 20.007623414611817
+      },
+      {
+        "name": "shuffled128",
+        "family": "A02_A03",
+        "mean_K": 128.0,
+        "mean_content_tokens": 160.0,
+        "bpp_mask256": 0.037109375,
+        "rFID": 1.1280806834391228,
+        "PSNR": 19.964331743621827
+      }
+    ]
+  }
 }

@@ -55,6 +55,34 @@ These seeds vary sampling for one fixed checkpoint; they are not independent tra
 
 These are inference ablations with the same trained codec and scorer weights. They do not estimate variability across independently trained models. The primary planned paper control groups gain+white+CAM as one local score module; individual rows are diagnostic.
 
+## Reconstruction selection and budget controls (same frozen checkpoint, full 50k)
+
+| Selection | Mean local K | Fixed-width bpp incl. mask | rFID ↓ | PSNR (dB) ↑ |
+|---|---:|---:|---:|---:|
+| `teacher_dynamic96` | 96.00 | 0.030273 | 1.000752 | 19.4012 |
+| `rank_uniform` | 96.00 | 0.030273 | 1.575418 | 17.2231 |
+| `rank_random` | 96.00 | 0.030273 | 1.491160 | 17.2867 |
+| `rank_gradient_entropy` | 96.00 | 0.030273 | 1.340215 | 18.0730 |
+| `fixed0` | 0.00 | 0.009766 | 2.729450 | 15.4488 |
+| `fixed32` | 32.00 | 0.016602 | 1.485138 | 17.3096 |
+| `fixed64` | 64.00 | 0.023438 | 1.125010 | 18.4526 |
+| `fixed96` | 96.00 | 0.030273 | 1.035932 | 19.3266 |
+| `fixed128` | 128.00 | 0.037109 | 1.109700 | 20.0076 |
+| `fixed196` | 196.00 | 0.051636 | 1.710688 | 20.9364 |
+| `fixed256` | 256.00 | 0.064453 | 2.513099 | 21.2596 |
+| `dynamic64` | 64.00 | 0.023438 | 1.080178 | 18.5146 |
+| `matched_mean64` | 64.00 | 0.023438 | 1.125010 | 18.4526 |
+| `shuffled64` | 64.00 | 0.023438 | 1.149850 | 18.4052 |
+| `matched_mean96` | 96.00 | 0.030273 | 1.035932 | 19.3266 |
+| `shuffled96` | 96.00 | 0.030273 | 1.049778 | 19.2434 |
+| `dynamic128` | 128.00 | 0.037109 | 1.115123 | 20.0562 |
+| `matched_mean128` | 128.00 | 0.037109 | 1.109700 | 20.0076 |
+| `shuffled128` | 128.00 | 0.037109 | 1.128081 | 19.9643 |
+
+All 19 policies were evaluated on the same 50,000 validation images, with FID pooled across four feature shards. The learned ranking strongly improves on random, uniform, and image-gradient-entropy rankings at mean K=96. Dynamic allocation improves rFID over fixed K at mean K=64 and 96, but not at 128. The K sweep changes masks at inference on one frozen checkpoint; K=0 and K=256 are not separately trained optima. The fixed-width bpp includes a raw 256-bit mask even when K=0 or 256, where that mask is redundant.
+
+Source result SHA256: `3c97eecec0d52caad9e0a2c717be04833b5df664412d384fed06e24878dc1b4e`; protocol SHA256: `7c9fbeca9c09a57dd914e3cf3e98836c690ff77e1f6fdca1b36af10112772ae5`.
+
 ## Generation fixed-budget inference control
 
 | Selection on seed 4 | Mean local K | gFID ↓ |
@@ -88,7 +116,6 @@ Component medians come from separate instrumented passes and should not be summe
 
 ## Pending measurements
 
-- Current Long reconstruction ranking, shuffled-budget and rate–distortion curves have frozen masks but no completed quality evaluation.
 - Independent random/uniform and nearconstant generator training and corresponding gFID are pending.
 - Current Long sampling-round sweep is pending.
 - Pure LlamaGen 12/16/24-round generator evaluation is pending; its tokenizer rFID is a separate control and is not a MixTok Long result.
