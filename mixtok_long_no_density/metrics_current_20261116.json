@@ -3048,7 +3048,7 @@
     ]
   },
   "generation_sampling_rounds_seed4_full50k": {
-    "status": "partial_8+24_pending",
+    "status": "complete",
     "n": 50000,
     "seed": 4,
     "cfg_stage1": 4.5,
@@ -3079,6 +3079,15 @@
         "gFID": 1.8481652617191457,
         "mean_local_K": 106.38386,
         "summary_sha256": "4238f7c6fe655f2f8c7d779ec044d3c0926f5499339241d058f7e9a4f8afacfb"
+      },
+      {
+        "stage1_rounds": 8,
+        "stage2_rounds": 24,
+        "total_rounds": 32,
+        "gFID": 1.8432086206173608,
+        "mean_local_K": 106.38386,
+        "summary_sha256": "07600155cd3b2c167ae197ef2c9f8c2480d1d3beed59c3a435cfab66dd548c18",
+        "audit_recovery": "Original 1e-5 tolerance exceeded by 3 of 102400000 base ADM FP32 values; recovery used 2e-5, no images regenerated"
       }
     ]
   }

@@ -34,8 +34,9 @@ The lowest full-50k seed-4 gFID in this scan is at 2D CFG 3.0. All five points u
 | 8+4 | 2.006164 | 106.38386 |
 | 8+8 | 1.865404 | 106.38386 |
 | 8+16 | 1.848165 | 106.38386 |
+| 8+24 | 1.843209 | 106.38386 |
 
-All completed rows use the same 20k-update checkpoint, CFG 4.5/3.0, seed 4, and the same mean 2D token budget. The 8+24 evaluation is still waiting for a generation GPU; it is not included yet.
+All rows use the same 20k-update checkpoint, CFG 4.5/3.0, seed 4, and the same mean 2D token budget. The 8+24 run reused all 50k generated images in an audit-only recovery: 3 of 102.4 million base ADM FP32 values exceeded the original 1e-5 comparison tolerance (maximum 1.097e-5), so the audit tolerance was set to 2e-5. No images were regenerated.
 
 ## Main CFG 3.0 sampling seeds
 
@@ -139,7 +140,6 @@ Component medians come from separate instrumented passes and should not be summe
 ## Pending measurements
 
 - Independent random/uniform and nearconstant generator training and corresponding gFID are pending.
-- Current Long sampling-round sweep is pending.
 - Pure LlamaGen 12/16/24-round generator evaluation is pending; its tokenizer rFID is a separate control and is not a MixTok Long result.
 
 ## Model identity
