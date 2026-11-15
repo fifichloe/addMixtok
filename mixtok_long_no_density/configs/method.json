@@ -15,5 +15,5 @@
   "rounds": "8+8",
   "cfg1": 4.5,
   "cfg2": 3.0,
-  "CFG_sweep_complete": false
+  "CFG_sweep_complete": true
 }

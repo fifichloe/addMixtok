@@ -1,6 +1,6 @@
 # MixTok Long：无 density 的重建与生成代码
 
-当前版本保留 **gain、white、CAM、图像级 U**，完全删除部署评分中的 density。生成使用本次重训后的 base-only Long router 和 20k-update MaskGIT。这是当前主实验代码；不是刚讨论但尚未执行的“fixed20 codec 再做动态微调”。
+当前版本保留 **gain、white、CAM、图像级 U**，完全删除部署评分中的 density。生成使用本次重训后的 base-only Long router 和 20k-update MaskGIT。这是当前主实验代码；不是刚讨论但尚未执行的“fixed20 codec 再做动态微调”。当前结果见 [RESULTS_CURRENT_20261116.md](RESULTS_CURRENT_20261116.md)。
 
 ## 目录
 
@@ -106,7 +106,7 @@ python mixtok_long_no_density/gene/eval/evaluate.py \
   --output /path/to/new_cfg3_seed4_8p8
 ```
 
-第一阶段8轮/CFG4.5；第二阶段由参数指定，默认8轮，即8+8。`--stage2-steps 16`是8+16。固定四个逻辑分片、batch8、原随机流，最多四张物理卡。CFG3.0是可用配置，不表示尚在进行的CFG扫描已确定最终最优值。
+第一阶段8轮/CFG4.5；第二阶段由参数指定，默认8轮，即8+8。`--stage2-steps 16`是8+16。固定四个逻辑分片、batch8、原随机流，最多四张物理卡。五个完整50k、seed4的CFG扫描已完成，其中CFG3.0的gFID最低；其他采样seed的结果见当前结果文件。
 
 现有checkpoint的科学身份逐项比较；安装目录字段在迁移比较中忽略。原配置SHA在精简配置中保留，模型/权重SHA仍按实际文件验证。训练代码中仅 `common.py` 外置路径绑定；旧checkpoint记录的该文件SHA与 `configs/original_training_sources.json` 核对，新训练记录当前文件SHA。其余原始训练和生成模块逐文件核对实际SHA。
 

@@ -2,7 +2,7 @@
 
 ## Current Long: reconstruction and generation without density
 
-See **[mixtok_long_no_density/README.md](mixtok_long_no_density/README.md)** for the current code, scientific configuration, external asset identities, and run commands.
+See **[mixtok_long_no_density/README.md](mixtok_long_no_density/README.md)** for the current code, scientific configuration, external asset identities, and run commands. Current measured results are collected in **[mixtok_long_no_density/RESULTS_CURRENT_20261116.md](mixtok_long_no_density/RESULTS_CURRENT_20261116.md)**.
 
 # LlamaGen VQ full-loss control and earlier K=256 workflows
 
