@@ -69,6 +69,9 @@ def main():
         for stage in ('train', 'spatial', 'budget'):
             copy(HERE / f'{stage}_{kind}/report.json', f'{kind}_{stage}_report.json')
             copy(HERE / f'{stage}_{kind}/config.json', f'{kind}_{stage}_config.json')
+        resume_history = HERE / f'train_{kind}/resume_history.jsonl'
+        if resume_history.exists():
+            copy(resume_history, f'{kind}_resume_history.jsonl')
     (DEST / 'results.json').write_text(json.dumps(dict(status='complete',
         protocol='same frozen generator; seed 4; 50000 images; 8+8; stage2 CFG 3.0; '
                  'same realized average 2D-token budget', rows=records),
