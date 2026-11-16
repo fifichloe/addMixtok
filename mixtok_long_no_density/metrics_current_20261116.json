@@ -1,7 +1,7 @@
 {
   "variant": "density-free Long; gain + white + CAM + image-level U retained",
   "scope": "ImageNet 256x256; current Long checkpoint only",
-  "updated_utc": "2026-11-15T20:10:29.669265+00:00",
+  "updated_utc": "2026-11-16T15:39:24.701602+00:00",
   "reconstruction_full50k": {
     "full_dynamic96": {
       "mean_local_K": 96.0,
@@ -3238,5 +3238,26 @@
       "tokenizer_sha256": "0911153ac8b0b13db0e528598f618d93a172f91016d97dce5d579db430022e4d",
       "summary_sha256": "8580b13da2b3ec836bf8f904a5dec67f54d63add31aaf27a119ef57a2a64531e"
     }
+  },
+  "generation_U_coefficient_0p3_same_checkpoint_seed4_full50k": {
+    "n": 50000,
+    "seed": 4,
+    "stage1_rounds": 8,
+    "stage2_rounds": 8,
+    "cfg_stage1": 4.5,
+    "cfg_stage2": 3.0,
+    "main_U_coefficient": 0.9,
+    "main_threshold": -0.23861974477767944,
+    "main_gFID": 1.865403534962752,
+    "tested_U_coefficient": 0.3,
+    "tested_threshold": -0.07680711895227432,
+    "threshold_calibrated_from_scores_without_quality": true,
+    "same_checkpoint_inference_only": true,
+    "mean_local_K_both": 106.38386,
+    "mean_content_tokens_both": 138.38386,
+    "tested_gFID": 1.8629056541497562,
+    "gFID_delta_tested_minus_main": -0.002497880812995845,
+    "images_with_changed_K": 9021,
+    "source_summary_sha256": "de0b7cf64429b7a071d32d0fce2dae360436a9bbf53a4e62e81e24188d5bb05d"
   }
 }

@@ -52,6 +52,15 @@ All rows use the same 20k-update checkpoint, CFG 4.5/3.0, seed 4, and the same m
 
 These seeds vary sampling for one fixed checkpoint; they are not independent training repeats.
 
+## Generation U coefficient check (same checkpoint, seed 4, full 50k)
+
+| Image-level U coefficient | Threshold | Mean local K | 8+8 gFID ↓ |
+|---:|---:|---:|---:|
+| 0.9 (main) | -0.238619745 | 106.38386 | 1.865404 |
+| 0.3 | -0.076807119 | 106.38386 | 1.862906 |
+
+Only the inference-time coefficient in `score_i = local_i + coefficient × U` changes. The 0.3 threshold was calibrated from the same seed-4 score arrays, without using image quality, to match the main run's average K exactly. Both rows use the same 20k-update generator/router weights, 50,000 generated classes, CFG 4.5/3.0, and 8+8 rounds. Spatial ranking is unchanged because U is one scalar per image; the image-level K changes for 9,021 of 50,000 images (18.042%). The 0.002498 gFID difference is a single-seed inference result and does not establish a robust gain. The 0.3 run's result summary SHA256 is `de0b7cf64429b7a071d32d0fce2dae360436a9bbf53a4e62e81e24188d5bb05d`.
+
 ## Reconstruction controls (same frozen codec, 50k validation images)
 
 | Selection | Mean local K | rFID ↓ | PSNR (dB) ↑ |
