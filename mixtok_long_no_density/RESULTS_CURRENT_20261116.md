@@ -15,7 +15,7 @@ This file records completed measurements for the current Long model. It is not t
 
 The generation timing cohort has mean local K = 92.20, whereas the 50k seed-4 quality cohort has mean local K = 106.38386. Do not equate the two cohorts or infer proportional compute savings from token count.
 
-For Figure 4 replacement candidates, see [200 reconstruction comparisons](qualitative/reconstruction_200/examples/README.md). They were selected for visible improvement while spanning four K ranges (mean local K = 96.99), and should not be interpreted as a random validation sample. Figure 5 uses generated images and is outside this reconstruction set.
+For Figure 4 replacement candidates, see [200 reconstruction comparisons](qualitative/reconstruction_200/examples/README.md) and the [55 author-selected examples](qualitative/reconstruction_200/examples/selected_55/README.md). Selected 2D locations are displayed with semitransparent white fill and thin dark outlines. The candidates were selected for visible improvement while spanning four K ranges (mean local K = 96.99), and should not be interpreted as a random validation sample. Figure 5 uses generated images and is outside this reconstruction set.
 
 ## Generation CFG scan (same 20k-update checkpoint, seed 4)
 
@@ -125,10 +125,11 @@ This is a separate 50k reconstruction control with its own tokenizer checkpoint.
 
 | Dense MaskGIT sampling rounds | gFID ↓ |
 |---:|---:|
+| 12 | 18.063469 |
 | 16 | 18.646575 |
 | 24 | 19.773103 |
 
-These gFID values are substantially worse than the sparse MixTok generation result; increasing from 16 to 24 rounds does not improve this checkpoint. The 12- and 32-round evaluations are still running. The 16- and 24-round summary SHA256 values are `e00a05a83b0fe62b7d8c5c9e430eae87f6ca0b491df87c91769a79010aa053e4` and `ad75c0f89beb4639af2b45eb23d16215575411ffeca21cf0b10b748629881ed8`.
+These gFID values are substantially worse than the sparse MixTok generation result; increasing from 12 to 24 rounds does not improve this checkpoint. The 32-round evaluation is still running. The 12-, 16-, and 24-round summary SHA256 values are `169d92c4c79f92f0de7e8d820a44af52b75ee937d258ce57fe6cfc4e3144279c`, `e00a05a83b0fe62b7d8c5c9e430eae87f6ca0b491df87c91769a79010aa053e4`, and `ad75c0f89beb4639af2b45eb23d16215575411ffeca21cf0b10b748629881ed8`.
 
 ## ALIT transfer: newly trained ALIT Grid Scorer
 
@@ -159,7 +160,7 @@ Component medians come from separate instrumented passes and should not be summe
 ## Pending measurements
 
 - The nearconstant independently trained generator gFID evaluation is pending; all three control training runs are complete.
-- Pure LlamaGen MaskGIT training is complete at 20,000 updates. Its 16- and 24-round generator evaluations are complete; 12 and 32 rounds are pending. Its tokenizer rFID is a separate control and is not a MixTok Long result.
+- Pure LlamaGen MaskGIT training is complete at 20,000 updates. Its 12-, 16-, and 24-round generator evaluations are complete; 32 rounds are pending. Its tokenizer rFID is a separate control and is not a MixTok Long result.
 
 ## Model identity
 

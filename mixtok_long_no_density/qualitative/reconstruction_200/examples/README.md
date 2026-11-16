@@ -6,6 +6,8 @@ The outputs use the density-free Long reconstruction scorer and the released Mix
 
 The candidates cover four refinement-budget ranges: 60 with K=48–79, 90 with K=80–111, 30 with K=112–143, and 20 with K=144. Their mean K is 96.99. The ordering follows these ranges, then descending measured improvement within each range. This makes the middle sheets useful when choosing examples close to the paper's average budget.
 
+The selected locations are now shown with white fill at 55% opacity and thin dark outlines. Only the location-visualization panel changed. [Browse the 55 examples chosen by the authors](selected_55/README.md).
+
 Browse all 200 examples in ten contact sheets:
 
 | | | | | |

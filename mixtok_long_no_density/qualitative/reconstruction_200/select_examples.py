@@ -16,6 +16,7 @@ from types import SimpleNamespace
 import numpy as np
 import torch
 from PIL import Image, ImageDraw, ImageFont
+from mixtok_long_no_density.qualitative.reconstruction_200.overlay import paint_selected_grid
 
 from mixtok_long_no_density.recon.io import ImagePathDataset, sha256_file
 from mixtok_long_no_density.recon.runtime import FrozenInputs
@@ -174,15 +175,7 @@ def score(args):
 def panel(target, base, mixed, mask, labels=True):
     rgb = [Image.fromarray(uint8(image).permute(1, 2, 0).cpu().numpy(), 'RGB')
            for image in (target, base, mixed)]
-    mask_image = Image.fromarray((mask.cpu().numpy().reshape(16, 16) * 255).astype('uint8'), 'L')
-    mask_image = mask_image.resize((256, 256), Image.Resampling.NEAREST)
-    overlay = Image.blend(rgb[0], Image.new('RGB', (256, 256), '#af3c1d'), 0.38)
-    grid = Image.composite(overlay, rgb[0], mask_image)
-    draw = ImageDraw.Draw(grid)
-    for x in range(0, 257, 16):
-        draw.line((x, 0, x, 256), fill=(255, 255, 255), width=1)
-    for y in range(0, 257, 16):
-        draw.line((0, y, 256, y), fill=(255, 255, 255), width=1)
+    grid = paint_selected_grid(rgb[0], mask.cpu().numpy())
     result = Image.new('RGB', (1024, 284 if labels else 256), 'white')
     for index, picture in enumerate((rgb[0], rgb[1], grid, rgb[2])):
         result.paste(picture, (256 * index, 28 if labels else 0))
@@ -244,7 +237,7 @@ def export(args):
         selection='Within four K bins, require positive PSNR and gradient-error gains, rank by PSNR gain + 0.35*gradient gain + 4*mean absolute RGB change, and allow at most two examples per ImageNet class',
         K_bin_quotas={'48-79': 60, '80-111': 90, '112-143': 30, '144': 20},
         selected_mean_K=float(np.mean([row['K'] for row in selected])),
-        rendering='Original 256x256 center crop; base and mixed are direct frozen-model outputs; orange locations mark selected 16x16 cells; no retouching',
+        rendering='Original 256x256 center crop; base and mixed are direct frozen-model outputs; selected 16x16 cells are marked by 55%-opacity white fill and dark outlines; no retouching',
         scoring_source_sha256=sha256_file(args.work / 'scored_records.jsonl'),
         assets_sha256=source_receipt(args), files=files))
     (args.output / 'README.md').write_text(
