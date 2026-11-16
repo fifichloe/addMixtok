@@ -15,6 +15,8 @@ This file records completed measurements for the current Long model. It is not t
 
 The generation timing cohort has mean local K = 92.20, whereas the 50k seed-4 quality cohort has mean local K = 106.38386. Do not equate the two cohorts or infer proportional compute savings from token count.
 
+For Figure 4 replacement candidates, see [200 reconstruction comparisons](qualitative/reconstruction_200/examples/README.md). They were selected for visible improvement and should not be interpreted as a random validation sample. Figure 5 uses generated images and is outside this reconstruction set.
+
 ## Generation CFG scan (same 20k-update checkpoint, seed 4)
 
 | 2D CFG | 1D base gFID ↓ | Full gFID ↓ | Mean local K | Mean content tokens |
@@ -109,8 +111,9 @@ This control changes selection at inference with the same generator checkpoint. 
 |---|---:|---:|---:|
 | Learned Long router | 20,000 updates | 106.38386 | 1.865404 |
 | Random locations | 20,000 updates | 106.38386 | 2.584442 |
+| Uniform spatial order | 20,000 updates | 106.38386 | 2.392052 |
 
-Both evaluations use 50,000 images and CFG 4.5/3.0. The random control was trained independently from the same official pretrained Halton initialization, with the same global batch, masked-token objective, and 20,000-update schedule. Its inference evaluation replays the same per-image K values and generated base inputs as the learned-router run; the random locations are selected independently for each image. The observed gFID gap is 0.719039. Uniform and nearconstant independent controls have completed training but their formal 50,000-image evaluations are still running. Source receipt: `independent_controls_20261116/evaluations/random_seed4/summary.json` in the experiment results archive, SHA256 `23e6916082e8b3b51258a18b5a7e8fbc97b5749d88b2c46f0cad2a54e02ee212`.
+All evaluations use 50,000 images and CFG 4.5/3.0. The random and uniform controls were trained independently from the same official pretrained Halton initialization, with the same global batch, masked-token objective, and 20,000-update schedule. Their inference evaluations replay the same per-image K values and generated base inputs as the learned-router run. The observed gFID gaps are 0.719039 and 0.526648, respectively. The nearconstant independent control has completed training, but its formal 50,000-image evaluation is still running. Source summary SHA256 values in the experiment results archive are `23e6916082e8b3b51258a18b5a7e8fbc97b5749d88b2c46f0cad2a54e02ee212` for random and `7851fcccb26761fee95633acc3a67c132d0df71a700475cd4ed4c76ca32fbaa8` for uniform.
 
 ## Separate matched-loss LlamaGen tokenizer control
 
@@ -148,7 +151,7 @@ Component medians come from separate instrumented passes and should not be summe
 
 ## Pending measurements
 
-- Uniform and nearconstant independently trained generator gFID evaluations are pending; all three control training runs are complete.
+- The nearconstant independently trained generator gFID evaluation is pending; all three control training runs are complete.
 - Pure LlamaGen MaskGIT training is complete at 20,000 updates; its 12/16/24/32-round generator evaluations are pending. Its tokenizer rFID is a separate control and is not a MixTok Long result.
 
 ## Model identity

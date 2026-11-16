@@ -5,6 +5,7 @@ from torch import nn
 from torch.nn import functional as F
 from .io import load_codec, sha256_file
 B0_SHA = '7f5810bc96def8f7552d5b7e68d53c4786f81167d28291b21c0d90e1fca14934'
+INPUT_CHANNELS = 3 * 256 + 12
 
 def standard(x):
     return (x-x.mean((2, 3), keepdim=True))/x.std((2, 3), keepdim=True, correction=0).clamp_min(1e-6)
