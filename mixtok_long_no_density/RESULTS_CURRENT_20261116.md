@@ -124,7 +124,18 @@ The nearconstant 50k generation and feature extraction completed. Its original a
 |---|---:|---:|---:|---:|
 | Pure LlamaGen VQ-16 EMA, H200 full-loss training | 256 | 1.238138 | 21.2151 | 0.05468750 |
 
-This is a separate 50k reconstruction control with its own tokenizer checkpoint. Its dense MaskGIT generator was independently trained for 20,000 updates from the official Halton initialization. The completed 50k, seed-4 generation evaluations use CFG 3.0 and the same tokenizer checkpoint:
+This is a separate 50k reconstruction control with its own tokenizer checkpoint. Its dense MaskGIT generator was independently trained for 20,000 updates from the official Halton initialization. A 2k-image, 16-round scan found CFG 0.7 best among the tested values (0, 0.3, 0.5, 0.7, 1.0, 1.5, 2.0). The same CFG 0.7 was then used for the following formal 50k evaluations with seed 4:
+
+| Dense MaskGIT sampling rounds | gFID ↓ |
+|---:|---:|
+| 12 | 4.218722 |
+| 16 | **4.042422** |
+| 24 | 4.337824 |
+| 32 | 4.504796 |
+
+Under this CFG and checkpoint, 16 rounds gives the lowest measured gFID among the four settings. These are single-seed sampling comparisons, not independent training repeats. The CFG-0.7 12-, 16-, 24-, and 32-round summary SHA256 values are `63a5d42aef1dfe5bef4fea94c1a683ef00b8e5564e67787197777de7730a8cf6`, `0b40d410a71906a5647df705f018b0eac6bc086dfe25ed3e10e879cce372c7a0`, `7e372e87c1df346a1adcec904116bb2872228f5642b79102b1e24dfb3c89d57b`, and `8580b13da2b3ec836bf8f904a5dec67f54d63add31aaf27a119ef57a2a64531e`.
+
+The earlier evaluations below used CFG 3.0 before guidance tuning. They are retained as diagnostic results, not as the matched-loss LlamaGen control's selected configuration:
 
 | Dense MaskGIT sampling rounds | gFID ↓ |
 |---:|---:|
@@ -133,7 +144,7 @@ This is a separate 50k reconstruction control with its own tokenizer checkpoint.
 | 24 | 19.773103 |
 | 32 | 20.219901 |
 
-These gFID values are substantially worse than the sparse MixTok generation result; increasing from 12 to 32 rounds does not improve this checkpoint. Each row uses 50,000 images from one sampling seed. The 12-, 16-, 24-, and 32-round summary SHA256 values are `169d92c4c79f92f0de7e8d820a44af52b75ee937d258ce57fe6cfc4e3144279c`, `e00a05a83b0fe62b7d8c5c9e430eae87f6ca0b491df87c91769a79010aa053e4`, `ad75c0f89beb4639af2b45eb23d16215575411ffeca21cf0b10b748629881ed8`, and `7e10102a04893a3ada35a00ed61df10b2f7ade3d14e4203f8038d3f6ca9d7e52`.
+Each row uses 50,000 images from one sampling seed. The CFG-3.0 12-, 16-, 24-, and 32-round summary SHA256 values are `169d92c4c79f92f0de7e8d820a44af52b75ee937d258ce57fe6cfc4e3144279c`, `e00a05a83b0fe62b7d8c5c9e430eae87f6ca0b491df87c91769a79010aa053e4`, `ad75c0f89beb4639af2b45eb23d16215575411ffeca21cf0b10b748629881ed8`, and `7e10102a04893a3ada35a00ed61df10b2f7ade3d14e4203f8038d3f6ca9d7e52`.
 
 ## ALIT transfer: newly trained ALIT Grid Scorer
 
