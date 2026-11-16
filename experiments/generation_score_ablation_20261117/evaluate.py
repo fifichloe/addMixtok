@@ -24,6 +24,21 @@ DISPATCH = EVAL_HERE.parent.parent/'new_router_ablation_suite_20261114/recovery_
 sys.path.insert(0, str(DISPATCH))
 from gpu_dispatch import snapshot
 
+QUALITY_STATUS = THIS_HERE/'quality_orchestrator_status.json'
+
+
+def reserved_quality_gpus():
+    if not QUALITY_STATUS.exists():
+        return set()
+    state = json.loads(QUALITY_STATUS.read_text())
+    if state.get('scheduler') != 'parallel_gpu_pairs_v1' or state.get('status') not in ('running', 'stage_complete'):
+        return set()
+    try:
+        os.kill(int(state['pid']), 0)
+    except (OSError, KeyError, ValueError):
+        return set()
+    return {str(index) for index in state.get('reserved_GPUs', [])}
+
 
 def run(args):
     out = args.output
@@ -68,7 +83,9 @@ def run(args):
         while True:
             # The accepted 50k run recorded 6.084 GiB peak PyTorch reserve;
             # allow shared cards while leaving ample headroom for TensorFlow.
-            cards = [card for card in snapshot() if card['free_MiB'] >= 16*1024][:4]
+            reserved = reserved_quality_gpus()
+            cards = [card for card in snapshot() if card['free_MiB'] >= 16*1024
+                     and str(card['index']) not in reserved][:4]
             if cards:
                 break
             update(GPU_snapshot=snapshot(), minimum_free_MiB=16*1024)
