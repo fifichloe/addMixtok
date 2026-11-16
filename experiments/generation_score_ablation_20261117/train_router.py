@@ -117,28 +117,68 @@ def main(args):
     policy = POLICIES[args.kind]
     model = GenerationRouter(policy['utility_weight'], policy['threshold']).cuda()
     optimizer = torch.optim.AdamW(model.parameters(), lr=2e-4, weight_decay=.01)
-    args.output.mkdir(parents=True, exist_ok=False)
     config = dict(kind=args.kind, steps=args.steps, batch=args.batch, policy=policy,
         optimizer='AdamW lr2e-4 wd0.01', init_seed=20261113,
         label_source='frozen reconstruction teacher with explicit component removed',
         input='f_base only', MaskGIT_retrained=False,
         original_base_cache=str(BASE_CACHE), target_cache=str(TARGET_CACHE),
         model_source=str(MODEL_SOURCE))
-    (args.output / 'config.json').write_text(json.dumps(config, indent=2) + '\n')
+    resume_step = 0
+    best = math.inf
+    prior_seconds = 0.
+    if args.resume:
+        checkpoint_path = args.output / 'latest.pt'
+        checkpoint = torch.load(checkpoint_path, map_location='cpu', weights_only=False)
+        previous = checkpoint['config']
+        assert previous['kind'] == args.kind and previous['steps'] == args.steps
+        assert previous['batch'] == args.batch and previous['policy'] == policy
+        assert previous['model_source'] == str(MODEL_SOURCE)
+        assert previous['target_cache'] == str(TARGET_CACHE)
+        model.load_state_dict(checkpoint['model'], strict=True)
+        optimizer.load_state_dict(checkpoint['optimizer'])
+        resume_step = int(checkpoint['step'])
+        best = float(checkpoint['best_held_loss'])
+        assert 0 < resume_step < args.steps
+        training_log = args.output / 'training.jsonl'
+        rows = [json.loads(line) for line in training_log.read_text().splitlines()]
+        matching = [row for row in rows if row['step'] == resume_step]
+        assert len(matching) == 1
+        prior_seconds = float(matching[0]['seconds'])
+        dropped = [row for row in rows if row['step'] > resume_step]
+        if dropped:
+            rollback = args.output / f'rollback_after_step_{resume_step}.jsonl'
+            assert not rollback.exists()
+            rollback.write_text(''.join(json.dumps(row) + '\n' for row in dropped))
+            training_log.write_text(''.join(json.dumps(row) + '\n'
+                                            for row in rows if row['step'] <= resume_step))
+        with (args.output / 'resume_history.jsonl').open('a') as file:
+            file.write(json.dumps(dict(resume_step=resume_step,
+                old_base_cache=previous['original_base_cache'],
+                new_base_cache=str(BASE_CACHE),
+                previous_elapsed_seconds=prior_seconds,
+                checkpoint_path=str(checkpoint_path),
+                exact_data_order_replay=True,
+                rolled_back_logged_steps=len(dropped))) + '\n')
+    else:
+        args.output.mkdir(parents=True, exist_ok=False)
+        (args.output / 'config.json').write_text(json.dumps(config, indent=2) + '\n')
     train_loader = DataLoader(JoinedShards('fit', args.kind, args.batch, True),
         batch_size=None, num_workers=2, pin_memory=True, persistent_workers=True)
     held_loader = DataLoader(JoinedShards('held', args.kind, args.batch, False),
         batch_size=None, num_workers=2, pin_memory=True, persistent_workers=True)
-    best = math.inf
-    started = time.monotonic()
+    started = time.monotonic() - prior_seconds
     def save(name, step, metrics):
         path = args.output / name
         temporary = path.with_suffix('.pt.tmp')
         torch.save(dict(model=model.state_dict(), optimizer=optimizer.state_dict(),
             step=step, best_held_loss=best, metrics=metrics, config=config), temporary)
         temporary.replace(path)
-    step = 0
+    step = resume_step
+    skipped = 0
     for cpu in train_loader:
+        if skipped < resume_step:
+            skipped += 1
+            continue
         base = cpu['f_base'].cuda(non_blocking=True)
         local = cpu['local'].cuda(non_blocking=True)
         utility = cpu['utility'].cuda(non_blocking=True)
@@ -186,4 +226,5 @@ if __name__ == '__main__':
     parser.add_argument('--steps', type=int, default=20000)
     parser.add_argument('--batch', type=int, default=512)
     parser.add_argument('--eval-every', type=int, default=1000)
+    parser.add_argument('--resume', action='store_true')
     main(parser.parse_args())
