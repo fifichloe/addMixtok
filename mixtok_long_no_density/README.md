@@ -14,7 +14,7 @@
 | `gene/eval/` | 原两阶段采样、CFG参数、正式50k ADM gFID与独立FP64核对 |
 | `configs/` | 方法参数、外部资产SHA256、原训练源码哈希和可填写的阶段配置 |
 | `qualitative/reconstruction_200/` | 200张当前重建模型的原图、1D base、白色2D选区和精修对比图；另含作者选出的55张及联系表 |
-| `qualitative/generation_200/` | 200张当前Long生成模型的1D base、白色2D选区和最终生成对比图，含原图与选区mask |
+| `qualitative/generation_random_400/` | 随机抽取400个类别各生成一张，全部保留；含1D base、白色2D选区、最终生成图、选区mask与联系表 |
 
 ## 评分方式
 

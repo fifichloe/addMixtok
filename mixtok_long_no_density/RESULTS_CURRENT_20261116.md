@@ -15,7 +15,7 @@ This file records completed measurements for the current Long model. It is not t
 
 The generation timing cohort has mean local K = 92.20, whereas the 50k seed-4 quality cohort has mean local K = 106.38386. Do not equate the two cohorts or infer proportional compute savings from token count.
 
-For Figure 4 replacement candidates, see [200 reconstruction comparisons](qualitative/reconstruction_200/examples/README.md) and the [55 author-selected examples](qualitative/reconstruction_200/examples/selected_55/README.md). For Figure 5, see [200 current Long generation comparisons](qualitative/generation_200/examples/README.md). Selected 2D locations are displayed with semitransparent white fill and thin dark outlines. Both sets are curated to make the 2D refinement visible; neither is a random quality sample. The reconstruction candidates span four K ranges (mean local K = 96.99), and the generation candidates span four K ranges (mean local K = 106.105).
+For Figure 4 replacement candidates, see [200 reconstruction comparisons](qualitative/reconstruction_200/examples/README.md) and the [55 author-selected examples](qualitative/reconstruction_200/examples/selected_55/README.md). For Figure 5, see [400 unfiltered random generation examples](qualitative/generation_random_400/examples/README.md). Selected 2D locations are displayed with semitransparent white fill and thin dark outlines. The reconstruction candidates were curated to make the 2D refinement visible (mean local K = 96.99). The generation examples were produced from 400 classes drawn uniformly without replacement before generation, with every result retained (mean local K = 103.8525).
 
 ## Generation CFG scan (same 20k-update checkpoint, seed 4)
 

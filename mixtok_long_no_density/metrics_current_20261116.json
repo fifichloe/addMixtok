@@ -3137,14 +3137,14 @@
       "summary_sha256": "7e10102a04893a3ada35a00ed61df10b2f7ade3d14e4203f8038d3f6ca9d7e52"
     }
   },
-  "qualitative_generation_200": {
-    "count": 200,
-    "seed": 4,
+  "qualitative_generation_random_400": {
+    "count": 400,
+    "seed": 20261116,
     "rounds_1d": 8,
     "rounds_2d": 8,
-    "mean_local_K": 106.105,
-    "selection": "curated for visible base-to-final change; not a random or representative sample",
-    "manifest_sha256": "7e31e86c54cb6314c14c547c356466a970505bbdf07d8be6003d15ba1ff9f743"
+    "mean_local_K": 103.8525,
+    "selection": "400 distinct ImageNet classes drawn uniformly without replacement before generation; all outputs retained",
+    "manifest_sha256": "8c156676e1a7047d24eb483402749f4b1e596be436448a71033b3caeb245942c"
   },
   "pure_LlamaGen_maskgit_cfg16_scan_seed4_n2000": {
     "rounds": 16,
