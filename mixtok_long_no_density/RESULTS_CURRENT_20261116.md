@@ -103,6 +103,15 @@ Source result SHA256: `3c97eecec0d52caad9e0a2c717be04833b5df664412d384fed06e2487
 
 This control changes selection at inference with the same generator checkpoint. Its mean K differs by 0.38386, and its base features were numerically equivalent within 1e-5 rather than bitwise equal. It is not an independently trained fixed-budget generator.
 
+## Independently trained generation routing control
+
+| Routing policy | Generation training | Mean local K | 8+8 gFID, seed 4 ↓ |
+|---|---:|---:|---:|
+| Learned Long router | 20,000 updates | 106.38386 | 1.865404 |
+| Random locations | 20,000 updates | 106.38386 | 2.584442 |
+
+Both evaluations use 50,000 images and CFG 4.5/3.0. The random control was trained independently from the same official pretrained Halton initialization, with the same global batch, masked-token objective, and 20,000-update schedule. Its inference evaluation replays the same per-image K values and generated base inputs as the learned-router run; the random locations are selected independently for each image. The observed gFID gap is 0.719039. Uniform and nearconstant independent controls have completed training but their formal 50,000-image evaluations are still running. Source receipt: `independent_controls_20261116/evaluations/random_seed4/summary.json` in the experiment results archive, SHA256 `23e6916082e8b3b51258a18b5a7e8fbc97b5749d88b2c46f0cad2a54e02ee212`.
+
 ## Separate matched-loss LlamaGen tokenizer control
 
 | Tokenizer | Content tokens | rFID ↓ | PSNR (dB) ↑ | Fixed-width bpp |
@@ -139,8 +148,8 @@ Component medians come from separate instrumented passes and should not be summe
 
 ## Pending measurements
 
-- Independent random/uniform and nearconstant generator training and corresponding gFID are pending.
-- Pure LlamaGen 12/16/24-round generator evaluation is pending; its tokenizer rFID is a separate control and is not a MixTok Long result.
+- Uniform and nearconstant independently trained generator gFID evaluations are pending; all three control training runs are complete.
+- Pure LlamaGen MaskGIT training is complete at 20,000 updates; its 12/16/24/32-round generator evaluations are pending. Its tokenizer rFID is a separate control and is not a MixTok Long result.
 
 ## Model identity
 
