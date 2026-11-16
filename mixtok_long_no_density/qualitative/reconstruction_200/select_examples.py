@@ -196,18 +196,24 @@ def panel(target, base, mixed, mask, labels=True):
 def export(args):
     scored = records(args.work / 'scored_records.jsonl')
     assert len(scored) == 2000 and len({r['validation_index'] for r in scored}) == 2000
-    scored.sort(key=lambda r: r['ranking_score'], reverse=True)
     selected = []
     class_count = {}
-    for row in scored:
-        if row['PSNR_gain_dB'] <= 0 or row['edge_gain_dB'] <= 0:
-            continue
-        if class_count.get(row['class_id'], 0) >= 2:
-            continue
-        selected.append(row)
-        class_count[row['class_id']] = class_count.get(row['class_id'], 0) + 1
-        if len(selected) == 200:
-            break
+    quotas = ((48, 80, 60), (80, 112, 90), (112, 144, 30), (144, 145, 20))
+    for low, high, quota in quotas:
+        pool = sorted((row for row in scored
+                       if low <= row['K'] < high
+                       and row['PSNR_gain_dB'] > 0 and row['edge_gain_dB'] > 0),
+                      key=lambda row: row['ranking_score'], reverse=True)
+        added = 0
+        for row in pool:
+            if class_count.get(row['class_id'], 0) >= 2:
+                continue
+            selected.append(row)
+            class_count[row['class_id']] = class_count.get(row['class_id'], 0) + 1
+            added += 1
+            if added == quota:
+                break
+        assert added == quota, (low, high, added, quota)
     assert len(selected) == 200
     args.output.mkdir(parents=True, exist_ok=False)
     runtime, scorer = make_runtime(args)
@@ -235,7 +241,9 @@ def export(args):
     atomic_json(args.output / 'manifest.json', dict(status='complete', count=200,
         figure='Figure 4 reconstruction candidate pool; Figure 5 requires separately generated samples',
         candidate_count=2000, selection_seed=SEED,
-        selection='Positive PSNR and gradient-error gains; rank by PSNR gain + 0.35*gradient gain + 4*mean absolute RGB change; at most two examples per ImageNet class',
+        selection='Within four K bins, require positive PSNR and gradient-error gains, rank by PSNR gain + 0.35*gradient gain + 4*mean absolute RGB change, and allow at most two examples per ImageNet class',
+        K_bin_quotas={'48-79': 60, '80-111': 90, '112-143': 30, '144': 20},
+        selected_mean_K=float(np.mean([row['K'] for row in selected])),
         rendering='Original 256x256 center crop; base and mixed are direct frozen-model outputs; orange locations mark selected 16x16 cells; no retouching',
         scoring_source_sha256=sha256_file(args.work / 'scored_records.jsonl'),
         assets_sha256=source_receipt(args), files=files))
@@ -244,6 +252,7 @@ def export(args):
         'These 200 ImageNet validation examples show ground truth, 1D base, selected 2D locations, '
         'and the MixTok reconstruction. They are deliberately selected for a visible 2D refinement effect, '
         'so they are qualitative examples rather than a representative random sample. '
+        'The 200 examples are balanced across four K ranges and have mean K near 97. '
         'The exact validation index, class, token count, per-image metrics, and PNG hash are in `manifest.json`.\n\n'
         'The outputs use the density-free Long reconstruction scorer and the released MixTok reconstruction '
         'checkpoint identified by SHA256 in `manifest.json`. Panels include center crops of the ImageNet validation images; no model weights or standalone dataset files are included.\n')

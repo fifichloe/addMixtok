@@ -15,7 +15,7 @@ This file records completed measurements for the current Long model. It is not t
 
 The generation timing cohort has mean local K = 92.20, whereas the 50k seed-4 quality cohort has mean local K = 106.38386. Do not equate the two cohorts or infer proportional compute savings from token count.
 
-For Figure 4 replacement candidates, see [200 reconstruction comparisons](qualitative/reconstruction_200/examples/README.md). They were selected for visible improvement and should not be interpreted as a random validation sample. Figure 5 uses generated images and is outside this reconstruction set.
+For Figure 4 replacement candidates, see [200 reconstruction comparisons](qualitative/reconstruction_200/examples/README.md). They were selected for visible improvement while spanning four K ranges (mean local K = 96.99), and should not be interpreted as a random validation sample. Figure 5 uses generated images and is outside this reconstruction set.
 
 ## Generation CFG scan (same 20k-update checkpoint, seed 4)
 
