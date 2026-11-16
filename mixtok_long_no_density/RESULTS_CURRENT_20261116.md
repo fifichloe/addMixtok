@@ -112,8 +112,11 @@ This control changes selection at inference with the same generator checkpoint. 
 | Learned Long router | 20,000 updates | 106.38386 | 1.865404 |
 | Random locations | 20,000 updates | 106.38386 | 2.584442 |
 | Uniform spatial order | 20,000 updates | 106.38386 | 2.392052 |
+| Learned locations, content-independent 106/107 budget (`nearconstant`) | 20,000 updates | 106.38386 | 2.036666 |
 
-All evaluations use 50,000 images and CFG 4.5/3.0. The random and uniform controls were trained independently from the same official pretrained Halton initialization, with the same global batch, masked-token objective, and 20,000-update schedule. Their inference evaluations replay the same per-image K values and generated base inputs as the learned-router run. The observed gFID gaps are 0.719039 and 0.526648, respectively. The nearconstant independent control has completed training, but its formal 50,000-image evaluation is still running. Source summary SHA256 values in the experiment results archive are `23e6916082e8b3b51258a18b5a7e8fbc97b5749d88b2c46f0cad2a54e02ee212` for random and `7851fcccb26761fee95633acc3a67c132d0df71a700475cd4ed4c76ca32fbaa8` for uniform.
+All evaluations use 50,000 images and CFG 4.5/3.0. The three controls were trained independently from the same official pretrained Halton initialization, with the same global batch, masked-token objective, and 20,000-update schedule. The random and uniform evaluations replay the main model's per-image K values and generated base inputs; their gFID gaps are 0.719039 and 0.526648. Nearconstant retains the learned spatial ranking, but assigns K=106 or 107 by a content-independent image-ID rule so that mean K exactly matches the main run. Its gFID is 0.171262 worse than the learned dynamic router. During training it similarly matches the main training mean K=93.641239 with 93/94 tokens. Nearconstant is an offline balanced diagnostic, not a deployable image-adaptive budget controller.
+
+The nearconstant 50k generation and feature extraction completed. Its original aggregation stopped at an overstrict base-feature equality tolerance of 2e-5. A separate post hoc audit, without regenerating images, verified identical image IDs, 1D tokens, local scores, router scores, and utility values across all four shards; the maximum base-feature difference was 2.7370452880859375e-4 (mean difference on the affected shard 5.69e-9). All 50k masks and budgets were replayed. The audit used a 5e-4 tolerance for these numerical base-feature differences, preserved the original failure record, and independently recomputed FP64 gFID=2.0366658605182693 against the official ADM calculation 2.0366659096982858. See [nearconstant audit summary](NEARCONSTANT_CONTROL_20261116.json). Source summary SHA256 values are `23e6916082e8b3b51258a18b5a7e8fbc97b5749d88b2c46f0cad2a54e02ee212` for random, `7851fcccb26761fee95633acc3a67c132d0df71a700475cd4ed4c76ca32fbaa8` for uniform, and `89c3ad05b341d22cdb8718005f286e446b474abd1a131be9db3fb29727fceb51` for nearconstant post hoc recovery.
 
 ## Separate matched-loss LlamaGen tokenizer control
 
@@ -159,7 +162,7 @@ Component medians come from separate instrumented passes and should not be summe
 
 ## Pending measurements
 
-- The nearconstant independently trained generator gFID evaluation is pending; all three control training runs are complete.
+- All three independent routing-control training runs and seed-4 gFID evaluations are complete. Nearconstant's gFID comes from the documented post hoc audit of its preserved 50k feature shards.
 - Pure LlamaGen MaskGIT training is complete at 20,000 updates. Its 12-, 16-, and 24-round generator evaluations are complete; 32 rounds are pending. Its tokenizer rFID is a separate control and is not a MixTok Long result.
 
 ## Model identity

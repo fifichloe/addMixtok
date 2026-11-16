@@ -1,0 +1,35 @@
+{
+  "experiment": "independently trained nearconstant generation budget control",
+  "date": "2026-11-16",
+  "n_images": 50000,
+  "seed": 4,
+  "generation_rounds": "8+8",
+  "cfg_stage1": 4.5,
+  "cfg_stage2": 3.0,
+  "training_updates": 20000,
+  "same_pretrained_initialization_and_training_recipe_as_main": true,
+  "spatial_selection": "learned Grid Scorer ranking, stable top-K",
+  "budget_assignment": "content-independent, deterministic by image ID, 106 or 107 tokens per image; exact main-run mean",
+  "generation_budget_histogram": {
+    "106": 30807,
+    "107": 19193
+  },
+  "mean_generated_2d_tokens": 106.38386,
+  "nearconstant_gfid_adm": 2.0366659096982858,
+  "nearconstant_gfid_independent_fp64": 2.0366658605182693,
+  "main_learned_dynamic_gfid_adm": 1.865403534962752,
+  "nearconstant_minus_main_gfid": 0.1712623747355338,
+  "audit": {
+    "posthoc_from_preserved_50000_feature_shards": true,
+    "new_generation_run": false,
+    "original_evaluation_failure_preserved": true,
+    "original_failure_reason": "base-feature maximum absolute difference 0.00027370452880859375 exceeded the original 0.00002 tolerance",
+    "image_ids_1d_tokens_local_scores_router_scores_utility_bitwise_equal_to_main": true,
+    "route_masks_and_counts_replayed": true,
+    "base_feature_maximum_absolute_difference": 0.00027370452880859375,
+    "posthoc_base_feature_tolerance": 0.0005,
+    "posthoc_summary_sha256": "89c3ad05b341d22cdb8718005f286e446b474abd1a131be9db3fb29727fceb51",
+    "original_failure_status_sha256": "f3c9fc291fa5e7e73cc988bf87a8a90d6f8b47890b9244d0509e329b0e9778aa"
+  },
+  "interpretation": "At the same mean generated token budget and with learned spatial ranking retained, a content-independent per-image budget performed worse than the learned dynamic budget in this seed-4 evaluation. This is one independent training run per policy, not a training-seed confidence interval."
+}
