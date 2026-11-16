@@ -121,7 +121,14 @@ All evaluations use 50,000 images and CFG 4.5/3.0. The random and uniform contro
 |---|---:|---:|---:|---:|
 | Pure LlamaGen VQ-16 EMA, H200 full-loss training | 256 | 1.238138 | 21.2151 | 0.05468750 |
 
-This is a separate 50k reconstruction control with its own tokenizer checkpoint. No pure LlamaGen gFID is claimed from this checkpoint yet.
+This is a separate 50k reconstruction control with its own tokenizer checkpoint. Its dense MaskGIT generator was independently trained for 20,000 updates from the official Halton initialization. The completed 50k, seed-4 generation evaluations use CFG 3.0 and the same tokenizer checkpoint:
+
+| Dense MaskGIT sampling rounds | gFID ↓ |
+|---:|---:|
+| 16 | 18.646575 |
+| 24 | 19.773103 |
+
+These gFID values are substantially worse than the sparse MixTok generation result; increasing from 16 to 24 rounds does not improve this checkpoint. The 12- and 32-round evaluations are still running. The 16- and 24-round summary SHA256 values are `e00a05a83b0fe62b7d8c5c9e430eae87f6ca0b491df87c91769a79010aa053e4` and `ad75c0f89beb4639af2b45eb23d16215575411ffeca21cf0b10b748629881ed8`.
 
 ## ALIT transfer: newly trained ALIT Grid Scorer
 
@@ -152,7 +159,7 @@ Component medians come from separate instrumented passes and should not be summe
 ## Pending measurements
 
 - The nearconstant independently trained generator gFID evaluation is pending; all three control training runs are complete.
-- Pure LlamaGen MaskGIT training is complete at 20,000 updates; its 12/16/24/32-round generator evaluations are pending. Its tokenizer rFID is a separate control and is not a MixTok Long result.
+- Pure LlamaGen MaskGIT training is complete at 20,000 updates. Its 16- and 24-round generator evaluations are complete; 12 and 32 rounds are pending. Its tokenizer rFID is a separate control and is not a MixTok Long result.
 
 ## Model identity
 
