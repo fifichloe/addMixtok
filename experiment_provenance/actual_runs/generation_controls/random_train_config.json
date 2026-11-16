@@ -1,0 +1,970 @@
+{
+  "accumulation_by_rank": [
+    2,
+    2,
+    2,
+    2
+  ],
+  "adapter_frozen": true,
+  "adapter_reuse_reason": "same 661 codec tensors; adapter targets/inputs independent of routing",
+  "adapter_reused": true,
+  "adapter_sha256": "52aeca25d6d5a44d34e294457f38971cee1f3a2e71ef7e092aec37b349967aad",
+  "adapter_step": 20000,
+  "betas": [
+    0.9,
+    0.999
+  ],
+  "clip_grad_norm": 1.0,
+  "control_identity": {
+    "budget": "exact per-source/view or generated-image new-scorer K",
+    "kind": "long",
+    "nearconstant_split_targets": null,
+    "no_batch_quota": true,
+    "per_image_independent_given_fixed_design": true,
+    "policy": "random",
+    "rounding": "Python round to nearest integer, ties to even",
+    "route_seed": 20261114,
+    "spatial": "per-ID NumPy uniform without replacement",
+    "target_mean_K": 106.38386,
+    "train_target_mean_K": 93.64123880805546
+  },
+  "dataset_rows": 2562334,
+  "eval_adapter_checkpoint": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/continuous_pruned_hf_stage_20260924/adapter_step20000.pt",
+  "eval_cfg_stage1": 4.5,
+  "eval_cfg_stage2": 3.0,
+  "eval_stage1_steps": 8,
+  "eval_stage2_steps": 8,
+  "fid_during_training": false,
+  "formal_updates": 20000,
+  "global_batch": 256,
+  "implementation_sha256": {
+    "cache_routes.py": "b49a3084615c4dfa7a211f64e7520bc7e277464647f895a507a732f3bfdccf0b",
+    "common.py": "cff94bc6d1a28e1462fbeda85e447982c389de213d5b9d0f6f61954a3ff28f48",
+    "routing.py": "70b8215bfa7a874db9df640147dfc19f872b27e5df184df19c3121c69ba24e15",
+    "train.py": "f965da5348d44ebafcede61651622beee0c117c51f1db1ea45517e2c279c94b8"
+  },
+  "initialization": "official pretrained Halton; fresh AdamW; step zero",
+  "k_bucket_coverage": {
+    "100": {
+      "dropped": 96,
+      "raw": 1632,
+      "used": 1536
+    },
+    "101": {
+      "dropped": 252,
+      "raw": 1532,
+      "used": 1280
+    },
+    "102": {
+      "dropped": 33,
+      "raw": 1569,
+      "used": 1536
+    },
+    "103": {
+      "dropped": 104,
+      "raw": 1640,
+      "used": 1536
+    },
+    "104": {
+      "dropped": 94,
+      "raw": 1630,
+      "used": 1536
+    },
+    "105": {
+      "dropped": 74,
+      "raw": 1610,
+      "used": 1536
+    },
+    "106": {
+      "dropped": 25,
+      "raw": 1561,
+      "used": 1536
+    },
+    "107": {
+      "dropped": 142,
+      "raw": 1678,
+      "used": 1536
+    },
+    "108": {
+      "dropped": 59,
+      "raw": 1595,
+      "used": 1536
+    },
+    "109": {
+      "dropped": 56,
+      "raw": 1592,
+      "used": 1536
+    },
+    "110": {
+      "dropped": 87,
+      "raw": 1623,
+      "used": 1536
+    },
+    "111": {
+      "dropped": 101,
+      "raw": 1637,
+      "used": 1536
+    },
+    "112": {
+      "dropped": 44,
+      "raw": 1580,
+      "used": 1536
+    },
+    "113": {
+      "dropped": 55,
+      "raw": 1591,
+      "used": 1536
+    },
+    "114": {
+      "dropped": 38,
+      "raw": 1574,
+      "used": 1536
+    },
+    "115": {
+      "dropped": 130,
+      "raw": 1666,
+      "used": 1536
+    },
+    "116": {
+      "dropped": 64,
+      "raw": 1600,
+      "used": 1536
+    },
+    "117": {
+      "dropped": 71,
+      "raw": 1607,
+      "used": 1536
+    },
+    "118": {
+      "dropped": 51,
+      "raw": 1587,
+      "used": 1536
+    },
+    "119": {
+      "dropped": 55,
+      "raw": 1591,
+      "used": 1536
+    },
+    "120": {
+      "dropped": 182,
+      "raw": 1718,
+      "used": 1536
+    },
+    "121": {
+      "dropped": 71,
+      "raw": 1607,
+      "used": 1536
+    },
+    "122": {
+      "dropped": 120,
+      "raw": 1656,
+      "used": 1536
+    },
+    "123": {
+      "dropped": 128,
+      "raw": 1664,
+      "used": 1536
+    },
+    "124": {
+      "dropped": 147,
+      "raw": 1683,
+      "used": 1536
+    },
+    "125": {
+      "dropped": 172,
+      "raw": 1708,
+      "used": 1536
+    },
+    "126": {
+      "dropped": 166,
+      "raw": 1702,
+      "used": 1536
+    },
+    "127": {
+      "dropped": 185,
+      "raw": 1721,
+      "used": 1536
+    },
+    "128": {
+      "dropped": 193,
+      "raw": 1729,
+      "used": 1536
+    },
+    "129": {
+      "dropped": 122,
+      "raw": 1658,
+      "used": 1536
+    },
+    "130": {
+      "dropped": 198,
+      "raw": 1734,
+      "used": 1536
+    },
+    "131": {
+      "dropped": 204,
+      "raw": 1740,
+      "used": 1536
+    },
+    "132": {
+      "dropped": 222,
+      "raw": 1758,
+      "used": 1536
+    },
+    "133": {
+      "dropped": 201,
+      "raw": 1737,
+      "used": 1536
+    },
+    "134": {
+      "dropped": 145,
+      "raw": 1681,
+      "used": 1536
+    },
+    "135": {
+      "dropped": 5,
+      "raw": 1797,
+      "used": 1792
+    },
+    "136": {
+      "dropped": 1,
+      "raw": 1793,
+      "used": 1792
+    },
+    "137": {
+      "dropped": 254,
+      "raw": 1790,
+      "used": 1536
+    },
+    "138": {
+      "dropped": 26,
+      "raw": 1818,
+      "used": 1792
+    },
+    "139": {
+      "dropped": 79,
+      "raw": 1871,
+      "used": 1792
+    },
+    "140": {
+      "dropped": 32,
+      "raw": 1824,
+      "used": 1792
+    },
+    "141": {
+      "dropped": 245,
+      "raw": 1781,
+      "used": 1536
+    },
+    "142": {
+      "dropped": 91,
+      "raw": 1883,
+      "used": 1792
+    },
+    "143": {
+      "dropped": 93,
+      "raw": 1885,
+      "used": 1792
+    },
+    "144": {
+      "dropped": 93,
+      "raw": 1137501,
+      "used": 1137408
+    },
+    "48": {
+      "dropped": 234,
+      "raw": 1258730,
+      "used": 1258496
+    },
+    "49": {
+      "dropped": 235,
+      "raw": 2283,
+      "used": 2048
+    },
+    "50": {
+      "dropped": 146,
+      "raw": 2194,
+      "used": 2048
+    },
+    "51": {
+      "dropped": 137,
+      "raw": 2185,
+      "used": 2048
+    },
+    "52": {
+      "dropped": 109,
+      "raw": 2157,
+      "used": 2048
+    },
+    "53": {
+      "dropped": 101,
+      "raw": 2149,
+      "used": 2048
+    },
+    "54": {
+      "dropped": 135,
+      "raw": 2183,
+      "used": 2048
+    },
+    "55": {
+      "dropped": 59,
+      "raw": 2107,
+      "used": 2048
+    },
+    "56": {
+      "dropped": 231,
+      "raw": 2023,
+      "used": 1792
+    },
+    "57": {
+      "dropped": 251,
+      "raw": 2043,
+      "used": 1792
+    },
+    "58": {
+      "dropped": 151,
+      "raw": 1943,
+      "used": 1792
+    },
+    "59": {
+      "dropped": 192,
+      "raw": 1984,
+      "used": 1792
+    },
+    "60": {
+      "dropped": 228,
+      "raw": 2020,
+      "used": 1792
+    },
+    "61": {
+      "dropped": 91,
+      "raw": 1883,
+      "used": 1792
+    },
+    "62": {
+      "dropped": 46,
+      "raw": 1838,
+      "used": 1792
+    },
+    "63": {
+      "dropped": 142,
+      "raw": 1934,
+      "used": 1792
+    },
+    "64": {
+      "dropped": 76,
+      "raw": 1868,
+      "used": 1792
+    },
+    "65": {
+      "dropped": 20,
+      "raw": 1812,
+      "used": 1792
+    },
+    "66": {
+      "dropped": 88,
+      "raw": 1880,
+      "used": 1792
+    },
+    "67": {
+      "dropped": 64,
+      "raw": 1856,
+      "used": 1792
+    },
+    "68": {
+      "dropped": 48,
+      "raw": 1840,
+      "used": 1792
+    },
+    "69": {
+      "dropped": 245,
+      "raw": 1781,
+      "used": 1536
+    },
+    "70": {
+      "dropped": 6,
+      "raw": 1798,
+      "used": 1792
+    },
+    "71": {
+      "dropped": 3,
+      "raw": 1795,
+      "used": 1792
+    },
+    "72": {
+      "dropped": 230,
+      "raw": 1766,
+      "used": 1536
+    },
+    "73": {
+      "dropped": 201,
+      "raw": 1737,
+      "used": 1536
+    },
+    "74": {
+      "dropped": 158,
+      "raw": 1694,
+      "used": 1536
+    },
+    "75": {
+      "dropped": 133,
+      "raw": 1669,
+      "used": 1536
+    },
+    "76": {
+      "dropped": 170,
+      "raw": 1706,
+      "used": 1536
+    },
+    "77": {
+      "dropped": 170,
+      "raw": 1706,
+      "used": 1536
+    },
+    "78": {
+      "dropped": 81,
+      "raw": 1617,
+      "used": 1536
+    },
+    "79": {
+      "dropped": 158,
+      "raw": 1694,
+      "used": 1536
+    },
+    "80": {
+      "dropped": 176,
+      "raw": 1712,
+      "used": 1536
+    },
+    "81": {
+      "dropped": 81,
+      "raw": 1617,
+      "used": 1536
+    },
+    "82": {
+      "dropped": 145,
+      "raw": 1681,
+      "used": 1536
+    },
+    "83": {
+      "dropped": 155,
+      "raw": 1691,
+      "used": 1536
+    },
+    "84": {
+      "dropped": 134,
+      "raw": 1670,
+      "used": 1536
+    },
+    "85": {
+      "dropped": 103,
+      "raw": 1639,
+      "used": 1536
+    },
+    "86": {
+      "dropped": 51,
+      "raw": 1587,
+      "used": 1536
+    },
+    "87": {
+      "dropped": 177,
+      "raw": 1713,
+      "used": 1536
+    },
+    "88": {
+      "dropped": 155,
+      "raw": 1691,
+      "used": 1536
+    },
+    "89": {
+      "dropped": 130,
+      "raw": 1666,
+      "used": 1536
+    },
+    "90": {
+      "dropped": 92,
+      "raw": 1628,
+      "used": 1536
+    },
+    "91": {
+      "dropped": 117,
+      "raw": 1653,
+      "used": 1536
+    },
+    "92": {
+      "dropped": 116,
+      "raw": 1652,
+      "used": 1536
+    },
+    "93": {
+      "dropped": 97,
+      "raw": 1633,
+      "used": 1536
+    },
+    "94": {
+      "dropped": 86,
+      "raw": 1622,
+      "used": 1536
+    },
+    "95": {
+      "dropped": 75,
+      "raw": 1611,
+      "used": 1536
+    },
+    "96": {
+      "dropped": 116,
+      "raw": 1652,
+      "used": 1536
+    },
+    "97": {
+      "dropped": 71,
+      "raw": 1607,
+      "used": 1536
+    },
+    "98": {
+      "dropped": 67,
+      "raw": 1603,
+      "used": 1536
+    },
+    "99": {
+      "dropped": 61,
+      "raw": 1597,
+      "used": 1536
+    }
+  },
+  "kind": "long",
+  "legacy_scorer_used": false,
+  "loss": "original masked-only CE; mean over eight logical 32-image microbatches",
+  "loss_scale_per_microbatch": 0.5,
+  "lr": 2e-05,
+  "lr_decay_until": 20000,
+  "lr_hold_until": 4000,
+  "lr_schedule": "budget-cosine",
+  "mask": "original half arccos random, half Halton-prefix, including full MASK",
+  "micro": 32,
+  "min_lr": 2e-06,
+  "original_modules_sha256": {
+    "adapter_data": "a4e9415d822f66e47c4b65197c975e8554aece5244fecd1dd80e42c0d6f95b75",
+    "bucket_sampler": "beb94e71be271711dc50d10f11aaf79964557ac5205dc5246e7cccaa08309699",
+    "continuous_halton": "4482445724b581671d5b6caa31703a0cca8ae9593265ea3ff58a9913718c7458",
+    "data": "71fb1954a7a7cfcd6ae8dad69e14a4999187f0aa11cd540232a75dc57dec56e7",
+    "embedding_adapter": "6ad14e01c42e1861958bf90edc6ba238deb2727a9cb82e0dc9fccf3dd56192da",
+    "halton_upstream": "7a0d241fe6f968c088af3fac71b895394bcda993b9425f60c5d23e07a9ac5590",
+    "train_halton": "e7c7789031d264d5a16f72ed00dad07305d4ac6758fcd21de6155b2c0ccdc867"
+  },
+  "physical_gpus": "0,1,2,3",
+  "policy": "random",
+  "precision": "Halton/adapter BF16; original adapter Fbase FP32; new router Fbase BF16, scorer FP32; TF32 off",
+  "pretrained_sha256": "7fe25cb80b05743e8b42dacc61d88792a9ab5217d6bd756bef28821e0a5fc68f",
+  "profile": false,
+  "route_config": {
+    "base_route_config_sha256": "23aaa1d63e1a23c753d72b14c7c94ce0bea094f3302b610fe6efbc20d39db25d",
+    "base_route_indices_sha256": "80c25111c8842d3c5084f0c736802bb33572dc15576a7d5b6f501a90710628a8",
+    "base_route_k_sha256": "35de4e062bb796ab92bcf744618be67ddcc5b7f63f3be51d85bcc8dc58851a73",
+    "base_route_root": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/maskgit/routes/long",
+    "batch_size": 1024,
+    "control_identity": {
+      "budget": "exact per-source/view or generated-image new-scorer K",
+      "kind": "long",
+      "nearconstant_split_targets": null,
+      "no_batch_quota": true,
+      "per_image_independent_given_fixed_design": true,
+      "policy": "random",
+      "rounding": "Python round to nearest integer, ties to even",
+      "route_seed": 20261114,
+      "spatial": "per-ID NumPy uniform without replacement",
+      "target_mean_K": 106.38386,
+      "train_target_mean_K": 93.64123880805546
+    },
+    "dtype": "uint16",
+    "fixed_k": null,
+    "flat_layout": "flat_id=source_index*num_aug+augmentation",
+    "format": "top_p_continuous_route_cache_v1",
+    "implementation_sha256": "b49a3084615c4dfa7a211f64e7520bc7e277464647f895a507a732f3bfdccf0b",
+    "p": null,
+    "route_mode": "control_random",
+    "router_identity": {
+      "bundle": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/accepted_long_inference",
+      "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+      "config_sha256": "85df748540a752175b12172139eb14d26c4fb2193dd821b280648e1de04152a2",
+      "density_component_removed": true,
+      "input_feature_precision": "BF16 frozen spatial expansion",
+      "kind": "long",
+      "maximum_K": 144,
+      "minimum_K": 48,
+      "model_sha256": "d764d701d86cac6ac2a7e1bff97b97a8d48f9819da36b17274c61935e3a9733d",
+      "policy": "one forward, scalar U shift, fixed threshold count, stable top K",
+      "scorer_precision": "FP32",
+      "target_validation_mean_K": 96,
+      "threshold": -0.23861974477767944,
+      "utility_weight": 0.9,
+      "weights_sha256": "a687641507933604582097ed8bb9d718aee641d9776c2dad8c4af5c4743d1ab8",
+      "white_direct_weight": 0.5
+    },
+    "routing_implementation_sha256": "70b8215bfa7a874db9df640147dfc19f872b27e5df184df19c3121c69ba24e15",
+    "scorer_sha256": "a687641507933604582097ed8bb9d718aee641d9776c2dad8c4af5c4743d1ab8",
+    "shape": [
+      2562334,
+      256
+    ],
+    "source_gt2d_sha256": "0fcd0cbaaa51d7556ac8e55e35f44898a9ef9b2816206af2ac50972eaa331333",
+    "source_labels_sha256": "0c2ddd65bd658853cb92839a358cc34962c91416d22448edf07490e72f2dbd0a",
+    "source_meta_sha256": "907020efaf14d2b3639fed0d5fa7637f396d119b76122a03dd149256349cf355",
+    "source_root": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/rebuttal_training_20261107/paired_top_p_codes",
+    "source_shape": [
+      1281167,
+      2,
+      32
+    ],
+    "source_titok_sha256": "5ea590b24da1b46b909dfd5a74a487b106acf476f2fa1a3c89ae4b84bf1f84b3",
+    "temperature": null,
+    "top_p_artifact_sha256": "e3806ee8011101a1f6bda002d18f2dd953f99b3dbfdf98d1be3126f1cb85547a",
+    "top_p_checkpoint_sha256": "61e6e22acf5e4f7dcf44158518e4061a3fc9d6ca481ddc753e97f822546cb819",
+    "world_size": 4
+  },
+  "route_root": "/tmp/no_density_control_routes_20261116/random",
+  "route_summary": {
+    "complete_coverage": true,
+    "config_sha256": "b43ddcc13952538fb4e25f91fb22859a3e52b4a99b1e227610f1163d6ec3d5a1",
+    "control_identity": {
+      "budget": "exact per-source/view or generated-image new-scorer K",
+      "kind": "long",
+      "nearconstant_split_targets": null,
+      "no_batch_quota": true,
+      "per_image_independent_given_fixed_design": true,
+      "policy": "random",
+      "rounding": "Python round to nearest integer, ties to even",
+      "route_seed": 20261114,
+      "spatial": "per-ID NumPy uniform without replacement",
+      "target_mean_K": 106.38386,
+      "train_target_mean_K": 93.64123880805546
+    },
+    "k_histogram": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1258730,
+      2283,
+      2194,
+      2185,
+      2157,
+      2149,
+      2183,
+      2107,
+      2023,
+      2043,
+      1943,
+      1984,
+      2020,
+      1883,
+      1838,
+      1934,
+      1868,
+      1812,
+      1880,
+      1856,
+      1840,
+      1781,
+      1798,
+      1795,
+      1766,
+      1737,
+      1694,
+      1669,
+      1706,
+      1706,
+      1617,
+      1694,
+      1712,
+      1617,
+      1681,
+      1691,
+      1670,
+      1639,
+      1587,
+      1713,
+      1691,
+      1666,
+      1628,
+      1653,
+      1652,
+      1633,
+      1622,
+      1611,
+      1652,
+      1607,
+      1603,
+      1597,
+      1632,
+      1532,
+      1569,
+      1640,
+      1630,
+      1610,
+      1561,
+      1678,
+      1595,
+      1592,
+      1623,
+      1637,
+      1580,
+      1591,
+      1574,
+      1666,
+      1600,
+      1607,
+      1587,
+      1591,
+      1718,
+      1607,
+      1656,
+      1664,
+      1683,
+      1708,
+      1702,
+      1721,
+      1729,
+      1658,
+      1734,
+      1740,
+      1758,
+      1737,
+      1681,
+      1797,
+      1793,
+      1790,
+      1818,
+      1871,
+      1824,
+      1781,
+      1883,
+      1885,
+      1137501,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "matched_per_source_view_K": true,
+    "max_k": 144,
+    "mean_k": 93.64123880805546,
+    "min_k": 48,
+    "route_indices_sha256": "720f285dffac871f0cb78bc6353cd10c9375fe67ba95d3330548e4308ee8168b",
+    "route_k_sha256": "35de4e062bb796ab92bcf744618be67ddcc5b7f63f3be51d85bcc8dc58851a73",
+    "route_mode": "control_random",
+    "router_identity": {
+      "bundle": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/accepted_long_inference",
+      "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+      "config_sha256": "85df748540a752175b12172139eb14d26c4fb2193dd821b280648e1de04152a2",
+      "density_component_removed": true,
+      "input_feature_precision": "BF16 frozen spatial expansion",
+      "kind": "long",
+      "maximum_K": 144,
+      "minimum_K": 48,
+      "model_sha256": "d764d701d86cac6ac2a7e1bff97b97a8d48f9819da36b17274c61935e3a9733d",
+      "policy": "one forward, scalar U shift, fixed threshold count, stable top K",
+      "scorer_precision": "FP32",
+      "target_validation_mean_K": 96,
+      "threshold": -0.23861974477767944,
+      "utility_weight": 0.9,
+      "weights_sha256": "a687641507933604582097ed8bb9d718aee641d9776c2dad8c4af5c4743d1ab8",
+      "white_direct_weight": 0.5
+    },
+    "rows": 2562334,
+    "scorer_sha256": "a687641507933604582097ed8bb9d718aee641d9776c2dad8c4af5c4743d1ab8",
+    "status": "complete",
+    "top_p_checkpoint_sha256": "61e6e22acf5e4f7dcf44158518e4061a3fc9d6ca481ddc753e97f822546cb819"
+  },
+  "router_identity": {
+    "bundle": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/accepted_long_inference",
+    "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+    "config_sha256": "85df748540a752175b12172139eb14d26c4fb2193dd821b280648e1de04152a2",
+    "density_component_removed": true,
+    "input_feature_precision": "BF16 frozen spatial expansion",
+    "kind": "long",
+    "maximum_K": 144,
+    "minimum_K": 48,
+    "model_sha256": "d764d701d86cac6ac2a7e1bff97b97a8d48f9819da36b17274c61935e3a9733d",
+    "policy": "one forward, scalar U shift, fixed threshold count, stable top K",
+    "scorer_precision": "FP32",
+    "target_validation_mean_K": 96,
+    "threshold": -0.23861974477767944,
+    "utility_weight": 0.9,
+    "weights_sha256": "a687641507933604582097ed8bb9d718aee641d9776c2dad8c4af5c4743d1ab8",
+    "white_direct_weight": 0.5
+  },
+  "scorer_frozen": true,
+  "seed": 0,
+  "source_root": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/rebuttal_training_20261107/paired_top_p_codes",
+  "steps_per_epoch": 9964,
+  "style": "mixtok_new_router_control_halton_v1",
+  "thresholds_recalibrated": false,
+  "tokenizer_frozen": true,
+  "top_p_artifact_sha256": "e3806ee8011101a1f6bda002d18f2dd953f99b3dbfdf98d1be3126f1cb85547a",
+  "top_p_checkpoint": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/continuous_pruned_hf_stage_20260924/top_p_ema_inference_v1_step247482.pt",
+  "updates": 20000,
+  "upstream_hashes": {
+    "Network/transformer.py": "3a94ad2ac63bc085e4c6982a1b7fce28c3bb263637626e88d596c3857beed856",
+    "Sampler/halton_sampler.py": "a045249e853a6318dcfacac6b7f9f0155d64f0301faec0f666f9e7c23c0ab980",
+    "Trainer/abstract_trainer.py": "7e3620944ec47aa1ba516072f823609ad7330df12fd40d7f1cab86b8c6e0895e",
+    "Trainer/cls_trainer.py": "7012b7e61eee59044bf193922adc6e65db4541906d95e1e3da1e02bba4cb27bd",
+    "Utils/masking_scheduler.py": "3f678c138ec3ef61416fce770307e263fd1ae8679be7e78341e4a0f3d41d1810",
+    "launch/run_cls_to_img.sh": "82569883ba4a01dc2c36f4a0cb0b0c2db8afd30d66e23379b7e55968d6738658"
+  },
+  "upstream_root": "/home/heyefei/lichenge/MoT_maskgit/third_party/Halton-MaskGIT",
+  "warmup": 2500,
+  "weight_decay": 0.03,
+  "world": 4
+}

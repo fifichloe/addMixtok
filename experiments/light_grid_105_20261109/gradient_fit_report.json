@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "n": 12000,
+  "fit_population": 84996,
+  "per_class": 12,
+  "validation_images_used": 0,
+  "calibration_images_used_for_fit": 0,
+  "checkpoint_sha256": "457be008836e3f3702327795bb1953250f0032a0b35f74e26e6ffce9ef50e82e",
+  "head_sha256": "a011ae4b37fb950c423d582f29a8057ddeafd35d0f594b2008d518d174c5ce38",
+  "source_paths_sha256": "4cc310421e120b086dca89940288bbbd82c0430839757a229af71e709e431cc4",
+  "files_sha256": "cd6ad42c9e8901742311b50be09f39c578ba12ed9bfdc33b2107b51c91264034",
+  "fid_gradient_reference": "fit-only original-ranking fixed96 reconstructions; not a calibration or validation gradient",
+  "source_roles_sha256": "d703e1111bba0b3d5e653779310ffc5f329e4ecd44e268c257dbdc6862e7686f"
+}

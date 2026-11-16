@@ -1,0 +1,39 @@
+{
+  "status": "complete",
+  "pid": 1008461,
+  "started": 1794741061.4507165,
+  "measurement": "current Long no-density reconstruction",
+  "fixed106_queue_PID": 986758,
+  "fixed106_queue_identity": {
+    "state": "S",
+    "start_ticks": "69460588",
+    "command": "/home/heyefei/miniconda3/envs/MoT/bin/python /home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/fixed106_seed4_20261115/run.py "
+  },
+  "queue_resumed": true,
+  "no_training": true,
+  "no_automatic_retry": true,
+  "max_owned_GPUs": 4,
+  "foreign_GPU_processes_seen": [],
+  "checked": 1794741149.4112554,
+  "worker_PID": 1008611,
+  "GPU": {
+    "index": "1",
+    "uuid": "GPU-54aab195-984c-7336-8529-2469f43de4fd",
+    "total_MiB": 32607,
+    "used_MiB": 0,
+    "free_MiB": 32607,
+    "utilization": 0
+  },
+  "other_owned_GPU_UUIDs": [
+    "GPU-198cec66-4c42-218b-05f6-5c7b9946992d"
+  ],
+  "worker_process": {
+    "state": "R",
+    "start_ticks": "69565295",
+    "command": "/home/heyefei/miniconda3/envs/MoT/bin/python /home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/recon_routing_share_20261115/measure.py "
+  },
+  "worker_exit_code": 0,
+  "finished": 1794741149.4106767,
+  "result": "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/recon_routing_share_20261115/result.json",
+  "exclusive_GPU_verified": true
+}

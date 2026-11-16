@@ -1,0 +1,20 @@
+{
+  "status": "main_cfg_selected",
+  "winner": {
+    "cfg": 3.0,
+    "seed": 4,
+    "gFID": 1.865403534962752,
+    "mean_local_K": 106.38386,
+    "mean_content_tokens": 138.38386,
+    "summary": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/generation_evaluation/long_cfg3_seed4_8p8/summary.json",
+    "summary_sha256": "ded6776d1fe35a249d03ac838e7e6bffa02deb97eddf9df832aeb7bfc4b3642e",
+    "checkpoint_sha256": "04a2f5e061fa0ce463755f73e008a620e8e0cce56d429aa21aeb79bfc2c869af",
+    "router_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb"
+  },
+  "cfg_results_sha256": "936960676a5e39f4623f883e819a087c8d05e46473964ea875ce63f3a32bd61b",
+  "next_seeds": [
+    1,
+    2,
+    3
+  ]
+}

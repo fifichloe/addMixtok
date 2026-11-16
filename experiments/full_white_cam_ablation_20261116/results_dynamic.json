@@ -1,0 +1,141 @@
+{
+  "status": "full_50000_quality_complete",
+  "kind": "long",
+  "rows": [
+    {
+      "name": "full_dynamic96",
+      "family": "frozen_head_full_input_component_ablation",
+      "component": "full",
+      "budget": "dynamic96",
+      "mean_K": 96.0,
+      "min_K": 48,
+      "max_K": 144,
+      "mean_content_tokens": 128.0,
+      "bpp_mask256": 0.0302734375,
+      "mask_file": "/home/heyefei/lichenge/paper/experiments/full_white_cam_ablation_20261116/policies/full_dynamic96.mask.npy",
+      "mask_sha256": "386ae7b69028e036cd3d50c2686f4e7a747aac187e4fc5b5bc60fc0233360df5",
+      "K_file": "/home/heyefei/lichenge/paper/experiments/full_white_cam_ablation_20261116/policies/full_dynamic96.K.npy",
+      "K_sha256": "8a6bbc9d1993db720cd161ee9eb7628aaf8aac699c148b531980c08f47fe89fe",
+      "calibration": {
+        "threshold": 0.3803865313529968,
+        "target": 96,
+        "mean_K": 96.0,
+        "quality_used": false
+      },
+      "head_retrained": false,
+      "training_mean_imputation": true,
+      "rFID": 1.000762689594353,
+      "PSNR": 19.40117571044922,
+      "n": 50000,
+      "codec_retrained": false,
+      "gain_head_independently_retrained": false,
+      "inference_control_on_original_head": true
+    },
+    {
+      "name": "without_white_all_explicit_dynamic96",
+      "family": "frozen_head_full_input_component_ablation",
+      "component": "without_white_all_explicit",
+      "budget": "dynamic96",
+      "mean_K": 96.0,
+      "min_K": 48,
+      "max_K": 144,
+      "mean_content_tokens": 128.0,
+      "bpp_mask256": 0.0302734375,
+      "mask_file": "/home/heyefei/lichenge/paper/experiments/full_white_cam_ablation_20261116/policies/without_white_all_explicit_dynamic96.mask.npy",
+      "mask_sha256": "b735a91c61620c3eebf18f432171508857d35d311fffb0c77d4678a93706c3fe",
+      "K_file": "/home/heyefei/lichenge/paper/experiments/full_white_cam_ablation_20261116/policies/without_white_all_explicit_dynamic96.K.npy",
+      "K_sha256": "c4ea4564e10e61ba41a51068ee685a9092eddccd9aa4df3f690f92a947489a9f",
+      "calibration": {
+        "threshold": 0.2924477458000183,
+        "target": 96,
+        "mean_K": 96.0,
+        "quality_used": false
+      },
+      "head_retrained": false,
+      "training_mean_imputation": true,
+      "rFID": 1.0036711325997771,
+      "PSNR": 19.34042103515625,
+      "n": 50000,
+      "codec_retrained": false,
+      "gain_head_independently_retrained": false,
+      "inference_control_on_original_head": true
+    },
+    {
+      "name": "without_cam_all_explicit_dynamic96",
+      "family": "frozen_head_full_input_component_ablation",
+      "component": "without_cam_all_explicit",
+      "budget": "dynamic96",
+      "mean_K": 96.0,
+      "min_K": 48,
+      "max_K": 144,
+      "mean_content_tokens": 128.0,
+      "bpp_mask256": 0.0302734375,
+      "mask_file": "/home/heyefei/lichenge/paper/experiments/full_white_cam_ablation_20261116/policies/without_cam_all_explicit_dynamic96.mask.npy",
+      "mask_sha256": "28074f2c035e1ba1ae1820bfb9064060ac2101e05a8252d206abc530034f80eb",
+      "K_file": "/home/heyefei/lichenge/paper/experiments/full_white_cam_ablation_20261116/policies/without_cam_all_explicit_dynamic96.K.npy",
+      "K_sha256": "0ed249f113c393e2d6b861a26ec1f40c9910c5436851e0fb87da97547d2c88c2",
+      "calibration": {
+        "threshold": 0.3156692385673523,
+        "target": 96,
+        "mean_K": 96.0,
+        "quality_used": false
+      },
+      "head_retrained": false,
+      "training_mean_imputation": true,
+      "rFID": 1.1407656641422363,
+      "PSNR": 19.614882778930664,
+      "n": 50000,
+      "codec_retrained": false,
+      "gain_head_independently_retrained": false,
+      "inference_control_on_original_head": true
+    }
+  ],
+  "full_unique_validation_coverage": true,
+  "no_shard_FID_averaging": true,
+  "protocol": "experiments/full_white_cam_ablation_20261116/policies/protocol.json",
+  "protocol_sha256": "61c255dece7833dd4f48d372a2c7ced946716ae69f9c3215f9f0746d35747c31",
+  "reports": [
+    {
+      "path": "experiments/full_white_cam_ablation_20261116/quality_dynamic/shard_0/report.json",
+      "sha256": "134ee3869ce6cf1c76fe0feefc0d21ba6303d03becdc3d7b5470ad683eb550c7"
+    },
+    {
+      "path": "experiments/full_white_cam_ablation_20261116/quality_dynamic/shard_1/report.json",
+      "sha256": "1a6534de16f8f29e3058dd4fcaf07cb22ad96cb805d50d7427d14616fbd5660c"
+    },
+    {
+      "path": "experiments/full_white_cam_ablation_20261116/quality_dynamic/shard_2/report.json",
+      "sha256": "e3c6ec6346fd4e0b292e6fb5ba0b3d461a72ebf98b66350b050e778b327bc4af"
+    }
+  ],
+  "formal_teacher_policy": {
+    "name": "full_dynamic96",
+    "family": "frozen_head_full_input_component_ablation",
+    "component": "full",
+    "budget": "dynamic96",
+    "mean_K": 96.0,
+    "min_K": 48,
+    "max_K": 144,
+    "mean_content_tokens": 128.0,
+    "bpp_mask256": 0.0302734375,
+    "mask_file": "/home/heyefei/lichenge/paper/experiments/full_white_cam_ablation_20261116/policies/full_dynamic96.mask.npy",
+    "mask_sha256": "386ae7b69028e036cd3d50c2686f4e7a747aac187e4fc5b5bc60fc0233360df5",
+    "K_file": "/home/heyefei/lichenge/paper/experiments/full_white_cam_ablation_20261116/policies/full_dynamic96.K.npy",
+    "K_sha256": "8a6bbc9d1993db720cd161ee9eb7628aaf8aac699c148b531980c08f47fe89fe",
+    "calibration": {
+      "threshold": 0.3803865313529968,
+      "target": 96,
+      "mean_K": 96.0,
+      "quality_used": false
+    },
+    "head_retrained": false,
+    "training_mean_imputation": true
+  },
+  "codec_retrained": false,
+  "inference_controls_only": true,
+  "independent_retraining": false,
+  "independent_retraining_components": [],
+  "newly_trained_head_runs": 0,
+  "training_seed_variability_evaluated": false,
+  "interpretation": "No-semantic row uses an independently trained RGB-only head on the unchanged frozen codec; other rows are frozen-head inference controls."
+}

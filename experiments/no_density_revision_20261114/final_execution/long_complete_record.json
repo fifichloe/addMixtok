@@ -1,0 +1,92 @@
+{
+  "status": "long_complete_new_final_design_acceptance_and_export_verified",
+  "student": "long",
+  "all_original_constraints_passed": true,
+  "official_unique_images": 50000,
+  "rFID": 1.2919789358915637,
+  "PSNR": 17.982921436157227,
+  "mean_local_K": 95.99998,
+  "threshold": -0.23861974477767944,
+  "full_acceptance": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_budget_features/validation/acceptance.json",
+  "full_acceptance_sha256": "8ca51a9edacd3fa107b955ecbe682a7d467bef1df2b48f991c2a99d0b980547a",
+  "inference_bundle": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/accepted_long_inference",
+  "inference_config_sha256": "85df748540a752175b12172139eb14d26c4fb2193dd821b280648e1de04152a2",
+  "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+  "checkpoint": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_budget_features/long/candidate_1000.pt",
+  "checkpoint_sha256": "4841bb1fd100c9ccdab24b5547ed0ef74240793d26abd2b76968e09883203a9e",
+  "actual_ancestry": {
+    "path": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_budget_features/long/candidate_1000.pt",
+    "sha256": "4841bb1fd100c9ccdab24b5547ed0ef74240793d26abd2b76968e09883203a9e",
+    "actual_step": 22500,
+    "actual_budget_feature_updates": 1000,
+    "actual_U_updates": 1000,
+    "parent": {
+      "path": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_reconstruction/long/candidate_1500.pt",
+      "sha256": "3321d5f25d715703f6c0376be544fcdb24ffb59b0cb230fe24ee5c0a0b901939",
+      "actual_step": 21500,
+      "new_updates": 1500,
+      "parent": {
+        "path": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/student_parent/long/best.pt",
+        "sha256": "8e71badefc9a06a523390ca52b7a3abbc9e789d0e4f4698b737aadc2c84ddeb6",
+        "actual_step": 20000,
+        "kind": "long",
+        "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+        "parent_report": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/student_parent/long/report.json",
+        "parent_report_sha256": "27da2203444b05542d0d57079c3f80c766604ac5e51e7557b971852b763e4683",
+        "actual_21_optimizer_steps_verified": true,
+        "no_historical_router_weights_loaded": true
+      },
+      "execution_gate": {
+        "path": "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/long_only_execution_20261115/decision.json",
+        "sha256": "72e316993d81649ccd2831b639e34985c89c172404e76f247d5288e6f415d642",
+        "actual_record": {
+          "status": "user_authorized_long_only",
+          "time": 1794706999.1716542,
+          "selected_kind": "long",
+          "short_acceptance_required": false,
+          "short_weights_as_long_initialization": false,
+          "initial_long_parent": "final/student_parent/long/best.pt",
+          "grouped_local_score_components": [
+            "gain",
+            "white",
+            "CAM"
+          ],
+          "independent_controls": [
+            "random",
+            "uniform",
+            "nearconstant"
+          ],
+          "maximum_owned_GPUs": 4,
+          "allowed_GPU_pool": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "GPU5_permission_pending": true,
+          "main_original_recipe_retained": true
+        },
+        "receipt_sha256": "039c9920966c834e88803cab6c77a9c7c2008d9b900267cd042563f783aee27a",
+        "short_acceptance_required": false
+      },
+      "training_report": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_reconstruction/long/report.json",
+      "training_report_sha256": "371477abcc08295843fcb2b00fa39ff1b0fb60fd92707c196af5833872e0f664",
+      "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+      "actual_21_optimizer_steps_verified": true,
+      "historical_weights_loaded": false,
+      "selection": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_reconstruction/selection.json",
+      "selection_sha256": "955e6250aef61800ff955e5bf8894e89d00b5d305a631b3da7292d164205b882"
+    },
+    "training_report": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_budget_features/long/report.json",
+    "training_report_sha256": "e86c74270bce9fb864ac7dfe6121ad235edecf9e0944732580ecb5d01c97974b",
+    "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+    "all_19_optimizer_steps_verified": true,
+    "all_17_local_parameters_exact_parent": true,
+    "historical_weights_loaded": false,
+    "selection": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_budget_features/selection.json",
+    "selection_sha256": "87aacdd97d2b3d37c8fdfcefd7d371391164fbe8df51aa52409ff4544e8884c6"
+  },
+  "new_MaskGIT_training_complete": false,
+  "objective_complete": false
+}

@@ -1,0 +1,8 @@
+{
+  "n_fit": 84996,
+  "validation_images_used": 0,
+  "calibration_images_used": 0,
+  "checkpoint_sha256": "457be008836e3f3702327795bb1953250f0032a0b35f74e26e6ffce9ef50e82e",
+  "source_roles_sha256": "d703e1111bba0b3d5e653779310ffc5f329e4ecd44e268c257dbdc6862e7686f",
+  "source": "Equal mixture of f1/f2 per-channel first and second moments on fit-only train images"
+}

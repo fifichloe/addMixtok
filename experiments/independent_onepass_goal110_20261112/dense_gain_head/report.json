@@ -1,0 +1,89 @@
+{
+  "status": "completed",
+  "rows": [
+    {
+      "epoch": 0,
+      "fit_loss": 0.06542028834486562,
+      "held_loss": 0.02346641333675529,
+      "seconds": 3.8001446850248612
+    },
+    {
+      "epoch": 1,
+      "fit_loss": 0.021026635745216106,
+      "held_loss": 0.018918326749187045,
+      "seconds": 6.885114733013324
+    },
+    {
+      "epoch": 2,
+      "fit_loss": 0.018578396398063232,
+      "held_loss": 0.01745357489826716,
+      "seconds": 9.684019915992394
+    },
+    {
+      "epoch": 3,
+      "fit_loss": 0.017465188033397125,
+      "held_loss": 0.017052626591449477,
+      "seconds": 12.517750441038515
+    },
+    {
+      "epoch": 4,
+      "fit_loss": 0.016708450380379145,
+      "held_loss": 0.01766429014355846,
+      "seconds": 15.387954470003024
+    },
+    {
+      "epoch": 5,
+      "fit_loss": 0.016298951715884406,
+      "held_loss": 0.0160903194315519,
+      "seconds": 18.40570751298219
+    },
+    {
+      "epoch": 6,
+      "fit_loss": 0.015714272068055708,
+      "held_loss": 0.01562478792247529,
+      "seconds": 21.45506931503769
+    },
+    {
+      "epoch": 7,
+      "fit_loss": 0.015383533148429473,
+      "held_loss": 0.01569776084071207,
+      "seconds": 24.566944169986527
+    },
+    {
+      "epoch": 8,
+      "fit_loss": 0.015012442473077191,
+      "held_loss": 0.014790802736836667,
+      "seconds": 27.64213600498624
+    },
+    {
+      "epoch": 9,
+      "fit_loss": 0.014915028914058878,
+      "held_loss": 0.014921048000879913,
+      "seconds": 30.75296268198872
+    },
+    {
+      "epoch": 10,
+      "fit_loss": 0.014690836900378779,
+      "held_loss": 0.014466488778964651,
+      "seconds": 33.728285196993966
+    },
+    {
+      "epoch": 11,
+      "fit_loss": 0.014515862270229765,
+      "held_loss": 0.014351552221907968,
+      "seconds": 36.81371747603407
+    }
+  ],
+  "fit_n": 10843,
+  "held_n": 1157,
+  "best_held_loss": 0.014351552221907968,
+  "source_sha256": {
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/fit_dense_gain.py": "4668953631811d64f4a8d9f5ac72b64ec261cbd8f5ac5a67dee852e3b88c6c7d",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/gain_model.py": "9ba1f504c238a2660b573ed0827b08804d804ab1ae9bfdd2aee861b74219a05f",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/routing.py": "c6060146660a39c26304df00ac8cfa4c8b36c08ab3e2f2dc5d1706dc4b18d5c7",
+    "/home/heyefei/lichenge/paper/experiments/fresh_reconstruction_scorer_20261112/runtime.py": "00c77d993dda775c227819cc0109897c070f99a38528be00e905e0973e2f990e"
+  },
+  "seconds": 36.824248148011975,
+  "legacy_scorer_or_routing_labels_used": false,
+  "Inception_training_supervision": false
+}

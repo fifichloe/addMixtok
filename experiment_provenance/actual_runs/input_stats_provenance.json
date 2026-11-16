@@ -1,0 +1,10 @@
+{
+  "source_checkpoint_sha256": "aa50f0bc896307008c0bbbb2b2523dcf74d028f24e9539797a38eb3736c9afe7",
+  "source_checkpoint": "experiments/fresh_reconstruction_scorer_20261112/heads/rgb0.5_best.pt",
+  "normalization_channels": 780,
+  "statistics_sample_fit_images": 256,
+  "fit_total_images": 10843,
+  "held_total_images": 1157,
+  "input_scales_256_sha256": "5a307e5937d1005e766a813686320e846895982f7cb29a33b116eb2539500f2d",
+  "input_stats_780_sha256": "9d9cb49b59eeb5e7455331822c3c51284363c54871e6a82b6e15d7cfbae5de2a"
+}

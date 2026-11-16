@@ -1,0 +1,86 @@
+{
+  "status": "CPU_source_and_weight_hashes_verified_no_GPU_execution",
+  "weights": {
+    "/home/heyefei/lichenge/MixTok-Official/assets/released/recon/mixtok_recon.pt": {
+      "sha256": "457be008836e3f3702327795bb1953250f0032a0b35f74e26e6ffce9ef50e82e",
+      "actual_file_rehashed": true
+    },
+    "/home/heyefei/lichenge/1d-tokenizer/tokenizer_titok_l32.bin": {
+      "sha256": "b8f0bf61e9ee1791d8b76fa723bdcb2c85a039a7d027e597f685db492935c31f",
+      "actual_file_rehashed": true
+    },
+    "/home/heyefei/lichenge/LlamaGen/pretrained_models/vq_ds16_c2i.pt": {
+      "sha256": "109aa8afb2cf3761eec23cdc8644154cb498f5ab7eef2a35264d25e5e0499f7d",
+      "actual_file_rehashed": true
+    },
+    "/tmp/mixtok_light_backbones_20261111/efficientnet_b0_rwightman-7f5810bc.pth": {
+      "sha256": "7f5810bc96def8f7552d5b7e68d53c4786f81167d28291b21c0d90e1fca14934",
+      "actual_file_rehashed": true
+    },
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal105_20261112/long_head/best.pt": {
+      "sha256": "fe9e5c562b72885b03a7be94b56541515c79df618f93aec46a413afb7cc03518",
+      "actual_file_rehashed": true
+    },
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/image_utility/semantic_rel.npz": {
+      "sha256": "bc23f1adc62b5c78c6c4a9fe6ba625878018ccf3c49155a2b6e4e99a9ca3dc55",
+      "actual_file_rehashed": true
+    },
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/generation_two_router_maskgit_20261114/short_seed0/latest.pt": {
+      "sha256": "1fc885371d00f0b557d7fc094a776767670804bfd3104bcb9d8eaf57936496fd",
+      "actual_file_rehashed": true
+    },
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/generation_short_budget_feature_selection_20261114/accepted_short_inference/student_state.pt": {
+      "sha256": "358ef2d5260e27f13a097dbac1ef985989b06ac03e8e73b788b483755456be20",
+      "actual_file_rehashed": true
+    },
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/generation_two_router_maskgit_20261114/long_seed0/latest.pt": {
+      "sha256": "bba1cbf61c55784c788f91afc33a03431048a58e742d80398b2c9e91279adef8",
+      "actual_file_rehashed": true
+    },
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/generation_long_budget_feature_selection_20261114/accepted_long_inference/student_state.pt": {
+      "sha256": "b554b302fa6cee02dd29a9fa3174a2d2ea07b2e3c43406a36ea03bb9a41e9efc",
+      "actual_file_rehashed": true
+    },
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/continuous_pruned_hf_stage_20260924/adapter_step20000.pt": {
+      "sha256": "52aeca25d6d5a44d34e294457f38971cee1f3a2e71ef7e092aec37b349967aad",
+      "actual_file_rehashed": true
+    },
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/dense_gain_head/best.pt": {
+      "sha256": "67c6a477e55242b8a86052746eb335d85747a733d7a9fc5163052a8dccee404d",
+      "actual_file_rehashed": true
+    }
+  },
+  "sources": {
+    "/home/heyefei/lichenge/paper/experiments/new_router_efficiency_20261114/profile_components.py": "0fa3639149365da4eb42227dbfed735d7bd2bfd6b3b9ab3d9a57effbeb13a31d",
+    "/home/heyefei/lichenge/paper/experiments/new_router_efficiency_20261114/budget_statistics.py": "dd9b82113880ae436f92ecd676d69f2e246f46c124cea63f04f5cea533dde33c",
+    "/home/heyefei/lichenge/paper/experiments/new_router_efficiency_20261114/jobs.json": "2b81fc6ad23a67ebca27def8b6a0bbcb8b3b98ecf86521c66287f5dfa0932c45",
+    "/home/heyefei/lichenge/paper/experiments/generation_two_router_maskgit_20261114/common.py": "77d32ca994a958c684c520fd50359bdee608ea706e21c211f580b283d4f31cbc",
+    "/home/heyefei/lichenge/paper/experiments/generation_two_router_maskgit_20261114/eval_worker.py": "b1d17a1f5d79543a73104461c59036194ab1aa19de6f97201ae396faec10a3ba",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal100_20261113/candidates.py": "11f01ea62359f9d92f3921683fe6043147bc3131e981513248d3b81a161555c6",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal100_20261113/onepass_inference.py": "1e71bd20f96f2b7cc47ef0dd5d6b5874714fb8186fbe4827fff165ea0f181401",
+    "/home/heyefei/lichenge/paper/experiments/fresh_reconstruction_scorer_20261112/runtime.py": "00c77d993dda775c227819cc0109897c070f99a38528be00e905e0973e2f990e",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/routing.py": "c6060146660a39c26304df00ac8cfa4c8b36c08ab3e2f2dc5d1706dc4b18d5c7",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/gain_model.py": "9ba1f504c238a2660b573ed0827b08804d804ab1ae9bfdd2aee861b74219a05f",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal105_20261112/accepted_policy.json": "10945d719cb244d21c0b4617abe4f588c7158156373937129ec7ea0b1cbcdfa6",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal105_20261112/val_budget_frozen.json": "3e12e89ec9310e85ccf781d7ad9d2c87c658a4e46b954a319e7b15c48c43bdd2",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal100_20261113/accepted_policy.json": "5102c00e2b6111cd33f6f02f4a4bc2ae874c61552c54570a686f3b170601370f",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal100_20261113/val_budget_frozen.json": "d6ba18e1b4c262ff3c887cdf435e722e9673d2387a1c64afb6ba5b5eb2cb2ec1"
+  },
+  "restore_scope": "Strict runtime loads and deployment parity checks are not executed yet; no optimizer restore needed for profiling.",
+  "GPU_execution_started": false,
+  "reconstruction_policy_by_kind": {
+    "short": {
+      "accepted_name": "u_semantic_rel_0.3",
+      "threshold": 0.3232019245624542,
+      "scorer_sha256": "67c6a477e55242b8a86052746eb335d85747a733d7a9fc5163052a8dccee404d",
+      "accepted_policy_sha256": "10945d719cb244d21c0b4617abe4f588c7158156373937129ec7ea0b1cbcdfa6"
+    },
+    "long": {
+      "accepted_name": "long_c0.75_u0.9",
+      "threshold": 0.4321809709072113,
+      "scorer_sha256": "fe9e5c562b72885b03a7be94b56541515c79df618f93aec46a413afb7cc03518",
+      "accepted_policy_sha256": "5102c00e2b6111cd33f6f02f4a4bc2ae874c61552c54570a686f3b170601370f"
+    }
+  },
+  "preexecution_correction": "Construct ordinary model tensors outside inference_mode; preserve version audits."
+}

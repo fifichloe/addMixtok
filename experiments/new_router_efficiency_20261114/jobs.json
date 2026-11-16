@@ -1,0 +1,165 @@
+{
+  "schema": "mixtok_experiment_job_templates_v1",
+  "scope": "A06",
+  "GPU_execution_authorized_by_coordinator": false,
+  "GPU_execution_started": false,
+  "allocation": {
+    "maximum_concurrent_physical_GPUs_across_all_experiments": 4,
+    "physical_GPUs_per_profile_job": 1,
+    "wait_until_existing_CFG_workers_release_GPU": true,
+    "GPU_placeholder": "{gpu}",
+    "no_auto_admission_from_this_file": true
+  },
+  "environment_template": {
+    "CUDA_VISIBLE_DEVICES": "{gpu}",
+    "OMP_NUM_THREADS": "4",
+    "OPENBLAS_NUM_THREADS": "4",
+    "PYTHONUNBUFFERED": "1"
+  },
+  "python": "/home/heyefei/miniconda3/envs/MoT/bin/python",
+  "working_directory": "/home/heyefei/lichenge/paper",
+  "large_output_root": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/new_router_efficiency_20261114",
+  "source_and_input_manifest": "/home/heyefei/lichenge/paper/experiments/new_router_efficiency_20261114/inputs_manifest.json",
+  "jobs": [
+    {
+      "id": "A06_reconstruction_profile_{kind}",
+      "type": "GPU_profiling",
+      "argv_template": [
+        "/home/heyefei/miniconda3/envs/MoT/bin/python",
+        "/home/heyefei/lichenge/paper/experiments/new_router_efficiency_20261114/profile_components.py",
+        "--mode",
+        "reconstruction",
+        "--kind",
+        "{kind}",
+        "--warmup",
+        "10",
+        "--repeats",
+        "50",
+        "--output",
+        "{output}"
+      ],
+      "allowed_kind": [
+        "short",
+        "long"
+      ],
+      "policy_by_kind": {
+        "long": "long_c0.75_u0.9",
+        "short": "u_semantic_rel_0.3 (combined-entry alias short_c0.5_u0.3)"
+      },
+      "frozen_threshold_by_kind": {
+        "long": 0.4321809709072113,
+        "short": 0.3232019245624542
+      },
+      "complete_marker": "{output}/result.json",
+      "complete_requirements": {
+        "complete": true,
+        "status": "complete",
+        "protocol.deployment_audit.split_path_matches_actual_deployment_exactly": true,
+        "final_frozen_audit.all_pretrained_weights_and_buffers_unchanged": true
+      },
+      "all_arms_require": {
+        "latency_status": "complete",
+        "FLOPs_status": "complete",
+        "rows_length": 50
+      },
+      "expected_arms": [
+        "dynamic",
+        "fixed_0",
+        "fixed_32",
+        "fixed_64",
+        "fixed_96",
+        "fixed_128",
+        "fixed_196",
+        "fixed_256"
+      ],
+      "checkpoint_restore_scope": "Original codec loader restores released 692 EMA trainable entries plus original TiTok/LlamaGen weights; new gain scorer restored strictly; fixed linear U loaded from NPZ. All weight/source hashes verified before profiling. No optimizer state exists or needs restore."
+    },
+    {
+      "id": "A06_generation_profile_{kind}_CFG{cfg}",
+      "type": "GPU_profiling",
+      "argv_template": [
+        "/home/heyefei/miniconda3/envs/MoT/bin/python",
+        "/home/heyefei/lichenge/paper/experiments/new_router_efficiency_20261114/profile_components.py",
+        "--mode",
+        "generation",
+        "--kind",
+        "{kind}",
+        "--cfg",
+        "{cfg}",
+        "--stage2-steps",
+        "8",
+        "--warmup",
+        "10",
+        "--repeats",
+        "50",
+        "--output",
+        "{output}"
+      ],
+      "allowed_kind": [
+        "short",
+        "long"
+      ],
+      "cfg": "Use final selected stage2 CFG; stage1 remains4.5",
+      "complete_marker": "{output}/result.json",
+      "complete_requirements": {
+        "complete": true,
+        "status": "complete",
+        "protocol.deployment_audit.split_scorer_matches_exported_student_exactly": true,
+        "final_frozen_audit.all_loaded_weights_and_buffers_unchanged": true
+      },
+      "all_arms_require": {
+        "latency_status": "complete",
+        "FLOPs_status": "complete",
+        "rows_length": 50
+      },
+      "expected_arms": [
+        "dynamic",
+        "fixed_0",
+        "fixed_32",
+        "fixed_64",
+        "fixed_96",
+        "fixed_128",
+        "fixed_196",
+        "fixed_256"
+      ],
+      "checkpoint_restore_scope": "Strict full stage2 state, step20000, whole checkpoint SHA matches receipt; strict accepted exported student; hash-checked frozen adapter, original codec and official1D model. No optimizer restore: profiling performs no training."
+    },
+    {
+      "id": "A06_actual_50k_budget_statistics",
+      "type": "CPU_statistics",
+      "GPU_required": false,
+      "already_completed_output": "/home/heyefei/lichenge/paper/experiments/new_router_efficiency_20261114/actual_budget_statistics_v2",
+      "argv_template": [
+        "/home/heyefei/miniconda3/envs/MoT/bin/python",
+        "/home/heyefei/lichenge/paper/experiments/new_router_efficiency_20261114/budget_statistics.py",
+        "--generation-results",
+        "{generation_results}",
+        "--output",
+        "{output}"
+      ],
+      "generation_results_default": "/home/heyefei/lichenge/paper/experiments/generation_two_router_maskgit_20261114/final_results.json",
+      "complete_marker": "{output}/statistics.json",
+      "complete_requirements": {
+        "status": "computed_from_completed_actual_50k_runs"
+      },
+      "all_rows_require": {
+        "n": 50000
+      }
+    }
+  ],
+  "bitrate_convention": {
+    "fixed_width_bitmap_bits": 256,
+    "formula": "(32*12 + K*14 + 256)/65536",
+    "K0_and_K256_special_case_optimized_formats": false,
+    "must_not_silently_change_endpoint_coding_convention": true,
+    "not_actual_entropy_coded_file_size": true
+  },
+  "output_directory_policy": "Must not exist. Preserve failed outputs and use new output path after a reviewed implementation correction.",
+  "failure_markers": [
+    "nonzero process exit",
+    "result.json.complete=false",
+    "FLOPs_status=failed",
+    "latency_complete_FLOPs_incomplete"
+  ],
+  "monitoring": "Coordinator records PID, stderr/stdout, exact argv/env, start/end timestamps, exit code, output path; verifies actual process handles. No launch from status files alone."
+}

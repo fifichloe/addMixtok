@@ -1,0 +1,55 @@
+{
+  "status": "selected_on_TRAIN_held_before_official_quality",
+  "selected": "budget_1000",
+  "checkpoint": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_budget_features/long/candidate_1000.pt",
+  "checkpoint_sha256": "4841bb1fd100c9ccdab24b5547ed0ef74240793d26abd2b76968e09883203a9e",
+  "criterion": "training_held_rFID_only",
+  "official_validation_quality_used_for_selection": false,
+  "selection_frozen_before_official_validation": true,
+  "held_report": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_budget_features/held/held_metrics.json",
+  "held_report_sha256": "c2d2ee327592bd1532eadb7a2e1e9539b889e292d3f0f1f6ffa45ceafb9c6d5d",
+  "candidate_manifest_sha256": "f332c4d897300088d1d4f86e6a11a4ab83b53f9afbe687c90b5d3dc12029bc14",
+  "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+  "selected_row": {
+    "candidate": "budget_1000",
+    "checkpoint": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_budget_features/long/candidate_1000.pt",
+    "checkpoint_sha256": "4841bb1fd100c9ccdab24b5547ed0ef74240793d26abd2b76968e09883203a9e",
+    "rFID": 3.60307312290405,
+    "rFID_independent_sqrtm": 3.603073122905755,
+    "sqrtm_imaginary_max": 0.0,
+    "PSNR": 18.661296319580078,
+    "mean_K": 96.0,
+    "std_K": 46.95373893525414,
+    "min_K": 48,
+    "max_K": 144,
+    "component_training_steps": {
+      "spatial": 21500,
+      "budget": 22500
+    }
+  },
+  "eligible_candidates_frozen_in_manifest": [
+    "budget_500",
+    "budget_1000",
+    "budget_1500",
+    "budget_2000"
+  ],
+  "lowest_reported_control_or_candidate": {
+    "candidate": "budget_1000",
+    "checkpoint": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/long_budget_features/long/candidate_1000.pt",
+    "checkpoint_sha256": "4841bb1fd100c9ccdab24b5547ed0ef74240793d26abd2b76968e09883203a9e",
+    "rFID": 3.60307312290405,
+    "rFID_independent_sqrtm": 3.603073122905755,
+    "sqrtm_imaginary_max": 0.0,
+    "PSNR": 18.661296319580078,
+    "mean_K": 96.0,
+    "std_K": 46.95373893525414,
+    "min_K": 48,
+    "max_K": 144,
+    "component_training_steps": {
+      "spatial": 21500,
+      "budget": 22500
+    }
+  },
+  "new_U_updates": 1000,
+  "new_budget_feature_updates": 1000
+}

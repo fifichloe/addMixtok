@@ -1,0 +1,39 @@
+{
+  "status": "scope_frozen_before_new_control_quality",
+  "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+  "reconstruction_primary_kind": "long",
+  "primary_reason": "pre-existing full50k lower rFID; short PSNR tradeoff also reported",
+  "independent_of_generation_winner": true,
+  "fixed_K": [
+    0,
+    32,
+    64,
+    96,
+    128,
+    196,
+    256
+  ],
+  "dynamic_target_K": [
+    64,
+    96,
+    128
+  ],
+  "dynamic_limits": [
+    48,
+    144
+  ],
+  "ranking": [
+    "teacher",
+    "random",
+    "uniform",
+    "gradient_entropy"
+  ],
+  "control_seed": 1,
+  "one_selection_and_shuffle_seed": true,
+  "no_new_reconstruction_training_seeds": true,
+  "generation_student_ranking": "separate policies after actual new student acceptance",
+  "B0_free_control": "separate fresh score composition using independently RGB-trained head",
+  "old_top_p_and_legacy_router_excluded": true,
+  "quality_used_for_thresholds": false,
+  "curve": "frozen codec/checkpoint inference curve, not independently trained per-K frontier"
+}

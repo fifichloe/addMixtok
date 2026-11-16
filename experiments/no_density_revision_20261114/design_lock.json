@@ -1,0 +1,36 @@
+{
+  "status": "density_free_component_design_locked",
+  "time": 1794674938.961136,
+  "density_component_removed": true,
+  "teachers": {
+    "short": {
+      "white_direct_weight": 0.5,
+      "gain_weight": 1.0,
+      "cam_weight": 0.5,
+      "utility_weight": 0.3,
+      "selected_policy_name": "full_dynamic96",
+      "threshold": 0.27000892162323,
+      "teacher_policy_sha256": "89d6b60f29f0f08fe94f8ea7231596b167124d659466f4e3d7add9e806909d48",
+      "component_quality_audit_sha256": "8b36315f460cc7c0585f80ba60b915d4754a349215a3943e3e30ed24ba13c2aa"
+    },
+    "long": {
+      "white_direct_weight": 0.5,
+      "gain_weight": 1.0,
+      "cam_weight": 0.75,
+      "utility_weight": 0.9,
+      "selected_policy_name": "full_dynamic96",
+      "threshold": 0.3803865313529968,
+      "teacher_policy_sha256": "1dd267c7735e02eba66d1162df466abd8d09781612fe54b96b4e0ce7ae710c04",
+      "component_quality_audit_sha256": "ce4dbfe68f99f9ed3582047fb4307c1c7c83d152b1cfcd981e3b2f37957bec38"
+    }
+  },
+  "white_decision": "Explicit user instruction retains direct white 0.5 in both teachers",
+  "white_decision_sha256": "bd7140fa19051d2c699ac31db29d81e0c6d2e614598df0dff750e871123b07e4",
+  "density_decision_sha256": "ecaf7df22dadfbdbccbb504b90f7e93a0204e0162a163c662c84a150814f26f8",
+  "policy_replay_audit_sha256": "40ebc1e87ddad10adf2c1a1b77b8e13dd39abe8dfa45d5ab34018c4cca63fa4f",
+  "component_manifest_sha256": "6459f43f6c6fe657ab4e750f598ab07ca6e2312b1c1f0df67aab24fe581f2159",
+  "thresholds_unchanged_from_pre_quality_score_only_calibration": true,
+  "component_choice_informed_by_ablation_quality": true,
+  "training_seed_variability_evaluated": false,
+  "no_automatic_component_deletion": true
+}

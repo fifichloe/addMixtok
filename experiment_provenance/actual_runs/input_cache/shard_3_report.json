@@ -1,0 +1,26 @@
+{
+  "status": "completed",
+  "n": 3000,
+  "shard": 3,
+  "shards": 4,
+  "paths_sha256": "0007c564ce751d770fc4d29bc69abf0d039750052cdc553bf218da878224ad59",
+  "fit": 2704,
+  "held": 296,
+  "source_sha256": {
+    "runtime.py": "00c77d993dda775c227819cc0109897c070f99a38528be00e905e0973e2f990e",
+    "cache_targets.py": "df40ef610473054290c6da0e377f0ba57fd635f1c83cc8316ea981b98a4446d5"
+  },
+  "training_only_uniform_continuous_mask": 0.375,
+  "legacy_score_or_mask_labels_used": false,
+  "Inception_LPIPS_DINO_used": false,
+  "seconds": 130.54615733103128,
+  "peak_GiB": 14.30471658706665,
+  "legacy_router_deleted": true,
+  "old_scores_used": false,
+  "old_masks_used": false,
+  "old_hidden_features_used": false,
+  "all_pretrained_weights_and_buffers_unchanged": true,
+  "usage_only_buffers_detached_during_setup": [
+    "llamagen_vq.quantize.codebook_used"
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "status": "all19_current_reconstruction_masks_and_K_replayed",
+  "kind": "long",
+  "rows": {
+    "teacher_dynamic96": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 96.0,
+      "position_mask_included_in_bpp": true
+    },
+    "rank_uniform": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 96.0,
+      "position_mask_included_in_bpp": true
+    },
+    "rank_random": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 96.0,
+      "position_mask_included_in_bpp": true
+    },
+    "rank_gradient_entropy": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 96.0,
+      "position_mask_included_in_bpp": true
+    },
+    "fixed0": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 0.0,
+      "position_mask_included_in_bpp": true
+    },
+    "fixed32": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 32.0,
+      "position_mask_included_in_bpp": true
+    },
+    "fixed64": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 64.0,
+      "position_mask_included_in_bpp": true
+    },
+    "fixed96": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 96.0,
+      "position_mask_included_in_bpp": true
+    },
+    "fixed128": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 128.0,
+      "position_mask_included_in_bpp": true
+    },
+    "fixed196": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 196.0,
+      "position_mask_included_in_bpp": true
+    },
+    "fixed256": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 256.0,
+      "position_mask_included_in_bpp": true
+    },
+    "dynamic64": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 64.0,
+      "position_mask_included_in_bpp": true
+    },
+    "matched_mean64": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 64.0,
+      "position_mask_included_in_bpp": true
+    },
+    "shuffled64": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 64.0,
+      "position_mask_included_in_bpp": true
+    },
+    "matched_mean96": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 96.0,
+      "position_mask_included_in_bpp": true
+    },
+    "shuffled96": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 96.0,
+      "position_mask_included_in_bpp": true
+    },
+    "dynamic128": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 128.0,
+      "position_mask_included_in_bpp": true
+    },
+    "matched_mean128": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 128.0,
+      "position_mask_included_in_bpp": true
+    },
+    "shuffled128": {
+      "n": 50000,
+      "full_mask_and_K_replay_exact": true,
+      "mean_K": 128.0,
+      "position_mask_included_in_bpp": true
+    }
+  },
+  "protocol_sha256": "7c9fbeca9c09a57dd914e3cf3e98836c690ff77e1f6fdca1b36af10112772ae5",
+  "quality_used": false,
+  "GPU_used": false,
+  "new_reconstruction_seeds": false,
+  "auditor_source_sha256": "7e4a70ab874053ad6cebba15e524200d73d172512cd20ff9e5516fdcb1087e6b",
+  "time": 1794683026.7830515
+}

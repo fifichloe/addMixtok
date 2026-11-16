@@ -1,0 +1,1224 @@
+{
+  "protocol": {
+    "status": "complete",
+    "mode": "generation",
+    "kind": "long",
+    "batch": 1,
+    "warmup": 10,
+    "repeats": 50,
+    "hardware": "NVIDIA GeForce RTX 5090",
+    "physical_GPU": "0",
+    "torch": "2.10.0+cu128",
+    "source_sha256": "54d7cebbe3069c4d42cfcdb10924efebcf72ee0358d6e6ad65df69dad73c64db",
+    "CUDA": "12.8",
+    "cuDNN": 91002,
+    "scope": "Images/labels already on GPU; excludes input disk/PIL, startup, ADM/Inception and all metrics. Includes CPU launch overhead.",
+    "wallclock": "CUDA synchronized wall-clock; components and independent end-to-end are separate passes, alternating pass order.",
+    "TF32": true,
+    "cudnn_benchmark": true,
+    "counted_FLOPs": "PyTorch FlopCounterMode; supported convolution/matmul/attention, 2 FLOPs per MAC. Operator-level count stored.",
+    "FLOPs_limitations": "Normalization, nonlinearities, sorting, thresholding, sampling, transfer and other unsupported operations may not be counted. Zero counted FLOPs does not mean zero computational cost.",
+    "FLOPs_input_scope": "One representative input index0 per budget; its K is reported separately from latency sample mean and actual full50k distributions.",
+    "comparison": "MixTok arXiv Appendix A.8 protocol: class 207, seeds 4..53, one RTX 5090, batch 1, 10 warmups, 50 measurements, median, TF32 enabled, cuDNN benchmarking.",
+    "frozen_fixed_K_diagnostic": false,
+    "no_new_training": true,
+    "pipeline": {
+      "kind": "long",
+      "policy": "learned",
+      "checkpoint": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/maskgit/long_seed0/latest.pt",
+      "checkpoint_sha256": "04a2f5e061fa0ce463755f73e008a620e8e0cce56d429aa21aeb79bfc2c869af",
+      "actual_training_audit": "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/final_execution/long_MaskGIT_training_audit.json",
+      "actual_training_audit_sha256": "3edfc2d7bfeb732e3ae4a20b0c8617f8190774da29abe8d234089b5aa237d484",
+      "router": {
+        "kind": "long",
+        "bundle": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/accepted_long_inference",
+        "model_sha256": "d764d701d86cac6ac2a7e1bff97b97a8d48f9819da36b17274c61935e3a9733d",
+        "weights_sha256": "a687641507933604582097ed8bb9d718aee641d9776c2dad8c4af5c4743d1ab8",
+        "config_sha256": "85df748540a752175b12172139eb14d26c4fb2193dd821b280648e1de04152a2",
+        "threshold": -0.23861974477767944,
+        "utility_weight": 0.9,
+        "minimum_K": 48,
+        "maximum_K": 144,
+        "target_validation_mean_K": 96,
+        "policy": "one forward, scalar U shift, fixed threshold count, stable top K",
+        "scorer_precision": "FP32",
+        "input_feature_precision": "BF16 frozen spatial expansion",
+        "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+        "density_component_removed": true,
+        "white_direct_weight": 0.5
+      },
+      "one_d_audit": {
+        "source_tensors": 391,
+        "loaded_target_tensors": 393,
+        "loaded_target_parameters": 177202432,
+        "new_target_tensors": [
+          "budget_embedding.weight",
+          "embedding_2d.weight",
+          "output_2d.bias",
+          "output_2d.weight",
+          "pos_embedding_2d.weight"
+        ],
+        "new_target_parameters": 25382656,
+        "total_parameters": 202585088,
+        "attention_implementation": "sdpa",
+        "type1_note": "source row is unused by upstream 1D; not pretrained for 2D"
+      },
+      "stage1": {
+        "guidance_scale": 4.5,
+        "guidance_decay": "linear",
+        "randomize_temperature": 9.5,
+        "softmax_temperature_annealing": false,
+        "num_sample_steps": 8
+      },
+      "stage2": {
+        "steps": 8,
+        "cfg_w": 3.0,
+        "temperature": 1.0
+      },
+      "assets": {
+        "top_p_checkpoint": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/continuous_pruned_hf_stage_20260924/top_p_ema_inference_v1_step247482.pt",
+        "top_p_state_key": "model_ema",
+        "top_p_step": 247482,
+        "public_release": false,
+        "source_lineage_verified": true,
+        "top_p_checkpoint_sha256": "61e6e22acf5e4f7dcf44158518e4061a3fc9d6ca481ddc753e97f822546cb819",
+        "top_p_artifact_sha256": "e3806ee8011101a1f6bda002d18f2dd953f99b3dbfdf98d1be3126f1cb85547a",
+        "loaded_tensors": {
+          "latent_decoder": 318,
+          "llamagen_vq": 343
+        },
+        "native_titok_checkpoint": "/home/heyefei/lichenge/1d-tokenizer/tokenizer_titok_l32.bin",
+        "native_titok_sha256": "b8f0bf61e9ee1791d8b76fa723bdcb2c85a039a7d027e597f685db492935c31f",
+        "native_titok_tensors": 692,
+        "k_selector_weights_loaded": false
+      },
+      "adapter_sha256": "52aeca25d6d5a44d34e294457f38971cee1f3a2e71ef7e092aec37b349967aad",
+      "parameters": {
+        "stage1_generator": {
+          "parameters": 177202432,
+          "fresh_unique_parameters": 177202432,
+          "trainable_at_inference": 0
+        },
+        "stage2_halton": {
+          "parameters": 142224641,
+          "fresh_unique_parameters": 142224641,
+          "trainable_at_inference": 0
+        },
+        "spatial_expansion": {
+          "parameters": 305315328,
+          "fresh_unique_parameters": 305315328,
+          "trainable_at_inference": 0
+        },
+        "one_d_codebook": {
+          "parameters": 49152,
+          "fresh_unique_parameters": 49152,
+          "trainable_at_inference": 0
+        },
+        "local_CNN": {
+          "parameters": 509313,
+          "fresh_unique_parameters": 509313,
+          "trainable_at_inference": 0
+        },
+        "budget_CNN_and_offset": {
+          "parameters": 525697,
+          "fresh_unique_parameters": 525697,
+          "trainable_at_inference": 0
+        },
+        "context_adapter": {
+          "parameters": 673024,
+          "fresh_unique_parameters": 673024,
+          "trainable_at_inference": 0
+        },
+        "local_codebook_projection": {
+          "parameters": 133376,
+          "fresh_unique_parameters": 133376,
+          "trainable_at_inference": 0
+        },
+        "shared_rgb_decoder": {
+          "parameters": 42449795,
+          "fresh_unique_parameters": 42449795,
+          "trainable_at_inference": 0
+        },
+        "total_unique_parameters": 669082758
+      },
+      "source_sha256": {
+        "/home/heyefei/lichenge/paper/experiments/long_generation_speed_paper_protocol_20261115/generation_runtime.py": "339ceecc1c96fe1ce3e671cc0460cc679b21ebacc612b2191322337c93b70e5c",
+        "/home/heyefei/lichenge/paper/experiments/new_router_efficiency_20261114/profile_components.py": "0fa3639149365da4eb42227dbfed735d7bd2bfd6b3b9ab3d9a57effbeb13a31d",
+        "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/maskgit/common.py": "4f13723c616b3d222ffb12b232720da6631218fa6bd44bd5d05db9cfd8a8532f",
+        "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/generation_eval/worker.py": "105ff49e24c5a208a879bfcf0ae470ffbedbc6cd677504e2ed5f52e936188b58",
+        "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/independent_controls/eval_worker.py": "c20eda2ffb1811c83edd34fe78c6287da79d613bf07fd42f89a0ccef98225662",
+        "/home/heyefei/lichenge/MixTok-Official/generation/experiments/continuous_halton_embedding_20260923/continuous_halton.py": "4482445724b581671d5b6caa31703a0cca8ae9593265ea3ff58a9913718c7458",
+        "/home/heyefei/lichenge/MixTok-Official/generation/experiments/continuous_halton_embedding_20260923/adapter_data.py": "a4e9415d822f66e47c4b65197c975e8554aece5244fecd1dd80e42c0d6f95b75",
+        "/home/heyefei/lichenge/MixTok-Official/generation/experiments/continuous_halton_embedding_20260923/embedding_adapter.py": "6ad14e01c42e1861958bf90edc6ba238deb2727a9cb82e0dc9fccf3dd56192da"
+      },
+      "precision": "BF16 stage1/stage2/adapter; FP32 adapter expansion; separate BF16 router expansion; FP32 scorer/projection/decoder; TF32off",
+      "additional_models_at_inference": "None; no B0, DINO, LPIPS, Inception or quality evaluator",
+      "base_rgb_control_decode_included": false,
+      "inputs": "Batch1, ImageNet class207, torch seeds4..53; arXiv A.8 timing cohort, not the full50k quality batch plan",
+      "endpoint_scope": "Frozen checkpoint fixed-K diagnostics retain routing/adapter/both expansions; no optimized K0 bypass",
+      "inference_policy": "current learned dynamic or specified fixed-K diagnostic",
+      "checkpoint_variant": "main",
+      "policy_file_sha256": null,
+      "actual_control_training_identity": null,
+      "no_new_training_or_budget_calibration": true
+    },
+    "deployment_audit": {
+      "split_scorer_matches_exported_current_student_exactly": true,
+      "actual_control_selection_function_replayed": true,
+      "finite_RGB": true,
+      "no_GT_or_2d_inputs": true,
+      "final_RGB_only_decode": true
+    }
+  },
+  "results": {
+    "dynamic": {
+      "latency_status": "complete",
+      "FLOPs_status": "complete",
+      "mean_K": 92.2,
+      "e2e_median_ms": 250.96505240071565,
+      "e2e_mean_ms": 250.97958338446915,
+      "e2e_std_ms": 0.29556532782319567,
+      "e2e_p90_ms": 251.3575734803453,
+      "component_median_ms": {
+        "stage1_generation": 145.1553559745662,
+        "base_expansion_FP32_for_adapter_and_render": 5.707259522750974,
+        "separate_base_expansion_BF16_for_router": 7.681566057726741,
+        "generation_local_ranking_CNN": 0.4031654680147767,
+        "generation_budget_feature_CNN": 0.3033254761248827,
+        "generation_image_utility_head": 0.1941679511219263,
+        "generation_score_combination": 0.032618991099298,
+        "threshold_and_single_final_selection": 0.16709702322259545,
+        "context_embedding_adapter": 0.3347524907439947,
+        "stage2_generation": 82.98899699002504,
+        "local_codebook_projection_and_mixing": 0.3476609708741307,
+        "final_rgb_decoder": 7.7922490308992565
+      },
+      "FLOPs": {
+        "K": 144,
+        "components": {
+          "stage1_generation": 172394864640,
+          "base_expansion_FP32_for_adapter_and_render": 184137121792,
+          "separate_base_expansion_BF16_for_router": 184137121792,
+          "generation_local_ranking_CNN": 243335168,
+          "generation_budget_feature_CNN": 243269632,
+          "generation_image_utility_head": 32896,
+          "generation_score_combination": 0,
+          "threshold_and_single_final_selection": 0,
+          "context_embedding_adapter": 343932928,
+          "stage2_generation": 841942106112,
+          "local_codebook_projection_and_mixing": 589824,
+          "final_rgb_decoder": 252715204608
+        },
+        "operator_counts": {
+          "stage1_generation": {
+            "aten.addmm": 171190517760,
+            "aten._scaled_dot_product_flash_attention": 1204346880
+          },
+          "base_expansion_FP32_for_adapter_and_render": {
+            "aten.bmm": 786432,
+            "aten.addmm": 174550155264,
+            "aten._scaled_dot_product_efficient_attention": 8210448384,
+            "aten.convolution": 1375731712
+          },
+          "separate_base_expansion_BF16_for_router": {
+            "aten.bmm": 786432,
+            "aten.addmm": 174550155264,
+            "aten._scaled_dot_product_flash_attention": 8210448384,
+            "aten.convolution": 1375731712
+          },
+          "generation_local_ranking_CNN": {
+            "aten.convolution": 243335168
+          },
+          "generation_budget_feature_CNN": {
+            "aten.convolution": 243269632
+          },
+          "generation_image_utility_head": {
+            "aten.addmm": 32896
+          },
+          "generation_score_combination": {},
+          "threshold_and_single_final_selection": {},
+          "context_embedding_adapter": {
+            "aten.convolution": 343932928
+          },
+          "stage2_generation": {
+            "aten.addmm": 104482209792,
+            "aten.mm": 698502610944,
+            "aten._scaled_dot_product_flash_attention": 38957285376
+          },
+          "local_codebook_projection_and_mixing": {
+            "aten.convolution": 589824
+          },
+          "final_rgb_decoder": {
+            "aten.convolution": 252178333696,
+            "aten.bmm": 536870912
+          }
+        },
+        "total": 1636157579392
+      },
+      "memory": {
+        "peak_allocated_GiB": 4.134737014770508,
+        "peak_reserved_GiB": 4.53125
+      },
+      "rows": [
+        {
+          "input_index": 0,
+          "K": 144,
+          "e2e_ms": 250.5535570671782,
+          "components_ms": {
+            "stage1_generation": 144.89270001649857,
+            "base_expansion_FP32_for_adapter_and_render": 5.6897790636867285,
+            "separate_base_expansion_BF16_for_router": 7.639992982149124,
+            "generation_local_ranking_CNN": 0.40187500417232513,
+            "generation_budget_feature_CNN": 0.3134600119665265,
+            "generation_image_utility_head": 0.19254698418080807,
+            "generation_score_combination": 0.03233901225030422,
+            "threshold_and_single_final_selection": 0.1671239733695984,
+            "context_embedding_adapter": 0.34315092489123344,
+            "stage2_generation": 82.96145091298968,
+            "local_codebook_projection_and_mixing": 0.34488202072679996,
+            "final_rgb_decoder": 7.767613977193832
+          }
+        },
+        {
+          "input_index": 1,
+          "K": 48,
+          "e2e_ms": 250.86972303688526,
+          "components_ms": {
+            "stage1_generation": 145.16939804889262,
+            "base_expansion_FP32_for_adapter_and_render": 5.698926048353314,
+            "separate_base_expansion_BF16_for_router": 7.6760470401495695,
+            "generation_local_ranking_CNN": 0.41063595563173294,
+            "generation_budget_feature_CNN": 0.3010840155184269,
+            "generation_image_utility_head": 0.19521208014339209,
+            "generation_score_combination": 0.03287196159362793,
+            "threshold_and_single_final_selection": 0.16707496251910925,
+            "context_embedding_adapter": 0.331729999743402,
+            "stage2_generation": 83.16036593168974,
+            "local_codebook_projection_and_mixing": 0.3543091006577015,
+            "final_rgb_decoder": 7.790814968757331
+          }
+        },
+        {
+          "input_index": 2,
+          "K": 110,
+          "e2e_ms": 251.217893906869,
+          "components_ms": {
+            "stage1_generation": 145.52891696803272,
+            "base_expansion_FP32_for_adapter_and_render": 5.701218964532018,
+            "separate_base_expansion_BF16_for_router": 7.707035052590072,
+            "generation_local_ranking_CNN": 0.4036598838865757,
+            "generation_budget_feature_CNN": 0.2978730481117964,
+            "generation_image_utility_head": 0.20121096167713404,
+            "generation_score_combination": 0.03243901301175356,
+            "threshold_and_single_final_selection": 0.1667479518800974,
+            "context_embedding_adapter": 0.32781402114778757,
+            "stage2_generation": 82.95494492631406,
+            "local_codebook_projection_and_mixing": 0.36260695196688175,
+            "final_rgb_decoder": 7.786402944475412
+          }
+        },
+        {
+          "input_index": 3,
+          "K": 48,
+          "e2e_ms": 250.4521900555119,
+          "components_ms": {
+            "stage1_generation": 145.27305902447551,
+            "base_expansion_FP32_for_adapter_and_render": 5.707071046344936,
+            "separate_base_expansion_BF16_for_router": 7.686806027777493,
+            "generation_local_ranking_CNN": 0.40978705510497093,
+            "generation_budget_feature_CNN": 0.2990179928019643,
+            "generation_image_utility_head": 0.194221967831254,
+            "generation_score_combination": 0.03314507193863392,
+            "threshold_and_single_final_selection": 0.1643860014155507,
+            "context_embedding_adapter": 0.33590197563171387,
+            "stage2_generation": 82.98802596982569,
+            "local_codebook_projection_and_mixing": 0.3379150293767452,
+            "final_rgb_decoder": 7.783181965351105
+          }
+        },
+        {
+          "input_index": 4,
+          "K": 144,
+          "e2e_ms": 251.1976109817624,
+          "components_ms": {
+            "stage1_generation": 145.21996793337166,
+            "base_expansion_FP32_for_adapter_and_render": 5.719712004065514,
+            "separate_base_expansion_BF16_for_router": 7.703140028752387,
+            "generation_local_ranking_CNN": 0.4013030556961894,
+            "generation_budget_feature_CNN": 0.30684692319482565,
+            "generation_image_utility_head": 0.19180192612111568,
+            "generation_score_combination": 0.03263994585722685,
+            "threshold_and_single_final_selection": 0.16637693624943495,
+            "context_embedding_adapter": 0.3444399917498231,
+            "stage2_generation": 83.02202401682734,
+            "local_codebook_projection_and_mixing": 0.342154991813004,
+            "final_rgb_decoder": 7.7981529757380486
+          }
+        },
+        {
+          "input_index": 5,
+          "K": 48,
+          "e2e_ms": 250.4572479519993,
+          "components_ms": {
+            "stage1_generation": 144.8884130222723,
+            "base_expansion_FP32_for_adapter_and_render": 5.701855989173055,
+            "separate_base_expansion_BF16_for_router": 7.678792928345501,
+            "generation_local_ranking_CNN": 0.40967599488794804,
+            "generation_budget_feature_CNN": 0.299256993457675,
+            "generation_image_utility_head": 0.1924100797623396,
+            "generation_score_combination": 0.03279093652963638,
+            "threshold_and_single_final_selection": 0.16765797045081854,
+            "context_embedding_adapter": 0.3338810056447983,
+            "stage2_generation": 84.8457079846412,
+            "local_codebook_projection_and_mixing": 0.4514789907261729,
+            "final_rgb_decoder": 7.989812991581857
+          }
+        },
+        {
+          "input_index": 6,
+          "K": 144,
+          "e2e_ms": 251.46473001223058,
+          "components_ms": {
+            "stage1_generation": 145.26501297950745,
+            "base_expansion_FP32_for_adapter_and_render": 5.828881054185331,
+            "separate_base_expansion_BF16_for_router": 7.676997920498252,
+            "generation_local_ranking_CNN": 0.4191810730844736,
+            "generation_budget_feature_CNN": 0.3131639678031206,
+            "generation_image_utility_head": 0.2097940305247903,
+            "generation_score_combination": 0.032773008570075035,
+            "threshold_and_single_final_selection": 0.17750496044754982,
+            "context_embedding_adapter": 0.3501760074868798,
+            "stage2_generation": 83.18771095946431,
+            "local_codebook_projection_and_mixing": 0.3451280063018203,
+            "final_rgb_decoder": 7.7919530449435115
+          }
+        },
+        {
+          "input_index": 7,
+          "K": 144,
+          "e2e_ms": 251.23909499961883,
+          "components_ms": {
+            "stage1_generation": 145.40870394557714,
+            "base_expansion_FP32_for_adapter_and_render": 5.703904898837209,
+            "separate_base_expansion_BF16_for_router": 7.708527962677181,
+            "generation_local_ranking_CNN": 0.3980459878221154,
+            "generation_budget_feature_CNN": 0.2994070528075099,
+            "generation_image_utility_head": 0.2148530911654234,
+            "generation_score_combination": 0.033488962799310684,
+            "threshold_and_single_final_selection": 0.16693305224180222,
+            "context_embedding_adapter": 0.33502804581075907,
+            "stage2_generation": 83.10105802956969,
+            "local_codebook_projection_and_mixing": 0.34465896897017956,
+            "final_rgb_decoder": 7.797262049280107
+          }
+        },
+        {
+          "input_index": 8,
+          "K": 144,
+          "e2e_ms": 250.62071299180388,
+          "components_ms": {
+            "stage1_generation": 144.95499001350254,
+            "base_expansion_FP32_for_adapter_and_render": 5.721210967749357,
+            "separate_base_expansion_BF16_for_router": 7.665822980925441,
+            "generation_local_ranking_CNN": 0.4060689825564623,
+            "generation_budget_feature_CNN": 0.30578102450817823,
+            "generation_image_utility_head": 0.19121402874588966,
+            "generation_score_combination": 0.032139942049980164,
+            "threshold_and_single_final_selection": 0.1674590166658163,
+            "context_embedding_adapter": 0.3299799282103777,
+            "stage2_generation": 82.98066700808704,
+            "local_codebook_projection_and_mixing": 0.34472893457859755,
+            "final_rgb_decoder": 7.801629952155054
+          }
+        },
+        {
+          "input_index": 9,
+          "K": 48,
+          "e2e_ms": 250.51344593521208,
+          "components_ms": {
+            "stage1_generation": 144.87369498237967,
+            "base_expansion_FP32_for_adapter_and_render": 5.693872109986842,
+            "separate_base_expansion_BF16_for_router": 7.688991958275437,
+            "generation_local_ranking_CNN": 0.4072070587426424,
+            "generation_budget_feature_CNN": 0.3139630425721407,
+            "generation_image_utility_head": 0.19497901666909456,
+            "generation_score_combination": 0.03229198046028614,
+            "threshold_and_single_final_selection": 0.16637390945106745,
+            "context_embedding_adapter": 0.3391579957678914,
+            "stage2_generation": 82.97951798886061,
+            "local_codebook_projection_and_mixing": 0.3487310605123639,
+            "final_rgb_decoder": 7.809661910869181
+          }
+        },
+        {
+          "input_index": 10,
+          "K": 48,
+          "e2e_ms": 250.82213792484254,
+          "components_ms": {
+            "stage1_generation": 144.94918496347964,
+            "base_expansion_FP32_for_adapter_and_render": 5.7074479991570115,
+            "separate_base_expansion_BF16_for_router": 7.685751072131097,
+            "generation_local_ranking_CNN": 0.40444894693791866,
+            "generation_budget_feature_CNN": 0.30203606002032757,
+            "generation_image_utility_head": 0.19332999363541603,
+            "generation_score_combination": 0.040226965211331844,
+            "threshold_and_single_final_selection": 0.16777298878878355,
+            "context_embedding_adapter": 0.33124606125056744,
+            "stage2_generation": 83.12686195131391,
+            "local_codebook_projection_and_mixing": 0.36170799285173416,
+            "final_rgb_decoder": 7.799068000167608
+          }
+        },
+        {
+          "input_index": 11,
+          "K": 48,
+          "e2e_ms": 251.15254893898964,
+          "components_ms": {
+            "stage1_generation": 145.09499806445092,
+            "base_expansion_FP32_for_adapter_and_render": 5.700770067051053,
+            "separate_base_expansion_BF16_for_router": 7.694004918448627,
+            "generation_local_ranking_CNN": 0.4079529317095876,
+            "generation_budget_feature_CNN": 0.3034620312973857,
+            "generation_image_utility_head": 0.19233697094023228,
+            "generation_score_combination": 0.032727024517953396,
+            "threshold_and_single_final_selection": 0.17563498113304377,
+            "context_embedding_adapter": 0.33160403836518526,
+            "stage2_generation": 83.85347900912166,
+            "local_codebook_projection_and_mixing": 0.3801260609179735,
+            "final_rgb_decoder": 7.8210089122876525
+          }
+        },
+        {
+          "input_index": 12,
+          "K": 54,
+          "e2e_ms": 251.30814197473228,
+          "components_ms": {
+            "stage1_generation": 145.5500249285251,
+            "base_expansion_FP32_for_adapter_and_render": 5.734828999266028,
+            "separate_base_expansion_BF16_for_router": 7.729870034381747,
+            "generation_local_ranking_CNN": 0.40443800389766693,
+            "generation_budget_feature_CNN": 0.2960929414257407,
+            "generation_image_utility_head": 0.20947202574461699,
+            "generation_score_combination": 0.032566022127866745,
+            "threshold_and_single_final_selection": 0.17383298836648464,
+            "context_embedding_adapter": 0.34174195025116205,
+            "stage2_generation": 83.18561792839319,
+            "local_codebook_projection_and_mixing": 4.283243091776967,
+            "final_rgb_decoder": 8.55087791569531
+          }
+        },
+        {
+          "input_index": 13,
+          "K": 144,
+          "e2e_ms": 251.17870792746544,
+          "components_ms": {
+            "stage1_generation": 145.33180510625243,
+            "base_expansion_FP32_for_adapter_and_render": 5.705668940208852,
+            "separate_base_expansion_BF16_for_router": 7.718629902228713,
+            "generation_local_ranking_CNN": 0.4014880396425724,
+            "generation_budget_feature_CNN": 0.3052030224353075,
+            "generation_image_utility_head": 0.19366806373000145,
+            "generation_score_combination": 0.03561493940651417,
+            "threshold_and_single_final_selection": 0.1661930000409484,
+            "context_embedding_adapter": 0.3430979559198022,
+            "stage2_generation": 83.1647269660607,
+            "local_codebook_projection_and_mixing": 0.34237303771078587,
+            "final_rgb_decoder": 7.813671953044832
+          }
+        },
+        {
+          "input_index": 14,
+          "K": 48,
+          "e2e_ms": 250.95781090203673,
+          "components_ms": {
+            "stage1_generation": 145.1538479886949,
+            "base_expansion_FP32_for_adapter_and_render": 5.709230084903538,
+            "separate_base_expansion_BF16_for_router": 7.665422977879643,
+            "generation_local_ranking_CNN": 0.4026710521429777,
+            "generation_budget_feature_CNN": 0.30587404035031796,
+            "generation_image_utility_head": 0.19138690549880266,
+            "generation_score_combination": 0.032905954867601395,
+            "threshold_and_single_final_selection": 0.16583502292633057,
+            "context_embedding_adapter": 0.3422970185056329,
+            "stage2_generation": 83.22254591621459,
+            "local_codebook_projection_and_mixing": 0.34313404466956854,
+            "final_rgb_decoder": 7.773328106850386
+          }
+        },
+        {
+          "input_index": 15,
+          "K": 144,
+          "e2e_ms": 250.9174000006169,
+          "components_ms": {
+            "stage1_generation": 144.57721705548465,
+            "base_expansion_FP32_for_adapter_and_render": 5.70355704985559,
+            "separate_base_expansion_BF16_for_router": 7.680749054998159,
+            "generation_local_ranking_CNN": 0.4122259560972452,
+            "generation_budget_feature_CNN": 0.2987409243360162,
+            "generation_image_utility_head": 0.1944960094988346,
+            "generation_score_combination": 0.03248103894293308,
+            "threshold_and_single_final_selection": 0.17642404418438673,
+            "context_embedding_adapter": 0.3360109403729439,
+            "stage2_generation": 82.96284801326692,
+            "local_codebook_projection_and_mixing": 0.3446259070187807,
+            "final_rgb_decoder": 7.809433038346469
+          }
+        },
+        {
+          "input_index": 16,
+          "K": 78,
+          "e2e_ms": 251.48149696178734,
+          "components_ms": {
+            "stage1_generation": 144.8713269783184,
+            "base_expansion_FP32_for_adapter_and_render": 5.71517099160701,
+            "separate_base_expansion_BF16_for_router": 7.669677026569843,
+            "generation_local_ranking_CNN": 0.39716693572700024,
+            "generation_budget_feature_CNN": 0.30600791797041893,
+            "generation_image_utility_head": 0.19385397899895906,
+            "generation_score_combination": 0.032255076803267,
+            "threshold_and_single_final_selection": 0.16679195687174797,
+            "context_embedding_adapter": 0.3295110072940588,
+            "stage2_generation": 83.31820101011544,
+            "local_codebook_projection_and_mixing": 4.384026979096234,
+            "final_rgb_decoder": 8.575369021855295
+          }
+        },
+        {
+          "input_index": 17,
+          "K": 144,
+          "e2e_ms": 251.14780094008893,
+          "components_ms": {
+            "stage1_generation": 144.92908690590411,
+            "base_expansion_FP32_for_adapter_and_render": 5.720859975554049,
+            "separate_base_expansion_BF16_for_router": 7.693831925280392,
+            "generation_local_ranking_CNN": 0.40659611113369465,
+            "generation_budget_feature_CNN": 0.3029709914699197,
+            "generation_image_utility_head": 0.19169703591614962,
+            "generation_score_combination": 0.032198033295571804,
+            "threshold_and_single_final_selection": 0.16682292334735394,
+            "context_embedding_adapter": 0.3359150141477585,
+            "stage2_generation": 82.89340196643025,
+            "local_codebook_projection_and_mixing": 0.3410039935261011,
+            "final_rgb_decoder": 7.787390961311758
+          }
+        },
+        {
+          "input_index": 18,
+          "K": 48,
+          "e2e_ms": 251.1748899705708,
+          "components_ms": {
+            "stage1_generation": 145.2664009993896,
+            "base_expansion_FP32_for_adapter_and_render": 5.706788040697575,
+            "separate_base_expansion_BF16_for_router": 7.682356052100658,
+            "generation_local_ranking_CNN": 0.39950700011104345,
+            "generation_budget_feature_CNN": 0.30859000980854034,
+            "generation_image_utility_head": 0.1917419722303748,
+            "generation_score_combination": 0.0323540298268199,
+            "threshold_and_single_final_selection": 0.1701459987089038,
+            "context_embedding_adapter": 0.3371299244463444,
+            "stage2_generation": 83.1072690198198,
+            "local_codebook_projection_and_mixing": 0.3431770019233227,
+            "final_rgb_decoder": 7.778743980452418
+          }
+        },
+        {
+          "input_index": 19,
+          "K": 48,
+          "e2e_ms": 250.71350706275553,
+          "components_ms": {
+            "stage1_generation": 144.81002499815077,
+            "base_expansion_FP32_for_adapter_and_render": 5.705913994461298,
+            "separate_base_expansion_BF16_for_router": 7.644354016520083,
+            "generation_local_ranking_CNN": 0.40229898877441883,
+            "generation_budget_feature_CNN": 0.2978580305352807,
+            "generation_image_utility_head": 0.19228598102927208,
+            "generation_score_combination": 0.035559991374611855,
+            "threshold_and_single_final_selection": 0.17296301666647196,
+            "context_embedding_adapter": 0.3288370789960027,
+            "stage2_generation": 83.2104969304055,
+            "local_codebook_projection_and_mixing": 0.3479339648038149,
+            "final_rgb_decoder": 7.810832932591438
+          }
+        },
+        {
+          "input_index": 20,
+          "K": 48,
+          "e2e_ms": 250.87825790978968,
+          "components_ms": {
+            "stage1_generation": 145.0119960354641,
+            "base_expansion_FP32_for_adapter_and_render": 5.710562923923135,
+            "separate_base_expansion_BF16_for_router": 7.689508958719671,
+            "generation_local_ranking_CNN": 0.4089120775461197,
+            "generation_budget_feature_CNN": 0.3089680103585124,
+            "generation_image_utility_head": 0.1911359140649438,
+            "generation_score_combination": 0.033149030059576035,
+            "threshold_and_single_final_selection": 0.1647809986025095,
+            "context_embedding_adapter": 0.3393650986254215,
+            "stage2_generation": 83.00575392786413,
+            "local_codebook_projection_and_mixing": 0.34334894735366106,
+            "final_rgb_decoder": 7.812684983946383
+          }
+        },
+        {
+          "input_index": 21,
+          "K": 48,
+          "e2e_ms": 250.63126801978797,
+          "components_ms": {
+            "stage1_generation": 145.414098049514,
+            "base_expansion_FP32_for_adapter_and_render": 5.708170938305557,
+            "separate_base_expansion_BF16_for_router": 7.7030479442328215,
+            "generation_local_ranking_CNN": 0.40130410343408585,
+            "generation_budget_feature_CNN": 0.3065100172534585,
+            "generation_image_utility_head": 0.19566703122109175,
+            "generation_score_combination": 0.03319396637380123,
+            "threshold_and_single_final_selection": 0.17203704919666052,
+            "context_embedding_adapter": 0.32571295741945505,
+            "stage2_generation": 83.01320392638445,
+            "local_codebook_projection_and_mixing": 0.34045299980789423,
+            "final_rgb_decoder": 7.779396022669971
+          }
+        },
+        {
+          "input_index": 22,
+          "K": 144,
+          "e2e_ms": 250.64295309130102,
+          "components_ms": {
+            "stage1_generation": 144.63601692114025,
+            "base_expansion_FP32_for_adapter_and_render": 5.709162098355591,
+            "separate_base_expansion_BF16_for_router": 7.646600948646665,
+            "generation_local_ranking_CNN": 0.3986500669270754,
+            "generation_budget_feature_CNN": 0.3213080344721675,
+            "generation_image_utility_head": 0.19552302546799183,
+            "generation_score_combination": 0.03300607204437256,
+            "threshold_and_single_final_selection": 0.16669207252562046,
+            "context_embedding_adapter": 0.3576219314709306,
+            "stage2_generation": 82.9012020258233,
+            "local_codebook_projection_and_mixing": 0.3441170556470752,
+            "final_rgb_decoder": 7.784039014950395
+          }
+        },
+        {
+          "input_index": 23,
+          "K": 144,
+          "e2e_ms": 251.49042101111263,
+          "components_ms": {
+            "stage1_generation": 145.16759698744863,
+            "base_expansion_FP32_for_adapter_and_render": 5.7163049932569265,
+            "separate_base_expansion_BF16_for_router": 7.694564992561936,
+            "generation_local_ranking_CNN": 0.40078407619148493,
+            "generation_budget_feature_CNN": 0.31040702015161514,
+            "generation_image_utility_head": 0.19354198593646288,
+            "generation_score_combination": 0.032596057280898094,
+            "threshold_and_single_final_selection": 0.16906100790947676,
+            "context_embedding_adapter": 0.34854502882808447,
+            "stage2_generation": 83.19276303518564,
+            "local_codebook_projection_and_mixing": 0.3579349722713232,
+            "final_rgb_decoder": 7.8146320302039385
+          }
+        },
+        {
+          "input_index": 24,
+          "K": 144,
+          "e2e_ms": 250.65759592689574,
+          "components_ms": {
+            "stage1_generation": 145.10466996580362,
+            "base_expansion_FP32_for_adapter_and_render": 5.698548979125917,
+            "separate_base_expansion_BF16_for_router": 7.695346954278648,
+            "generation_local_ranking_CNN": 0.41260605212301016,
+            "generation_budget_feature_CNN": 0.303893000818789,
+            "generation_image_utility_head": 0.19283895380795002,
+            "generation_score_combination": 0.03164890222251415,
+            "threshold_and_single_final_selection": 0.16724900342524052,
+            "context_embedding_adapter": 0.331277959048748,
+            "stage2_generation": 82.90391007903963,
+            "local_codebook_projection_and_mixing": 0.34536898601800203,
+            "final_rgb_decoder": 7.7931120758876204
+          }
+        },
+        {
+          "input_index": 25,
+          "K": 48,
+          "e2e_ms": 250.94423699192703,
+          "components_ms": {
+            "stage1_generation": 144.8908990714699,
+            "base_expansion_FP32_for_adapter_and_render": 5.7086009765043855,
+            "separate_base_expansion_BF16_for_router": 7.680776063352823,
+            "generation_local_ranking_CNN": 0.3984019858762622,
+            "generation_budget_feature_CNN": 0.3001920413225889,
+            "generation_image_utility_head": 0.1941139344125986,
+            "generation_score_combination": 0.03182399086654186,
+            "threshold_and_single_final_selection": 0.1652430510148406,
+            "context_embedding_adapter": 0.33635098952800035,
+            "stage2_generation": 82.98426098190248,
+            "local_codebook_projection_and_mixing": 0.34654606133699417,
+            "final_rgb_decoder": 7.803726010024548
+          }
+        },
+        {
+          "input_index": 26,
+          "K": 144,
+          "e2e_ms": 250.6343510467559,
+          "components_ms": {
+            "stage1_generation": 145.09329700376838,
+            "base_expansion_FP32_for_adapter_and_render": 5.72140293661505,
+            "separate_base_expansion_BF16_for_router": 7.677394081838429,
+            "generation_local_ranking_CNN": 0.3964909119531512,
+            "generation_budget_feature_CNN": 0.30033302027732134,
+            "generation_image_utility_head": 0.19821804016828537,
+            "generation_score_combination": 0.033190008252859116,
+            "threshold_and_single_final_selection": 0.16957300249487162,
+            "context_embedding_adapter": 0.3321219701319933,
+            "stage2_generation": 82.73985201958567,
+            "local_codebook_projection_and_mixing": 0.3528490196913481,
+            "final_rgb_decoder": 7.795921992510557
+          }
+        },
+        {
+          "input_index": 27,
+          "K": 144,
+          "e2e_ms": 251.26963295042515,
+          "components_ms": {
+            "stage1_generation": 144.74899496417493,
+            "base_expansion_FP32_for_adapter_and_render": 5.701977992430329,
+            "separate_base_expansion_BF16_for_router": 7.696858956478536,
+            "generation_local_ranking_CNN": 0.40765595622360706,
+            "generation_budget_feature_CNN": 0.3093349514529109,
+            "generation_image_utility_head": 0.19557704217731953,
+            "generation_score_combination": 0.03228604327887297,
+            "threshold_and_single_final_selection": 0.1652330392971635,
+            "context_embedding_adapter": 0.3326449077576399,
+            "stage2_generation": 82.8103789826855,
+            "local_codebook_projection_and_mixing": 0.3490149974822998,
+            "final_rgb_decoder": 7.787094102241099
+          }
+        },
+        {
+          "input_index": 28,
+          "K": 144,
+          "e2e_ms": 250.75973593629897,
+          "components_ms": {
+            "stage1_generation": 145.19544003996998,
+            "base_expansion_FP32_for_adapter_and_render": 5.7152899680659175,
+            "separate_base_expansion_BF16_for_router": 7.650765008293092,
+            "generation_local_ranking_CNN": 0.4065240500494838,
+            "generation_budget_feature_CNN": 0.2951479982584715,
+            "generation_image_utility_head": 0.1919930800795555,
+            "generation_score_combination": 0.03215903416275978,
+            "threshold_and_single_final_selection": 0.17379899509251118,
+            "context_embedding_adapter": 0.3253889735788107,
+            "stage2_generation": 82.98394992016256,
+            "local_codebook_projection_and_mixing": 0.3439299762248993,
+            "final_rgb_decoder": 7.791153970174491
+          }
+        },
+        {
+          "input_index": 29,
+          "K": 144,
+          "e2e_ms": 250.58642798103392,
+          "components_ms": {
+            "stage1_generation": 145.2834620140493,
+            "base_expansion_FP32_for_adapter_and_render": 5.715232924558222,
+            "separate_base_expansion_BF16_for_router": 7.716830936260521,
+            "generation_local_ranking_CNN": 0.4001969937235117,
+            "generation_budget_feature_CNN": 0.30454492662101984,
+            "generation_image_utility_head": 0.20031596068292856,
+            "generation_score_combination": 0.03245694097131491,
+            "threshold_and_single_final_selection": 0.16730604693293571,
+            "context_embedding_adapter": 0.333737931214273,
+            "stage2_generation": 82.66931504476815,
+            "local_codebook_projection_and_mixing": 0.3456861013546586,
+            "final_rgb_decoder": 7.768734940327704
+          }
+        },
+        {
+          "input_index": 30,
+          "K": 48,
+          "e2e_ms": 251.3936139876023,
+          "components_ms": {
+            "stage1_generation": 145.25548205710948,
+            "base_expansion_FP32_for_adapter_and_render": 5.703009897843003,
+            "separate_base_expansion_BF16_for_router": 7.6653530122712255,
+            "generation_local_ranking_CNN": 0.4093529423698783,
+            "generation_budget_feature_CNN": 0.2993029775097966,
+            "generation_image_utility_head": 0.19674398936331272,
+            "generation_score_combination": 0.03290106542408466,
+            "threshold_and_single_final_selection": 0.16733398661017418,
+            "context_embedding_adapter": 0.3439940046519041,
+            "stage2_generation": 82.92915299534798,
+            "local_codebook_projection_and_mixing": 0.35305600613355637,
+            "final_rgb_decoder": 7.790057919919491
+          }
+        },
+        {
+          "input_index": 31,
+          "K": 48,
+          "e2e_ms": 251.24412297736853,
+          "components_ms": {
+            "stage1_generation": 145.22941096220165,
+            "base_expansion_FP32_for_adapter_and_render": 5.70906896609813,
+            "separate_base_expansion_BF16_for_router": 7.6450909255072474,
+            "generation_local_ranking_CNN": 0.4045480163767934,
+            "generation_budget_feature_CNN": 0.3101159818470478,
+            "generation_image_utility_head": 0.2014109632000327,
+            "generation_score_combination": 0.033269054256379604,
+            "threshold_and_single_final_selection": 0.16475794836878777,
+            "context_embedding_adapter": 0.3279830561950803,
+            "stage2_generation": 83.0942130414769,
+            "local_codebook_projection_and_mixing": 0.3507679793983698,
+            "final_rgb_decoder": 7.790611009113491
+          }
+        },
+        {
+          "input_index": 32,
+          "K": 48,
+          "e2e_ms": 251.09122006688267,
+          "components_ms": {
+            "stage1_generation": 145.07095608860254,
+            "base_expansion_FP32_for_adapter_and_render": 5.694837891496718,
+            "separate_base_expansion_BF16_for_router": 7.638738956302404,
+            "generation_local_ranking_CNN": 0.4091419978067279,
+            "generation_budget_feature_CNN": 0.29845000244677067,
+            "generation_image_utility_head": 0.19102392252534628,
+            "generation_score_combination": 0.03259803634136915,
+            "threshold_and_single_final_selection": 0.1727859489619732,
+            "context_embedding_adapter": 0.32992393244057894,
+            "stage2_generation": 82.76790496893227,
+            "local_codebook_projection_and_mixing": 0.3446890041232109,
+            "final_rgb_decoder": 7.7925450168550014
+          }
+        },
+        {
+          "input_index": 33,
+          "K": 48,
+          "e2e_ms": 250.92610204592347,
+          "components_ms": {
+            "stage1_generation": 145.17270808573812,
+            "base_expansion_FP32_for_adapter_and_render": 5.684262025170028,
+            "separate_base_expansion_BF16_for_router": 7.708871038630605,
+            "generation_local_ranking_CNN": 0.3991380799561739,
+            "generation_budget_feature_CNN": 0.30494993552565575,
+            "generation_image_utility_head": 0.19584910478442907,
+            "generation_score_combination": 0.03268802538514137,
+            "threshold_and_single_final_selection": 0.16616901848465204,
+            "context_embedding_adapter": 0.35679200664162636,
+            "stage2_generation": 83.18065002094954,
+            "local_codebook_projection_and_mixing": 0.34225499257445335,
+            "final_rgb_decoder": 7.794699049554765
+          }
+        },
+        {
+          "input_index": 34,
+          "K": 144,
+          "e2e_ms": 250.98906795028597,
+          "components_ms": {
+            "stage1_generation": 145.04709094762802,
+            "base_expansion_FP32_for_adapter_and_render": 5.706678959541023,
+            "separate_base_expansion_BF16_for_router": 7.6542620081454515,
+            "generation_local_ranking_CNN": 0.4057219484820962,
+            "generation_budget_feature_CNN": 0.30247599352151155,
+            "generation_image_utility_head": 0.19224698189646006,
+            "generation_score_combination": 0.03311305772513151,
+            "threshold_and_single_final_selection": 0.16706599853932858,
+            "context_embedding_adapter": 0.3308249870315194,
+            "stage2_generation": 83.16702302545309,
+            "local_codebook_projection_and_mixing": 0.35059498623013496,
+            "final_rgb_decoder": 7.802557083778083
+          }
+        },
+        {
+          "input_index": 35,
+          "K": 48,
+          "e2e_ms": 250.71445701178163,
+          "components_ms": {
+            "stage1_generation": 147.51076290849596,
+            "base_expansion_FP32_for_adapter_and_render": 5.851480993442237,
+            "separate_base_expansion_BF16_for_router": 7.730289013125002,
+            "generation_local_ranking_CNN": 0.42082706931978464,
+            "generation_budget_feature_CNN": 0.3031889209523797,
+            "generation_image_utility_head": 0.21001300774514675,
+            "generation_score_combination": 0.032859970815479755,
+            "threshold_and_single_final_selection": 0.18854497466236353,
+            "context_embedding_adapter": 0.36589696537703276,
+            "stage2_generation": 83.28525605611503,
+            "local_codebook_projection_and_mixing": 0.3662580857053399,
+            "final_rgb_decoder": 7.808186928741634
+          }
+        },
+        {
+          "input_index": 36,
+          "K": 48,
+          "e2e_ms": 250.58734300546348,
+          "components_ms": {
+            "stage1_generation": 144.9600870255381,
+            "base_expansion_FP32_for_adapter_and_render": 5.700190900824964,
+            "separate_base_expansion_BF16_for_router": 7.663149037398398,
+            "generation_local_ranking_CNN": 0.40101201739162207,
+            "generation_budget_feature_CNN": 0.3055189736187458,
+            "generation_image_utility_head": 0.19287795294076204,
+            "generation_score_combination": 0.03382901195436716,
+            "threshold_and_single_final_selection": 0.16484002117067575,
+            "context_embedding_adapter": 0.33430103212594986,
+            "stage2_generation": 82.95508997980505,
+            "local_codebook_projection_and_mixing": 0.34738797694444656,
+            "final_rgb_decoder": 7.769129937514663
+          }
+        },
+        {
+          "input_index": 37,
+          "K": 144,
+          "e2e_ms": 251.34353595785797,
+          "components_ms": {
+            "stage1_generation": 144.9131170520559,
+            "base_expansion_FP32_for_adapter_and_render": 5.714773898944259,
+            "separate_base_expansion_BF16_for_router": 7.6847049640491605,
+            "generation_local_ranking_CNN": 0.40068908128887415,
+            "generation_budget_feature_CNN": 0.30051497742533684,
+            "generation_image_utility_head": 0.19261101260781288,
+            "generation_score_combination": 0.04044896923005581,
+            "threshold_and_single_final_selection": 0.16840605530887842,
+            "context_embedding_adapter": 0.3282109973952174,
+            "stage2_generation": 82.9899680102244,
+            "local_codebook_projection_and_mixing": 0.356315984390676,
+            "final_rgb_decoder": 7.7948340913280845
+          }
+        },
+        {
+          "input_index": 38,
+          "K": 48,
+          "e2e_ms": 250.86402101442218,
+          "components_ms": {
+            "stage1_generation": 145.1754659647122,
+            "base_expansion_FP32_for_adapter_and_render": 5.705152987502515,
+            "separate_base_expansion_BF16_for_router": 7.648004102520645,
+            "generation_local_ranking_CNN": 0.40508201345801353,
+            "generation_budget_feature_CNN": 0.30279799830168486,
+            "generation_image_utility_head": 0.19032089039683342,
+            "generation_score_combination": 0.0317930243909359,
+            "threshold_and_single_final_selection": 0.1656579552218318,
+            "context_embedding_adapter": 0.33897499088197947,
+            "stage2_generation": 82.63460802845657,
+            "local_codebook_projection_and_mixing": 0.34375605173408985,
+            "final_rgb_decoder": 7.7724739676341414
+          }
+        },
+        {
+          "input_index": 39,
+          "K": 48,
+          "e2e_ms": 250.81888609565794,
+          "components_ms": {
+            "stage1_generation": 145.31930699013174,
+            "base_expansion_FP32_for_adapter_and_render": 5.713311024010181,
+            "separate_base_expansion_BF16_for_router": 7.703690091148019,
+            "generation_local_ranking_CNN": 0.39891304913908243,
+            "generation_budget_feature_CNN": 0.30096201226115227,
+            "generation_image_utility_head": 0.20299898460507393,
+            "generation_score_combination": 0.03237708006054163,
+            "threshold_and_single_final_selection": 0.1677300315350294,
+            "context_embedding_adapter": 0.33447693567723036,
+            "stage2_generation": 82.95746706426144,
+            "local_codebook_projection_and_mixing": 0.3507140791043639,
+            "final_rgb_decoder": 7.769348914735019
+          }
+        },
+        {
+          "input_index": 40,
+          "K": 48,
+          "e2e_ms": 251.35356897953898,
+          "components_ms": {
+            "stage1_generation": 144.91992304101586,
+            "base_expansion_FP32_for_adapter_and_render": 5.689561949111521,
+            "separate_base_expansion_BF16_for_router": 7.694605039432645,
+            "generation_local_ranking_CNN": 0.3971459809690714,
+            "generation_budget_feature_CNN": 0.30622805934399366,
+            "generation_image_utility_head": 0.19791594240814447,
+            "generation_score_combination": 0.032849027775228024,
+            "threshold_and_single_final_selection": 0.16572093591094017,
+            "context_embedding_adapter": 0.34308002796024084,
+            "stage2_generation": 82.62233703862876,
+            "local_codebook_projection_and_mixing": 0.35870401188731194,
+            "final_rgb_decoder": 7.783413981087506
+          }
+        },
+        {
+          "input_index": 41,
+          "K": 48,
+          "e2e_ms": 250.89205394033343,
+          "components_ms": {
+            "stage1_generation": 145.0062980875373,
+            "base_expansion_FP32_for_adapter_and_render": 5.7055409997701645,
+            "separate_base_expansion_BF16_for_router": 11.751760030165315,
+            "generation_local_ranking_CNN": 0.40384894236922264,
+            "generation_budget_feature_CNN": 0.3018199931830168,
+            "generation_image_utility_head": 0.20549306645989418,
+            "generation_score_combination": 0.032554962672293186,
+            "threshold_and_single_final_selection": 0.1655400265008211,
+            "context_embedding_adapter": 0.3277040086686611,
+            "stage2_generation": 82.88098208140582,
+            "local_codebook_projection_and_mixing": 0.3528629895299673,
+            "final_rgb_decoder": 7.778565981425345
+          }
+        },
+        {
+          "input_index": 42,
+          "K": 48,
+          "e2e_ms": 251.079591922462,
+          "components_ms": {
+            "stage1_generation": 145.03256895113736,
+            "base_expansion_FP32_for_adapter_and_render": 5.720227956771851,
+            "separate_base_expansion_BF16_for_router": 7.635028916411102,
+            "generation_local_ranking_CNN": 0.40124403312802315,
+            "generation_budget_feature_CNN": 0.30030298512429,
+            "generation_image_utility_head": 0.19211007747799158,
+            "generation_score_combination": 0.030934112146496773,
+            "threshold_and_single_final_selection": 0.16624992713332176,
+            "context_embedding_adapter": 0.3351739142090082,
+            "stage2_generation": 83.06425402406603,
+            "local_codebook_projection_and_mixing": 0.3422399749979377,
+            "final_rgb_decoder": 7.776977028697729
+          }
+        },
+        {
+          "input_index": 43,
+          "K": 144,
+          "e2e_ms": 251.02035596501082,
+          "components_ms": {
+            "stage1_generation": 145.04894008859992,
+            "base_expansion_FP32_for_adapter_and_render": 5.711455014534295,
+            "separate_base_expansion_BF16_for_router": 7.700189016759396,
+            "generation_local_ranking_CNN": 0.3969829995185137,
+            "generation_budget_feature_CNN": 0.3067069919779897,
+            "generation_image_utility_head": 0.1929369755089283,
+            "generation_score_combination": 0.03215600736439228,
+            "threshold_and_single_final_selection": 0.16719300765544176,
+            "context_embedding_adapter": 0.34624594263732433,
+            "stage2_generation": 82.95814995653927,
+            "local_codebook_projection_and_mixing": 0.34421507734805346,
+            "final_rgb_decoder": 7.8200200805440545
+          }
+        },
+        {
+          "input_index": 44,
+          "K": 144,
+          "e2e_ms": 251.17953796871006,
+          "components_ms": {
+            "stage1_generation": 145.53618396166712,
+            "base_expansion_FP32_for_adapter_and_render": 5.685678916051984,
+            "separate_base_expansion_BF16_for_router": 7.619780953973532,
+            "generation_local_ranking_CNN": 0.4009049152955413,
+            "generation_budget_feature_CNN": 0.3059679875150323,
+            "generation_image_utility_head": 0.19343092571943998,
+            "generation_score_combination": 0.03223400563001633,
+            "threshold_and_single_final_selection": 0.1672039506956935,
+            "context_embedding_adapter": 0.32919307705014944,
+            "stage2_generation": 82.89212605450302,
+            "local_codebook_projection_and_mixing": 0.34858298022300005,
+            "final_rgb_decoder": 7.775867939926684
+          }
+        },
+        {
+          "input_index": 45,
+          "K": 48,
+          "e2e_ms": 251.09756796155125,
+          "components_ms": {
+            "stage1_generation": 145.15686396043748,
+            "base_expansion_FP32_for_adapter_and_render": 5.698038963600993,
+            "separate_base_expansion_BF16_for_router": 7.67039495985955,
+            "generation_local_ranking_CNN": 0.39947591722011566,
+            "generation_budget_feature_CNN": 0.3061379538848996,
+            "generation_image_utility_head": 0.1942720264196396,
+            "generation_score_combination": 0.03200490027666092,
+            "threshold_and_single_final_selection": 0.16711908392608166,
+            "context_embedding_adapter": 0.3440099535509944,
+            "stage2_generation": 82.93464197777212,
+            "local_codebook_projection_and_mixing": 0.3448269562795758,
+            "final_rgb_decoder": 7.7983669470995665
+          }
+        },
+        {
+          "input_index": 46,
+          "K": 144,
+          "e2e_ms": 250.97229389939457,
+          "components_ms": {
+            "stage1_generation": 145.20762593019754,
+            "base_expansion_FP32_for_adapter_and_render": 5.713999969884753,
+            "separate_base_expansion_BF16_for_router": 7.670501945540309,
+            "generation_local_ranking_CNN": 0.39791897870600224,
+            "generation_budget_feature_CNN": 0.29516604263335466,
+            "generation_image_utility_head": 0.20202796440571547,
+            "generation_score_combination": 0.03226997796446085,
+            "threshold_and_single_final_selection": 0.16657705418765545,
+            "context_embedding_adapter": 0.33345003612339497,
+            "stage2_generation": 83.02055392414331,
+            "local_codebook_projection_and_mixing": 0.3604600206017494,
+            "final_rgb_decoder": 7.780040963552892
+          }
+        },
+        {
+          "input_index": 47,
+          "K": 48,
+          "e2e_ms": 251.09599507413805,
+          "components_ms": {
+            "stage1_generation": 145.2322129625827,
+            "base_expansion_FP32_for_adapter_and_render": 5.720781977288425,
+            "separate_base_expansion_BF16_for_router": 7.692866027355194,
+            "generation_local_ranking_CNN": 0.40265696588903666,
+            "generation_budget_feature_CNN": 0.29555405490100384,
+            "generation_image_utility_head": 0.19763095770031214,
+            "generation_score_combination": 0.03203109372407198,
+            "threshold_and_single_final_selection": 0.1665180316194892,
+            "context_embedding_adapter": 0.33257005270570517,
+            "stage2_generation": 86.80889196693897,
+            "local_codebook_projection_and_mixing": 0.3594929585233331,
+            "final_rgb_decoder": 7.82282801810652
+          }
+        },
+        {
+          "input_index": 48,
+          "K": 144,
+          "e2e_ms": 250.87223900482059,
+          "components_ms": {
+            "stage1_generation": 145.23836108855903,
+            "base_expansion_FP32_for_adapter_and_render": 5.736034014262259,
+            "separate_base_expansion_BF16_for_router": 7.679008063860238,
+            "generation_local_ranking_CNN": 0.4153810441493988,
+            "generation_budget_feature_CNN": 0.30566996429115534,
+            "generation_image_utility_head": 0.1961729722097516,
+            "generation_score_combination": 0.032840995118021965,
+            "threshold_and_single_final_selection": 0.1767640933394432,
+            "context_embedding_adapter": 0.33764797262847424,
+            "stage2_generation": 83.12466600909829,
+            "local_codebook_projection_and_mixing": 0.35622494760900736,
+            "final_rgb_decoder": 7.782795932143927
+          }
+        },
+        {
+          "input_index": 49,
+          "K": 144,
+          "e2e_ms": 251.50806398596615,
+          "components_ms": {
+            "stage1_generation": 145.1761000789702,
+            "base_expansion_FP32_for_adapter_and_render": 5.706940079107881,
+            "separate_base_expansion_BF16_for_router": 7.634807960130274,
+            "generation_local_ranking_CNN": 0.4046600079163909,
+            "generation_budget_feature_CNN": 0.29754394199699163,
+            "generation_image_utility_head": 0.20273402333259583,
+            "generation_score_combination": 0.03626593388617039,
+            "threshold_and_single_final_selection": 0.1659259432926774,
+            "context_embedding_adapter": 0.3290390595793724,
+            "stage2_generation": 82.84336293581873,
+            "local_codebook_projection_and_mixing": 0.3548969980329275,
+            "final_rgb_decoder": 7.771425996907055
+          }
+        }
+      ]
+    }
+  },
+  "complete": true,
+  "final_frozen_audit": {
+    "all_loaded_weights_and_buffers_unchanged": true,
+    "all_inference_modules_frozen": true,
+    "no_optimizer_or_training_state_created": true,
+    "checkpoint_restore_scope": "Strict stage2 model state at step20000, strict exported student state, hash-checked frozen adapter and official codec/stage1 assets. No optimizer restore: profiling performs no training."
+  },
+  "status": "complete"
+}

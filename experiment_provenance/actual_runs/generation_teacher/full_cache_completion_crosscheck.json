@@ -1,0 +1,40 @@
+{
+  "status": "full_cache_exit0_coverage_and_source_identity_crosschecked",
+  "time": 1794694411.3830986,
+  "n": 1281167,
+  "splits": {
+    "held": {
+      "n": 10000,
+      "chunks": 5,
+      "all_file_paths_counts_and_sizes_match_independent_header_audit": true,
+      "all_tensors_finite_by_original_full_scan": true
+    },
+    "fit": {
+      "n": 1271167,
+      "chunks": 621,
+      "all_file_paths_counts_and_sizes_match_independent_header_audit": true,
+      "all_tensors_finite_by_original_full_scan": true
+    }
+  },
+  "per_rank_image_counts": [
+    322703,
+    319488,
+    319488,
+    319488
+  ],
+  "full_payload_audit": "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/final_execution/full_training_cache_audit.json",
+  "full_payload_audit_sha256": "0f5b713e8be1bc73e752a1d31e5ab63bf14cc5dae49429e03574efd933dfd896",
+  "header_audit_sha256": "9e2fb4151fe3de6957b225d2e0abd2defef42ba7db80c960c33bbc33e029444b",
+  "extraction_exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "original_full_scan_exit_code": 0,
+  "parent_controller_acknowledged_full_audit_sha256": true,
+  "source_field_conventions": "Full audit source_sha256 is the teacher source identity mapping, matched to extraction and supervisor. Header source_sha256 identifies the header audit script, matched to its frozen code hash.",
+  "no_second_full_payload_scan_run": true,
+  "not_independent_recomputation_of_all_teacher_labels": true,
+  "objective_complete": false
+}

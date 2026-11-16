@@ -1,0 +1,25 @@
+{
+  "all_frozen_components_unchanged": true,
+  "checkpoint_sha256": "1f3d12876140412413b0bcdfb0339017c559b958bb4bfce621719abdd3f92d93",
+  "fid_evaluated": false,
+  "global_batch": 256,
+  "initialization": {
+    "fresh_parameters": 0,
+    "pretrained_parameters": 142224641,
+    "source_sha256": "7fe25cb80b05743e8b42dacc61d88792a9ab5217d6bd756bef28821e0a5fc68f",
+    "tied_head": true,
+    "total_parameters": 142224641,
+    "transfer_token_embedding": true,
+    "upstream_commit": "f61b0a1314717004dc7487531fd16a8bb71e1888",
+    "upstream_transformer_sha256": "3a94ad2ac63bc085e4c6982a1b7fce28c3bb263637626e88d596c3857beed856"
+  },
+  "kind": "long",
+  "model_optimizer_restore_passed": true,
+  "peak_reserved_gib": 10.75,
+  "policy": "nearconstant",
+  "profile": false,
+  "seconds": 20984.126643604017,
+  "status": "complete",
+  "steady_seconds_per_step": 1.0042337078951853,
+  "step": 20000
+}

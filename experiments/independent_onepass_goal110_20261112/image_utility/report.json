@@ -1,0 +1,206 @@
+{
+  "status": "trained_independent_image_utilities_not_quality_validated",
+  "n": 12000,
+  "fit": 10843,
+  "held": 1157,
+  "feature_dimension": 1560,
+  "target_names": [
+    "rgb_abs",
+    "rgb_rel",
+    "mixed_abs",
+    "mixed_rel",
+    "positive_rgb_rel",
+    "semantic_rel"
+  ],
+  "best": [
+    {
+      "name": "rgb_abs",
+      "ridge_relative": 0.001,
+      "held_MSE": 0.023248700938125075,
+      "held_Spearman": 0.9869192961247133
+    },
+    {
+      "name": "rgb_rel",
+      "ridge_relative": 0.001,
+      "held_MSE": 0.1330906336175083,
+      "held_Spearman": 0.9348039449413238
+    },
+    {
+      "name": "mixed_abs",
+      "ridge_relative": 0.001,
+      "held_MSE": 0.026631986877082302,
+      "held_Spearman": 0.9844420588970565
+    },
+    {
+      "name": "mixed_rel",
+      "ridge_relative": 0.001,
+      "held_MSE": 0.17703535948728824,
+      "held_Spearman": 0.9076371367652478
+    },
+    {
+      "name": "positive_rgb_rel",
+      "ridge_relative": 0.001,
+      "held_MSE": 0.1274529551371474,
+      "held_Spearman": 0.9372662985392084
+    },
+    {
+      "name": "semantic_rel",
+      "ridge_relative": 0.01,
+      "held_MSE": 0.8161113136640776,
+      "held_Spearman": 0.5910284346439517
+    }
+  ],
+  "rows": [
+    {
+      "name": "rgb_abs",
+      "ridge_relative": 0.001,
+      "held_MSE": 0.023248700938125075,
+      "held_Spearman": 0.9869192961247133
+    },
+    {
+      "name": "rgb_rel",
+      "ridge_relative": 0.001,
+      "held_MSE": 0.1330906336175083,
+      "held_Spearman": 0.9348039449413238
+    },
+    {
+      "name": "mixed_abs",
+      "ridge_relative": 0.001,
+      "held_MSE": 0.026631986877082302,
+      "held_Spearman": 0.9844420588970565
+    },
+    {
+      "name": "mixed_rel",
+      "ridge_relative": 0.001,
+      "held_MSE": 0.17703535948728824,
+      "held_Spearman": 0.9076371367652478
+    },
+    {
+      "name": "positive_rgb_rel",
+      "ridge_relative": 0.001,
+      "held_MSE": 0.1274529551371474,
+      "held_Spearman": 0.9372662985392084
+    },
+    {
+      "name": "semantic_rel",
+      "ridge_relative": 0.001,
+      "held_MSE": 0.8207707013478266,
+      "held_Spearman": 0.5866039057340776
+    },
+    {
+      "name": "rgb_abs",
+      "ridge_relative": 0.01,
+      "held_MSE": 0.024612156432075483,
+      "held_Spearman": 0.9871480128091881
+    },
+    {
+      "name": "rgb_rel",
+      "ridge_relative": 0.01,
+      "held_MSE": 0.13602458338735327,
+      "held_Spearman": 0.9323512684145404
+    },
+    {
+      "name": "mixed_abs",
+      "ridge_relative": 0.01,
+      "held_MSE": 0.02751066393529317,
+      "held_Spearman": 0.9846731929123427
+    },
+    {
+      "name": "mixed_rel",
+      "ridge_relative": 0.01,
+      "held_MSE": 0.179337738180698,
+      "held_Spearman": 0.9045242035170024
+    },
+    {
+      "name": "positive_rgb_rel",
+      "ridge_relative": 0.01,
+      "held_MSE": 0.13071562109248797,
+      "held_Spearman": 0.9348569480185086
+    },
+    {
+      "name": "semantic_rel",
+      "ridge_relative": 0.01,
+      "held_MSE": 0.8161113136640776,
+      "held_Spearman": 0.5910284346439517
+    },
+    {
+      "name": "rgb_abs",
+      "ridge_relative": 0.1,
+      "held_MSE": 0.03440692661969148,
+      "held_Spearman": 0.9847881400915726
+    },
+    {
+      "name": "rgb_rel",
+      "ridge_relative": 0.1,
+      "held_MSE": 0.1499052821749696,
+      "held_Spearman": 0.9236366901168933
+    },
+    {
+      "name": "mixed_abs",
+      "ridge_relative": 0.1,
+      "held_MSE": 0.035897400472867484,
+      "held_Spearman": 0.9825802725444417
+    },
+    {
+      "name": "mixed_rel",
+      "ridge_relative": 0.1,
+      "held_MSE": 0.19453396625862135,
+      "held_Spearman": 0.8934640008073885
+    },
+    {
+      "name": "positive_rgb_rel",
+      "ridge_relative": 0.1,
+      "held_MSE": 0.14489260967780848,
+      "held_Spearman": 0.9262016175693091
+    },
+    {
+      "name": "semantic_rel",
+      "ridge_relative": 0.1,
+      "held_MSE": 0.8312297079024731,
+      "held_Spearman": 0.5827474805563313
+    },
+    {
+      "name": "rgb_abs",
+      "ridge_relative": 1.0,
+      "held_MSE": 0.08789412845664414,
+      "held_Spearman": 0.9664220973540006
+    },
+    {
+      "name": "rgb_rel",
+      "ridge_relative": 1.0,
+      "held_MSE": 0.18541120964543087,
+      "held_Spearman": 0.9044672412858286
+    },
+    {
+      "name": "mixed_abs",
+      "ridge_relative": 1.0,
+      "held_MSE": 0.08542043993577211,
+      "held_Spearman": 0.9642006245731995
+    },
+    {
+      "name": "mixed_rel",
+      "ridge_relative": 1.0,
+      "held_MSE": 0.23120239587607772,
+      "held_Spearman": 0.8727745622543185
+    },
+    {
+      "name": "positive_rgb_rel",
+      "ridge_relative": 1.0,
+      "held_MSE": 0.18055153319952266,
+      "held_Spearman": 0.9071513307506839
+    },
+    {
+      "name": "semantic_rel",
+      "ridge_relative": 1.0,
+      "held_MSE": 0.8915903834119633,
+      "held_Spearman": 0.5439658394586455
+    }
+  ],
+  "features": "FP64 mean/std over positions of FP16-rounded new 780-channel inputs; image axis never reduced at inference",
+  "labels": "Absolute/relative new base-vs-dense RGB and B0 endpoint gains; not marginal K48-to144 gains",
+  "original_scorer_used": false,
+  "old_mask_used": false,
+  "validation_used": false,
+  "metric_network_supervision": false,
+  "seconds": 22.95569806196727
+}

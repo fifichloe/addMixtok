@@ -1,0 +1,40 @@
+{
+  "status": "verified_accepted_independent_onepass_policy",
+  "name": "g1_w0.5_p0.0_c0.5_d025",
+  "threshold": 0.28371405601501465,
+  "min_K": 48,
+  "max_K": 144,
+  "global_tokens": 32,
+  "priority": {
+    "learned_mixed_endpoint_gain": 1.0,
+    "whitened_feature_cosine": 0.5,
+    "pixel_error_direct_weight": 0.0,
+    "B0_CAM_missing": 0.5,
+    "static_feature_density_penalty": 0.25
+  },
+  "normalization": "Each priority component standardized over this image spatial locations, correction=0, std floor1e-6.",
+  "scorer_checkpoint": "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/dense_gain_head/best.pt",
+  "scorer_checkpoint_sha256": "67c6a477e55242b8a86052746eb335d85747a733d7a9fc5163052a8dccee404d",
+  "shared_pretrained_assets": {
+    "/home/heyefei/lichenge/MixTok-Official/assets/released/recon/mixtok_recon.pt": "457be008836e3f3702327795bb1953250f0032a0b35f74e26e6ffce9ef50e82e",
+    "/home/heyefei/lichenge/1d-tokenizer/tokenizer_titok_l32.bin": "b8f0bf61e9ee1791d8b76fa723bdcb2c85a039a7d027e597f685db492935c31f",
+    "/home/heyefei/lichenge/LlamaGen/pretrained_models/vq_ds16_c2i.pt": "109aa8afb2cf3761eec23cdc8644154cb498f5ab7eef2a35264d25e5e0499f7d",
+    "/tmp/mixtok_light_backbones_20261111/efficientnet_b0_rwightman-7f5810bc.pth": "7f5810bc96def8f7552d5b7e68d53c4786f81167d28291b21c0d90e1fca14934"
+  },
+  "inference_entrypoint": "onepass_inference.OnePassEngine([name])(images, threshold)",
+  "scorer_parameters": 496196,
+  "auxiliary_B0_parameters": 5288548,
+  "rFID": 1.0712006916669452,
+  "PSNR": 19.39717392578125,
+  "n": 50000,
+  "mean_local_K": 96.0,
+  "mean_content_tokens": 128.0,
+  "original_scorer_used": false,
+  "score_calls": 1,
+  "selection_calls": 1,
+  "selection_feedback": false,
+  "per_image_independent": true,
+  "generation": "remains paused",
+  "completion_audit_sha256": "672ffaa3d2cc22b7054b84954a612ca07e478a39c08608a50989dcf6ff106da9",
+  "frozen_source_and_threshold_manifest": "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/val_budget_frozen.json"
+}

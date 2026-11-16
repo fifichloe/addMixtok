@@ -1,0 +1,23 @@
+{
+  "status": "completed",
+  "step": 20000,
+  "elapsed_seconds": 15309.726073664031,
+  "best_held_loss": 0.4255755623340607,
+  "best_checkpoint_sha256": "8e71badefc9a06a523390ca52b7a3abbc9e789d0e4f4698b737aadc2c84ddeb6",
+  "teacher_policy": {
+    "name": "long_density_free_white0.5",
+    "weight": 0.9,
+    "threshold": 0.3803865313529968,
+    "density": 0.0,
+    "white": 0.5,
+    "cam": 0.75,
+    "teacher_rFID": 1.0007626895946942,
+    "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+    "teacher_policy_sha256": "1dd267c7735e02eba66d1162df466abd8d09781612fe54b96b4e0ce7ae710c04",
+    "selected_policy_name": "full_dynamic96",
+    "source": "final design frozen after full component controls; original score-only thresholds retained",
+    "quality_used_for_thresholds": false,
+    "component_choice_informed_by_ablation_quality": true
+  },
+  "note": "Scorer/offset distillation only; no MaskGIT fine-tuning or gFID evaluation performed."
+}

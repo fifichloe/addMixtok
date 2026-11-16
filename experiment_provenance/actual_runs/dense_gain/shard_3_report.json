@@ -1,0 +1,31 @@
+{
+  "status": "completed",
+  "n": 3000,
+  "source_inputs": "/home/heyefei/lichenge/paper/experiments/fresh_reconstruction_scorer_20261112/targets_3/inputs.npy",
+  "source_indices": "/home/heyefei/lichenge/paper/experiments/fresh_reconstruction_scorer_20261112/targets_3/source_indices.npy",
+  "paths_sha256": "0007c564ce751d770fc4d29bc69abf0d039750052cdc553bf218da878224ad59",
+  "labels": "signed RGB local error reduction; signed B0 middle/deep local cosine-error reduction",
+  "extra_dense_decode_at_inference": false,
+  "old_routing_or_mask_used": false,
+  "Inception_used": false,
+  "parity": [
+    {
+      "first_batch_cached_input_exact": true,
+      "max_abs_difference": 0.0
+    }
+  ],
+  "source_sha256": {
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/cache_dense_gain.py": "420e0c5e5055606eef86b05fadf1c7a061265821c5b22aaa072aab238a16f49a",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/routing.py": "c6060146660a39c26304df00ac8cfa4c8b36c08ab3e2f2dc5d1706dc4b18d5c7",
+    "/home/heyefei/lichenge/paper/experiments/fresh_reconstruction_scorer_20261112/runtime.py": "00c77d993dda775c227819cc0109897c070f99a38528be00e905e0973e2f990e"
+  },
+  "seconds": 52.071379693981726,
+  "legacy_router_deleted": true,
+  "old_scores_used": false,
+  "old_masks_used": false,
+  "old_hidden_features_used": false,
+  "all_pretrained_weights_and_buffers_unchanged": true,
+  "usage_only_buffers_detached_during_setup": [
+    "llamagen_vq.quantize.codebook_used"
+  ]
+}

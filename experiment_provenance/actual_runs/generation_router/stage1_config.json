@@ -1,0 +1,40 @@
+{
+  "kind": "long",
+  "policy": {
+    "name": "long_density_free_white0.5",
+    "weight": 0.9,
+    "threshold": 0.3803865313529968,
+    "density": 0.0,
+    "white": 0.5,
+    "cam": 0.75,
+    "teacher_rFID": 1.0007626895946942,
+    "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+    "teacher_policy_sha256": "1dd267c7735e02eba66d1162df466abd8d09781612fe54b96b4e0ce7ae710c04",
+    "selected_policy_name": "full_dynamic96",
+    "source": "final design frozen after full component controls; original score-only thresholds retained",
+    "quality_used_for_thresholds": false,
+    "component_choice_informed_by_ablation_quality": true
+  },
+  "steps": 20000,
+  "micro_batch": 128,
+  "world_size": 2,
+  "global_batch": 256,
+  "parameters": 525826,
+  "input": "f_base_only_Bx256x16x16",
+  "fresh_initialization": true,
+  "direct_K_head": false,
+  "optimizer": "AdamW lr=2e-4 wd=.01 constant",
+  "autocast": "bfloat16",
+  "streaming_cache": false,
+  "expected_fit_chunks": 621,
+  "epoch0_chunk_order": "shuffled",
+  "cache_read": "sequential_chunk_into_RAM",
+  "local_metrics": true,
+  "loss": "KL(T2)+.05 localSmoothL1+utilitySmoothL1+.1 soft-thresholdBCE(T.5)",
+  "cache": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/final/full/cache",
+  "source_sha256": {
+    "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/student_final_parent/train.py": "2386dd7f2acbc9618946a086f1d62e458442e3271bbbec2935b016811831ae3f",
+    "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/student_final_parent/model.py": "69ccdba68356123ea55218a66962f0d3f4b2d4a0ceaf1b3e9ac61658a4484458",
+    "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/student_final_parent/policies.py": "0c876b5484f3c5d9bb105447370f569874bdc7848347dc4b5e1d49a142fe69ac"
+  }
+}

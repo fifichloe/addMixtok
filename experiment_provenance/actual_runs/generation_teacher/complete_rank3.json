@@ -1,0 +1,69 @@
+{
+  "status": "completed",
+  "mode": "train",
+  "rank": 3,
+  "world": 4,
+  "images": 319488,
+  "policies": {
+    "short": {
+      "name": "short_density_free_white0.5",
+      "weight": 0.3,
+      "threshold": 0.27000892162323,
+      "density": 0.0,
+      "white": 0.5,
+      "cam": 0.5,
+      "teacher_rFID": 1.0267614790731727,
+      "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+      "teacher_policy_sha256": "89d6b60f29f0f08fe94f8ea7231596b167124d659466f4e3d7add9e806909d48",
+      "selected_policy_name": "full_dynamic96",
+      "source": "final design frozen after full component controls; original score-only thresholds retained",
+      "quality_used_for_thresholds": false,
+      "component_choice_informed_by_ablation_quality": true
+    },
+    "long": {
+      "name": "long_density_free_white0.5",
+      "weight": 0.9,
+      "threshold": 0.3803865313529968,
+      "density": 0.0,
+      "white": 0.5,
+      "cam": 0.75,
+      "teacher_rFID": 1.0007626895946942,
+      "component_design_sha256": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb",
+      "teacher_policy_sha256": "1dd267c7735e02eba66d1162df466abd8d09781612fe54b96b4e0ce7ae710c04",
+      "selected_policy_name": "full_dynamic96",
+      "source": "final design frozen after full component controls; original score-only thresholds retained",
+      "quality_used_for_thresholds": false,
+      "component_choice_informed_by_ablation_quality": true
+    }
+  },
+  "source_sha256": {
+    "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/density_free_config.py": "7657e27ea8c19058586c81364ab67e005103dd36c5108b44b04b6b86ea1fb3ee",
+    "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/teacher_no_density.py": "eadb6ad54de013943d1f0dbcf0ef6bf518954c285d3d6b10a5635e5224dc2db5",
+    "/home/heyefei/lichenge/paper/experiments/fresh_reconstruction_scorer_20261112/runtime.py": "00c77d993dda775c227819cc0109897c070f99a38528be00e905e0973e2f990e",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/gain_model.py": "9ba1f504c238a2660b573ed0827b08804d804ab1ae9bfdd2aee861b74219a05f",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/image_utility/semantic_rel.npz": "bc23f1adc62b5c78c6c4a9fe6ba625878018ccf3c49155a2b6e4e99a9ca3dc55",
+    "/home/heyefei/lichenge/paper/experiments/light_grid_105_20261109/input_scales.npz": "5a307e5937d1005e766a813686320e846895982f7cb29a33b116eb2539500f2d",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal110_20261112/dense_gain_head/best.pt": "67c6a477e55242b8a86052746eb335d85747a733d7a9fc5163052a8dccee404d",
+    "/home/heyefei/lichenge/paper/experiments/independent_onepass_goal105_20261112/long_head/best.pt": "fe9e5c562b72885b03a7be94b56541515c79df618f93aec46a413afb7cc03518",
+    "/home/heyefei/lichenge/MixTok-Official/assets/released/recon/mixtok_recon.pt": "457be008836e3f3702327795bb1953250f0032a0b35f74e26e6ffce9ef50e82e",
+    "/home/heyefei/lichenge/1d-tokenizer/tokenizer_titok_l32.bin": "b8f0bf61e9ee1791d8b76fa723bdcb2c85a039a7d027e597f685db492935c31f",
+    "/home/heyefei/lichenge/LlamaGen/pretrained_models/vq_ds16_c2i.pt": "109aa8afb2cf3761eec23cdc8644154cb498f5ab7eef2a35264d25e5e0499f7d",
+    "/tmp/mixtok_light_backbones_20261111/efficientnet_b0_rwightman-7f5810bc.pth": "7f5810bc96def8f7552d5b7e68d53c4786f81167d28291b21c0d90e1fca14934",
+    "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/final_teacher_config.py": "16b9886ac87d1fa663596cf7ebf774df31d412030ac70e81fa53ebf58e82dadc",
+    "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/teacher_final.py": "a7352e892daa806b28f123ca10295ed5c3b7d10305e0a7d14ddb8629852f6704",
+    "/home/heyefei/lichenge/paper/experiments/no_density_revision_20261114/design_lock.json": "7fccc46707b7a641e2f85dc5750849e258c81784233227a12ce986808b1bc0eb"
+  },
+  "no_official_validation_images": true,
+  "f_base_lossless_bfloat16": true,
+  "density_computed": false,
+  "heads_frozen_and_unchanged": true,
+  "density_removed_from_computation": true,
+  "legacy_router_deleted": true,
+  "old_scores_used": false,
+  "old_masks_used": false,
+  "old_hidden_features_used": false,
+  "all_pretrained_weights_and_buffers_unchanged": true,
+  "usage_only_buffers_detached_during_setup": [
+    "llamagen_vq.quantize.codebook_used"
+  ]
+}

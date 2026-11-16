@@ -1,0 +1,63 @@
+{
+  "status": "actual_full_validation_quality_audited_not_goal_complete",
+  "n": 50000,
+  "rows": [
+    {
+      "name": "g1_w0.5_p0.0_c0.5_d025",
+      "rFID": 1.0712006916669452,
+      "rFID_reverse_root": 1.071200691667343,
+      "PSNR": 19.39717392578125,
+      "mean_K": 96.0,
+      "min_K": 48,
+      "max_K": 142,
+      "mean_content_tokens": 128.0,
+      "quality_pass": true,
+      "budget_pass": true,
+      "mask_checks": [
+        {
+          "shard": 0,
+          "n": 12512,
+          "all_numpy_masks_K_exact": true
+        },
+        {
+          "shard": 1,
+          "n": 12512,
+          "all_numpy_masks_K_exact": true
+        },
+        {
+          "shard": 2,
+          "n": 12512,
+          "all_numpy_masks_K_exact": true
+        },
+        {
+          "shard": 3,
+          "n": 12464,
+          "all_numpy_masks_K_exact": true
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "name": "g1_w0.5_p0.0_c0.5_d025",
+      "singleton_reverse_same_activations_mask_and_K_exact": true
+    },
+    {
+      "name": "g1_w0.5_p0.0_c0.5_d025",
+      "singleton_reverse_same_activations_mask_and_K_exact": true
+    },
+    {
+      "name": "g1_w0.5_p0.0_c0.5_d025",
+      "singleton_reverse_same_activations_mask_and_K_exact": true
+    },
+    {
+      "name": "g1_w0.5_p0.0_c0.5_d025",
+      "singleton_reverse_same_activations_mask_and_K_exact": true
+    }
+  ],
+  "all_paths_unique_once": true,
+  "all_numpy_masks_K_replayed": true,
+  "codec_frozen": true,
+  "goal_completion_still_requires": "Deployment fresh-input equivalence and measured cost/lightweight audit.",
+  "frozen_sha256": "2f6a43eafd63c4838b38e7e1553b1020fbe6a192864a9b143beeb754e4a811de"
+}
