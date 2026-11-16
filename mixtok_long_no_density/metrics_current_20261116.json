@@ -2859,11 +2859,7 @@
     "generation_CFG_aggregation": "936960676a5e39f4623f883e819a087c8d05e46473964ea875ce63f3a32bd61b",
     "MaskGIT_training_audit": "3edfc2d7bfeb732e3ae4a20b0c8617f8190774da29abe8d234089b5aa237d484"
   },
-  "pending": [
-    "Independent random/uniform and nearconstant generator training",
-    "Current Long 2D sampling-round sweep",
-    "Pure LlamaGen generator with 12/16/24 rounds"
-  ],
+  "pending": [],
   "reconstruction_controls_full50k_20261116": {
     "n": 50000,
     "same_frozen_codec_and_scorer": true,
@@ -3090,5 +3086,64 @@
         "audit_recovery": "Original 1e-5 tolerance exceeded by 3 of 102400000 base ADM FP32 values; recovery used 2e-5, no images regenerated"
       }
     ]
+  },
+  "pure_LlamaGen_maskgit_sampling_rounds_seed4_full50k": {
+    "12": {
+      "gFID": 18.063468968724976,
+      "gFID_independent_FP64": 18.063427848641197,
+      "absolute_difference": 4.1120083778878325e-05,
+      "n": 50000,
+      "seed": 4,
+      "sampling_rounds": 12,
+      "cfg": 3.0,
+      "checkpoint_sha256": "20607251bfc94c2bc5f725ddf06e216749c24d587238da088b90f0d60e95c133",
+      "tokenizer_sha256": "0911153ac8b0b13db0e528598f618d93a172f91016d97dce5d579db430022e4d",
+      "summary_sha256": "169d92c4c79f92f0de7e8d820a44af52b75ee937d258ce57fe6cfc4e3144279c"
+    },
+    "16": {
+      "gFID": 18.646574573553607,
+      "gFID_independent_FP64": 18.646536551911993,
+      "absolute_difference": 3.8021641614705004e-05,
+      "n": 50000,
+      "seed": 4,
+      "sampling_rounds": 16,
+      "cfg": 3.0,
+      "checkpoint_sha256": "20607251bfc94c2bc5f725ddf06e216749c24d587238da088b90f0d60e95c133",
+      "tokenizer_sha256": "0911153ac8b0b13db0e528598f618d93a172f91016d97dce5d579db430022e4d",
+      "summary_sha256": "e00a05a83b0fe62b7d8c5c9e430eae87f6ca0b491df87c91769a79010aa053e4"
+    },
+    "24": {
+      "gFID": 19.773102613107824,
+      "gFID_independent_FP64": 19.77306319433194,
+      "absolute_difference": 3.941877588431453e-05,
+      "n": 50000,
+      "seed": 4,
+      "sampling_rounds": 24,
+      "cfg": 3.0,
+      "checkpoint_sha256": "20607251bfc94c2bc5f725ddf06e216749c24d587238da088b90f0d60e95c133",
+      "tokenizer_sha256": "0911153ac8b0b13db0e528598f618d93a172f91016d97dce5d579db430022e4d",
+      "summary_sha256": "ad75c0f89beb4639af2b45eb23d16215575411ffeca21cf0b10b748629881ed8"
+    },
+    "32": {
+      "gFID": 20.219900664143267,
+      "gFID_independent_FP64": 20.21986442683749,
+      "absolute_difference": 3.62373057782861e-05,
+      "n": 50000,
+      "seed": 4,
+      "sampling_rounds": 32,
+      "cfg": 3.0,
+      "checkpoint_sha256": "20607251bfc94c2bc5f725ddf06e216749c24d587238da088b90f0d60e95c133",
+      "tokenizer_sha256": "0911153ac8b0b13db0e528598f618d93a172f91016d97dce5d579db430022e4d",
+      "summary_sha256": "7e10102a04893a3ada35a00ed61df10b2f7ade3d14e4203f8038d3f6ca9d7e52"
+    }
+  },
+  "qualitative_generation_200": {
+    "count": 200,
+    "seed": 4,
+    "rounds_1d": 8,
+    "rounds_2d": 8,
+    "mean_local_K": 106.105,
+    "selection": "curated for visible base-to-final change; not a random or representative sample",
+    "manifest_sha256": "7e31e86c54cb6314c14c547c356466a970505bbdf07d8be6003d15ba1ff9f743"
   }
 }
