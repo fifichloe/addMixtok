@@ -53,8 +53,10 @@ def run(args):
         document = json.loads(args.policy_file.read_text())
         assert document['status'] == 'frozen_before_control_quality'
         assert document['router_identity'] == identity and document['checkpoint_sha256'] == digest
+        assert document['ablation'] == args.ablation
         assert document['kind'] == args.kind and document['seed'] == args.seed
         assert document['cfg'] == args.cfg and document['stage2_steps'] == args.stage2_steps
+        assert document['quality_used_for_budget_or_threshold'] is False
         policy = document['selection_policy']
     frozen = {str(path):sha256(path) for path in [Path(__file__), THIS_HERE/'worker.py',
               THIS_HERE/'ablation_router.py', EVAL_HERE.parent/'generation_control_policy.py',
@@ -171,18 +173,25 @@ def run(args):
             assert np.array_equal(expected_mask, arrays['route_mask'])
             hist += np.bincount(expected_K, minlength=257)
             if baseline_root is not None:
-                for name in ('ids', 'z1d', 'local_scores', 'router_scores', 'utility'):
+                for name in ('ids', 'z1d'):
                     current = np.load(out/f'{name}_shard{rank}.npy', mmap_mode='r')
                     reference = np.load(baseline_root/f'{name}_shard{rank}.npy', mmap_mode='r')
-                    assert np.array_equal(current, reference), ('Same generated inputs/scorer changed', rank, name)
+                    assert np.array_equal(current, reference), ('Generated 1D input changed', rank, name)
                 assert np.array_equal(np.load(out/f'base_shard{rank}.npy', mmap_mode='r'),
                                       np.load(baseline_root/f'base_shard{rank}.npy', mmap_mode='r'))
+                if document.get('expected_same_router_outputs', False):
+                    for name in ('local_scores', 'router_scores', 'utility'):
+                        current = np.load(out/f'{name}_shard{rank}.npy', mmap_mode='r')
+                        reference = np.load(baseline_root/f'{name}_shard{rank}.npy', mmap_mode='r')
+                        assert np.array_equal(current, reference), ('Router output changed', rank, name)
         assert hist.sum() == 50000 and not hist[:48].any() and not hist[145:].any()
         mean_k = float(hist@np.arange(257)/50000)
         if policy['policy'] == 'U_zero':
             assert document is not None and abs(mean_k-document['target_mean_K']) <= .01
         if policy['policy'] == 'fixed':
             assert mean_k == policy['fixed_K']
+        if document is not None and policy['policy'] == 'dynamic':
+            assert abs(mean_k-document['target_mean_K']) <= .01
         update(status='CPU_ADM_gFID_and_independent_FP64_audit')
         os.environ['CUDA_VISIBLE_DEVICES'] = ''
         spec = importlib.util.spec_from_file_location('final_router_ADM_statistics', EVALUATOR)
@@ -226,7 +235,10 @@ def run(args):
             cfg_stage1=4.5, cfg_stage2=args.cfg, routing_policy=policy,
             routing_policy_file_sha256=sha256(args.policy_file) if args.policy_file else None,
             all_masks_and_K_replayed=True, all_routes_and_inputs_saved=True,
-            same_generated_inputs_and_scorer_exact_baseline=baseline_root is not None,
+            same_generated_inputs_exact_baseline=baseline_root is not None,
+            same_scorer_exact_baseline=baseline_root is not None and
+                document.get('expected_same_router_outputs', False),
+            matched_baseline_mean_K=baseline_root is not None and abs(mean_k-document['target_mean_K']) <= .01,
             source_sha256=frozen, objective_complete=False)
         atomic_json(out/'summary.json', result)
         update(status='complete', completed=50000)

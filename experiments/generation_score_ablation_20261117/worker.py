@@ -53,6 +53,7 @@ def main(args):
     if args.policy_file is not None:
         document=json.loads(args.policy_file.read_text())
         assert document['status']=='frozen_before_control_quality'
+        assert document['ablation']==args.ablation
         assert document['router_identity']==identity and document['seed']==args.seed
         assert document['kind']==args.kind and document['cfg']==args.cfg
         assert document['stage2_steps']==args.stage2_steps
