@@ -1,0 +1,27 @@
+{
+  "status": "completed",
+  "step": 22000,
+  "initial_checkpoint_step": 20000,
+  "new_finetuning_updates": 2000,
+  "warmstart_checkpoint": "/home/heyefei/lichenge/paper/experiments/generation_score_ablation_20261117/train_without_gain/latest.pt",
+  "warmstart_sha256": "7d0b9c20848dc8e0cbcafa188c9db58bc493c37ed3845fcf3d6d1c4979b0b8c7",
+  "teacher_policy": {
+    "weight": 0.9,
+    "threshold": 0.22436349093914032
+  },
+  "best_held_loss": 0.4176177904129028,
+  "best_checkpoint_sha256": "d744a321f7a8e79a7e1e8120de3d99b1857c335bc957f263da4b7d13d3d393a9",
+  "elapsed_seconds": 1227.5618283089716,
+  "frozen_codec": {
+    "codec_parameters_and_buffers_frozen": true,
+    "original_router_deleted": true,
+    "B0_loaded": false,
+    "ground_truth_or_2D_features_enter_student": false
+  },
+  "semantic_parameters_and_buffers_frozen": true,
+  "B0_training_loss_only": true,
+  "B0_student_input": false,
+  "B0_required_at_deployment": false,
+  "Inception_or_LPIPS_used_for_training": false,
+  "reference_student_frozen": true
+}

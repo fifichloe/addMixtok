@@ -1,0 +1,8 @@
+{
+  "status": "complete",
+  "kind": "without_cam_all_explicit",
+  "steps": 20000,
+  "best_held_loss": 0.29489813895225525,
+  "seconds": 26143.66034801898,
+  "MaskGIT_retrained": false
+}

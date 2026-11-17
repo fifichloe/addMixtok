@@ -1,0 +1,61 @@
+{
+  "status": "complete",
+  "protocol": "same frozen generator; seed 4; 50000 images; 8+8; stage2 CFG 3.0; same realized average 2D-token budget",
+  "rows": [
+    {
+      "kind": "main",
+      "n": 50000,
+      "seed": 4,
+      "generation_rounds": "8+8",
+      "cfg_stage2": 3.0,
+      "gFID": 1.865403534962752,
+      "mean_generated_2D_tokens": 106.38386,
+      "delta_gFID_vs_main": 0.0,
+      "generator_checkpoint_sha256": "04a2f5e061fa0ce463755f73e008a620e8e0cce56d429aa21aeb79bfc2c869af"
+    },
+    {
+      "kind": "U_zero",
+      "n": 50000,
+      "seed": 4,
+      "generation_rounds": "8+8",
+      "cfg_stage2": 3.0,
+      "gFID": 1.94098284874201,
+      "mean_generated_2D_tokens": 106.38386,
+      "delta_gFID_vs_main": 0.07557931377925797,
+      "generator_checkpoint_sha256": "04a2f5e061fa0ce463755f73e008a620e8e0cce56d429aa21aeb79bfc2c869af"
+    },
+    {
+      "kind": "without_gain",
+      "n": 50000,
+      "seed": 4,
+      "generation_rounds": "8+8",
+      "cfg_stage2": 3.0,
+      "gFID": 1.9073653392716778,
+      "mean_generated_2D_tokens": 106.38386,
+      "delta_gFID_vs_main": 0.04196180430892582,
+      "generator_checkpoint_sha256": "04a2f5e061fa0ce463755f73e008a620e8e0cce56d429aa21aeb79bfc2c869af"
+    },
+    {
+      "kind": "without_white_all_explicit",
+      "n": 50000,
+      "seed": 4,
+      "generation_rounds": "8+8",
+      "cfg_stage2": 3.0,
+      "gFID": 1.9155318429984618,
+      "mean_generated_2D_tokens": 106.38384,
+      "delta_gFID_vs_main": 0.05012830803570978,
+      "generator_checkpoint_sha256": "04a2f5e061fa0ce463755f73e008a620e8e0cce56d429aa21aeb79bfc2c869af"
+    },
+    {
+      "kind": "without_cam_all_explicit",
+      "n": 50000,
+      "seed": 4,
+      "generation_rounds": "8+8",
+      "cfg_stage2": 3.0,
+      "gFID": 1.8854851469548066,
+      "mean_generated_2D_tokens": 106.38384,
+      "delta_gFID_vs_main": 0.020081611992054604,
+      "generator_checkpoint_sha256": "04a2f5e061fa0ce463755f73e008a620e8e0cce56d429aa21aeb79bfc2c869af"
+    }
+  ]
+}

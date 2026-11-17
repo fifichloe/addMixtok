@@ -1,0 +1,59 @@
+{
+  "ablation": "without_white_all_explicit",
+  "baseline_root": "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/generation_evaluation/long_cfg3_seed4_8p8",
+  "baseline_summary_sha256": "ded6776d1fe35a249d03ac838e7e6bffa02deb97eddf9df832aeb7bfc4b3642e",
+  "calibration": {
+    "absolute_mean_error": 1.9999999992137418e-05,
+    "mean_K": 106.38384,
+    "no_batch_quota": true,
+    "quality_used": false,
+    "score_only": true,
+    "source": "same-seed 50000 generated 1D IDs",
+    "target_mean_K": 106.38386,
+    "threshold": -0.07339584827423096
+  },
+  "cfg": 3.0,
+  "checkpoint_sha256": "04a2f5e061fa0ce463755f73e008a620e8e0cce56d429aa21aeb79bfc2c869af",
+  "elapsed_seconds": 99.56876833096612,
+  "expected_same_router_outputs": false,
+  "kind": "long",
+  "quality_used_for_budget_or_threshold": false,
+  "router_identity": {
+    "MaskGIT_retrained": false,
+    "checkpoint": "/home/heyefei/lichenge/paper/experiments/generation_score_ablation_20261117/budget_without_white_all_explicit/best.pt",
+    "explicit_component_removed": "without_white_all_explicit",
+    "kind": "without_white_all_explicit",
+    "maximum_K": 144,
+    "minimum_K": 48,
+    "model_sha256": "d764d701d86cac6ac2a7e1bff97b97a8d48f9819da36b17274c61935e3a9733d",
+    "one_forward_one_final_selection": true,
+    "spatial_parent_sha256": "5154271c1695e740a416388f337d9ab8d50aafefae3570d2ae4ea0fbd2b54bf7",
+    "student_input": "base_features_only",
+    "target_held_mean_K": 96,
+    "threshold": -0.0762631818652153,
+    "utility_weight": 0.9,
+    "weights_sha256": "8645c75794414c697e50cdbf3f34c4b214130e4cb932851c0a0d8f91bf459add"
+  },
+  "scope": "same-frozen-generator-score-ablation-matched-mean-K",
+  "seed": 4,
+  "selection_policy": {
+    "maximum_K": 144,
+    "minimum_K": 48,
+    "policy": "dynamic",
+    "threshold": -0.07339584827423096
+  },
+  "source_z1d_and_ids_sha256": {
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/generation_evaluation/long_cfg3_seed4_8p8/ids_shard0.npy": "307dcec3cf21bcda824d6da7d471893d1282dc0312292ecc4d66898323749e3d",
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/generation_evaluation/long_cfg3_seed4_8p8/ids_shard1.npy": "965fd8438c6bb49f41ab6b21dcfd815c8a5ad54edcf2132af318a014b9384eed",
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/generation_evaluation/long_cfg3_seed4_8p8/ids_shard2.npy": "a1f62e676e24d2b49a0fb978ef1dff6f6617b6a662f7ca8b673bf1dd4fbe681d",
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/generation_evaluation/long_cfg3_seed4_8p8/ids_shard3.npy": "9e246cb76b3414f45d343a6ab404ec31cb37d587c179464db69a6390ddbe1e05",
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/generation_evaluation/long_cfg3_seed4_8p8/z1d_shard0.npy": "1929ce4207850f985191b230ae430c2bc18e8e1f793ec123e94348593c41d545",
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/generation_evaluation/long_cfg3_seed4_8p8/z1d_shard1.npy": "e5b76746dc970a3f085d3c1f038fe836c0955cf8386e992d96c66ca424087365",
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/generation_evaluation/long_cfg3_seed4_8p8/z1d_shard2.npy": "5fc7993c660c5b53d3540c7cd9abd27c75236350154487c9b54bf74f4a530236",
+    "/mnt/data/heyefei/lichenge/Mixture-of-Tokenizer/AR/results/no_density_revision_20261114/generation_evaluation/long_cfg3_seed4_8p8/z1d_shard3.npy": "ecd76382231e55620f842f904175348fef3b0f9f1ecb359ac74032d93b9d4a00"
+  },
+  "stage2_steps": 8,
+  "status": "frozen_before_control_quality",
+  "target_mean_K": 106.38386,
+  "time": 1794880335.3641706
+}

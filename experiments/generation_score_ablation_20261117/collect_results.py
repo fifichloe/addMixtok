@@ -88,7 +88,11 @@ def main():
         lines.append(f"| {row['kind']} | {row['gFID']:.4f} | "
                      f"{row['mean_generated_2D_tokens']:.4f} | "
                      f"{row['delta_gFID_vs_main']:+.4f} |")
-    lines.extend(['', 'Run configs, stage reports, policy receipts, and 50k summary JSON '
+    lines.extend(['', 'All generated image IDs and 1D tokens match the main run exactly. '
+                  'The independent ADM audit allows only bounded cross-GPU floating-point '
+                  'drift in the base feature arrays (maximum absolute difference below 3e-4); '
+                  'each summary records the observed drift and an independent FP64 gFID check.',
+                  '', 'Run configs, stage reports, policy receipts, and 50k summary JSON '
                   'are archived in this directory. ImageNet images, large feature dumps, '
                   'and checkpoints are excluded.', ''])
     (DEST / 'README.md').write_text('\n'.join(lines))

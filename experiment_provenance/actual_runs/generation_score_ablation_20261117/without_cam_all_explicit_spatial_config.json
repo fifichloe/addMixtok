@@ -1,0 +1,56 @@
+{
+  "kind": "long",
+  "policy": {
+    "weight": 0.9,
+    "threshold": 0.3156692385673523
+  },
+  "input": "f_base_only_Bx256x16x16",
+  "steps": 22000,
+  "initial_checkpoint_step": 20000,
+  "new_updates": 2000,
+  "fresh_initialization": false,
+  "sampler_seed": 20261119,
+  "execution_gate_sha256": "5157140397fbe5232537a5b1079083f3f45acd08c4d35362763ae80d1ef8c5f7",
+  "parent_source_audit_sha256": "f62292736e8c8800e439ade7c8fab8a7b82c7ee091a8d334927cc29ccfd13d71",
+  "profile_weights_loaded": false,
+  "warmstart_checkpoint": "/home/heyefei/lichenge/paper/experiments/generation_score_ablation_20261117/train_without_cam_all_explicit/latest.pt",
+  "warmstart_sha256": "9c665978402da2204dbcb9c492e28622ea6869b8701810c6ab57a8691cc5aa94",
+  "warmstart_optimizer_loaded": false,
+  "micro_batch": 16,
+  "world_size": 2,
+  "global_batch": 32,
+  "full_fit_manifest_images": 1271167,
+  "held_images": 10000,
+  "fit_images_seen_this_stage": 64000,
+  "new_stage_visits_entire_manifest": false,
+  "optimizer": "FreshAdamW lr2e-5 wd.01; spatial/offset groups separately clipped1",
+  "autocast": "FP32 student; BF16 frozen codec and semantic supervision",
+  "loss": "B0semantic+.5RGB+.01localanchor; isolatedUanchor to initialstudent",
+  "checkpoint_selection": "fixedmeanK96 held spatial objective; no officialval/FID",
+  "training_mask": "Hardmaskforward; sigmoidSTgradient; training-onlybatchrateconstraint",
+  "deployment": "singleforward basesonly; frozenscalar threshold; K48--144; stabletopK",
+  "B0_used_at_deployment": false,
+  "direct_K_head": false,
+  "direct_K_regression": false,
+  "per_image_K_supervision": false,
+  "offset_features_detached": true,
+  "asset_sha256": {
+    "/home/heyefei/lichenge/MixTok-Official/assets/released/recon/mixtok_recon.pt": "457be008836e3f3702327795bb1953250f0032a0b35f74e26e6ffce9ef50e82e",
+    "/home/heyefei/lichenge/1d-tokenizer/tokenizer_titok_l32.bin": "b8f0bf61e9ee1791d8b76fa723bdcb2c85a039a7d027e597f685db492935c31f",
+    "/home/heyefei/lichenge/LlamaGen/pretrained_models/vq_ds16_c2i.pt": "109aa8afb2cf3761eec23cdc8644154cb498f5ab7eef2a35264d25e5e0499f7d"
+  },
+  "source_sha256": {
+    "/home/heyefei/lichenge/paper/addMixtok_metrics_work/mixtok_long_no_density/gene/scorer_training/spatial/train.py": "45dabd71a9c12776f208945ab9fc9c7890d71a7bdd2c1f8334f844e54f12d431",
+    "/home/heyefei/lichenge/paper/addMixtok_metrics_work/mixtok_long_no_density/gene/scorer_training/spatial/direct_runtime.py": "a6fb1a363ecceb2011bff18a0fada55f5f77b8d2f57942cea54784d382573bfe",
+    "/home/heyefei/lichenge/paper/addMixtok_metrics_work/mixtok_long_no_density/gene/scorer_training/spatial/model.py": "6824fcd7fb373c5b9d395cf1696c75a317146c144c2c2cd47962b63ca150b934",
+    "/home/heyefei/lichenge/paper/addMixtok_metrics_work/mixtok_long_no_density/gene/scorer_training/spatial/policies.py": "c57d91a204b049ad58f5a4a8bf60d25d6266b19006b1940ad59f9556772e4dda",
+    "/home/heyefei/lichenge/paper/addMixtok_metrics_work/mixtok_long_no_density/gene/scorer_training/spatial/quality_eval.py": "c14252974d11e41dc0ce97d85fccddc271810a6b44f65714a0c88d80d3d0ff6f",
+    "/tmp/mixtok_light_backbones_20261111/efficientnet_b0_rwightman-7f5810bc.pth": "7f5810bc96def8f7552d5b7e68d53c4786f81167d28291b21c0d90e1fca14934",
+    "/home/heyefei/lichenge/paper/addMixtok_metrics_work/mixtok_long_no_density/gene/scorer_training/distill/model.py": "69ccdba68356123ea55218a66962f0d3f4b2d4a0ceaf1b3e9ac61658a4484458",
+    "/home/heyefei/lichenge/paper/addMixtok_metrics_work/mixtok_long_no_density/gene/scorer_training/spatial/acceptance_requirements.json": "8e78c1099c31737b6129890c03f70e47f24aed0a1b43de64379addf1d7d08c79"
+  },
+  "manifest_sha256": {
+    "/home/heyefei/lichenge/paper/experiments/generation_dynamic_router_20261112/data/fit_paths.txt": "c5b6fc71ea88702eddcd6614b50f2cec0553c4b8574777eab84cfb17438e93a2",
+    "/home/heyefei/lichenge/paper/experiments/generation_dynamic_router_20261112/data/held_paths.txt": "491ddf76dbe573fe7e12c1814ddc612719b40aa9d5368fef7d850ece23036371"
+  }
+}

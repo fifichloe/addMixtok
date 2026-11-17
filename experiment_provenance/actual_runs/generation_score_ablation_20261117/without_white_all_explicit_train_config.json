@@ -1,0 +1,22 @@
+{
+  "kind": "without_white_all_explicit",
+  "steps": 20000,
+  "batch": 512,
+  "policy": {
+    "threshold": 0.2924477458000183,
+    "utility_weight": 0.9,
+    "mean_K_target": 96,
+    "min_K": 48,
+    "max_K": 144,
+    "source_policy_sha256": "61c255dece7833dd4f48d372a2c7ced946716ae69f9c3215f9f0746d35747c31",
+    "source_row_name": "without_white_all_explicit_dynamic96"
+  },
+  "optimizer": "AdamW lr2e-4 wd0.01",
+  "init_seed": 20261113,
+  "label_source": "frozen reconstruction teacher with explicit component removed",
+  "input": "f_base only",
+  "MaskGIT_retrained": false,
+  "original_base_cache": "/tmp/mixtok_gen_score_base_cache",
+  "target_cache": "/home/heyefei/lichenge/paper/experiments/generation_score_ablation_20261117/cache",
+  "model_source": "/home/heyefei/lichenge/paper/addMixtok_metrics_work/mixtok_long_no_density/gene/scorer_training/distill/model.py"
+}
