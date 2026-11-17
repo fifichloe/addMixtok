@@ -15,6 +15,6 @@ CFG was selected with 2,000 generated images at 16 sampling rounds and seed 4: C
 | 12 | 4.1637042191 |
 | 16 | **4.0060684723** |
 | 24 | 4.2675420838 |
-| 32 | Running; result will be added after completion |
+| 32 | 4.5151650571 |
 
 The 24-round value is higher than the 16-round value under the common CFG 0.7. We report the measured values without retuning CFG separately for each round count. The independent centered-FP64 FID audit of each completed run agrees with the ADM result to within 0.000015. Per-run summaries are in `generation_{rounds}_rounds_50k.json`.
