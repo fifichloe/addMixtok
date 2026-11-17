@@ -1,5 +1,9 @@
 # MixTok experimental additions
 
+## Pure LlamaGen 26-epoch control
+
+The completed reconstruction and full-grid MaskGIT generation measurements are in [llamagen_full_loss/RESULTS_26EPOCH_MASKGIT_20261117.md](llamagen_full_loss/RESULTS_26EPOCH_MASKGIT_20261117.md). This is the pure 256-token LlamaGen VQ-16 control trained with the matched reconstruction loss recipe, followed by a separately trained dense MaskGIT generator.
+
 ## Current Long: reconstruction and generation without density
 
 See **[mixtok_long_no_density/README.md](mixtok_long_no_density/README.md)** for the current code, scientific configuration, external asset identities, and run commands. Current measured results are collected in **[mixtok_long_no_density/RESULTS_CURRENT_20261116.md](mixtok_long_no_density/RESULTS_CURRENT_20261116.md)**.

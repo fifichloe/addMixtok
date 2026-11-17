@@ -1,0 +1,21 @@
+{
+  "FID_absolute_error": 6.821210263296962e-13,
+  "PSNR": 21.210407975463866,
+  "codebook_size": 16384,
+  "content_tokens": 256,
+  "covariance": "explicitly centered FP64 two-pass unbiased; complete50k pooled",
+  "global_tokens": 0,
+  "local_tokens": 256,
+  "model": "pure LlamaGen VQ-16 EMA",
+  "n": 50000,
+  "original_codebook_unchanged": true,
+  "position_inclusive_fixed_width_bpp": 0.0546875,
+  "precision": "BF16 pureVQ forward; FP32 metric pixels/Inception; TF32off",
+  "preprocessing": "official LlamaGen center_crop_arr256; identical ordered50k manifest",
+  "rFID": 1.2178118361882753,
+  "rFID_independent_sqrtm": 1.2178118361889574,
+  "status": "complete",
+  "tokenizer_checkpoint_sha256": "bc9a0c35631caf4e8fef86328e94c24f9c869af56c4af9a7b2dd8d719b16acb4",
+  "tokenizer_optimizer_step": 166662,
+  "tokenizer_repo_revision": "b3ec737fb081e641e571794f22032c24099e439b"
+}
