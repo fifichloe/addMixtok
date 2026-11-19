@@ -1,0 +1,25 @@
+{
+  "absolute_difference": 2.0874530832770688e-05,
+  "cfg": 1.0,
+  "checkpoint_sha256": "44c1123023433284dabfe642a04a900e04d01d9ad17c73c520255f45a6c14f94",
+  "content_tokens": 256,
+  "gFID": 6.24665014337279,
+  "gFID_independent_FP64": 6.246629268841957,
+  "metric": "original ADM FP32 mean/np.cov and independent centered FP64 audit",
+  "model": "pure LlamaGen VQ-16 EMA + full-grid Halton MaskGIT",
+  "n": 50000,
+  "sampling_rounds": 16,
+  "seed": 4,
+  "shard_receipts_sha256": [
+    "140b8c80d1b53899200f48d27d1315251ef0223959651edb27a720a9ffe4b2a8",
+    "0ea9de0cd5d1ff1968ee22527089f99251e57e8b09e3875611a91ba0f793cadf",
+    "acaa4a5b43ab3ab0c2085c2bcdff02942f8b87db5c402eb802bd044888909f6d",
+    "bbe9643f0d0ee143744b051af3234c7ee6ede21b2720a4b7c20e6340f2d1a247"
+  ],
+  "source_sha256": "0ae74b4d3080568ec48be7932cf92f6ffa7790cdb9c423b3cfb3af01e743c49b",
+  "spatial_mask_bits": 0,
+  "sqrtm_imaginary_diagonal_max": 0.0,
+  "sqrtm_imaginary_max": 0.0,
+  "status": "complete",
+  "tokenizer_sha256": "bc9a0c35631caf4e8fef86328e94c24f9c869af56c4af9a7b2dd8d719b16acb4"
+}
